@@ -12,7 +12,6 @@ import os
 class IrisService(object):
     def __init__(self):
         global model, graph, target_names
-        print("iris_model.h5 Path is " + os.path.join(os.path.abspath("api/dlearn/save"), "iris_model.h5"))
         model = load_model(os.path.join(os.path.abspath("api/dlearn/save"), "iris_model.h5"))
         target_names = datasets.load_iris().target_names
 
