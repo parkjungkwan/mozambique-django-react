@@ -13,7 +13,7 @@ from api.dlearn.iris_service import IrisService
 QueryDict 관련 블로그
 https://velog.io/@qlgks1/Django-request-HttpRequest-QueryDict
 '''
-@api_view(['GET'])
+@api_view(['POST'])
 @parser_classes([JSONParser])
 def iris(request):
     iris_data = request.data
@@ -36,4 +36,4 @@ def iris(request):
         resp = 'versicolor / 버시칼라'
     elif result == 2:
         resp = 'virginica / 버지니카'
-    return JsonResponse({'data':resp})
+    return JsonResponse({'result':resp})

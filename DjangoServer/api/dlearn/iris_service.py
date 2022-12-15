@@ -6,11 +6,14 @@ from keras.layers import Dense
 from keras.saving.save import load_model
 from sklearn import datasets
 from sklearn.preprocessing import OneHotEncoder
+import os
+
 
 class IrisService(object):
     def __init__(self):
         global model, graph, target_names
-        model = load_model('./save/iris_model.h5')
+        print("iris_model.h5 Path is " + os.path.join(os.path.abspath("api/dlearn/save"), "iris_model.h5"))
+        model = load_model(os.path.join(os.path.abspath("api/dlearn/save"), "iris_model.h5"))
         target_names = datasets.load_iris().target_names
 
     def service_model(self, features): # features = []
