@@ -1,5 +1,5 @@
 import { combineReducers} from "@reduxjs/toolkit"
-import todoReducer from "common/reducers/todo.reducer"
+import todoReducer from "api/todos/reducers/todo.reducer"
 
 export default combineReducers({
     todos: todoReducer

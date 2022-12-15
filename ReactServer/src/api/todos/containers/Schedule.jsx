@@ -1,4 +1,4 @@
-import {AddTodo, TodoList} from "cop"
+import {AddTodo, TodoList} from "api"
 const Schedule = () => {
     return <>
         <AddTodo/>

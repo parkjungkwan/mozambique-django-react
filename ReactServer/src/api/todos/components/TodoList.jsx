@@ -1,6 +1,6 @@
-import 'cop/styles/TodoList.css'
+import '../styles/TodoList.css'
 import { useSelector } from 'react-redux'
-import { Todo } from 'blog'
+import { Todo } from 'api'
 
 const TodoList = () => {
     const todos = useSelector((state) => state.todos)

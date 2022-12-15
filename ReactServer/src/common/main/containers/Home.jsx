@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-
-import {Navigation2, Counter, Footer} from "common"
+import {Navigation2, Footer} from "common"
 import {Schedule} from "api"
 import {LoginForm} from "security"
-import image from '../../resources/fashion.png'
-import {Iris} from "api/dlearn/components/Iris"
+import image from '../images/fashion.png'
+import {Counter, Iris} from "api"
 const Home = () => {
     const imageSize = {width: 700, height: 500}
     return (<>

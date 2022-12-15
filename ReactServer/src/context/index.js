@@ -1,26 +1,25 @@
-export default context = {
-    server : "http://127.0.0.1:8000/",
-    analysis : "api/analysis/", 
-    basics : "api/basics/",
-    dlearn : "api/dlearn/",
-    mlearn : "api/mlearn/",
-    nlp : "api/nlp/",
-    todos : "api/todos/",
-    vision : "api/vision/",
-    comments : "blog/comments/",
-    posts : "blog/posts/",
-    tags : "blog/tags/",
-    views : "blog/views/",
-    main : "common/main/",
-    cinemas : "multiplex/cinemas/",
-    movies : "multiplex/movies/",
-    showtimes : "multiplex/showtimes/",
-    theater_tickets : "multiplex/theater_tickets/",
-    theaters : "multiplex/theaters/",
-    users : "security/users/",
-    carts : "shop/carts/",
-    categroies : "shop/categories/",
-    deliveries : "shop/deliveries/",
-    orders : "shop/orders/",
-    products : "shop/products/"
-}
+export const server = "http://127.0.0.1:8000/"
+export const analysis = "api/analysis/" 
+export const basics = "api/basics/"
+export const dlearn = "api/dlearn/"
+export const mlearn = "api/mlearn/"
+export const nlp = "api/nlp/"
+export const todos = "api/todos/"
+export const vision = "api/vision/"
+export const comments = "blog/comments/"
+export const posts = "blog/posts/"
+export const tags = "blog/tags/"
+export const views = "blog/views/"
+export const main = "common/main/"
+export const cinemas = "multiplex/cinemas/"
+export const movies = "multiplex/movies/"
+export const showtimes = "multiplex/showtimes/"
+export const theater_tickets = "multiplex/theater_tickets/"
+export const theaters = "multiplex/theaters/"
+export const users = "security/users/"
+export const carts = "shop/carts/"
+export const categroies = "shop/categories/"
+export const deliveries = "shop/deliveries/"
+export const orders = "shop/orders/"
+export const products = "shop/products/"
+
