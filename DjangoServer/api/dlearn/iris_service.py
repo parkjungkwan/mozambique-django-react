@@ -16,6 +16,7 @@ class IrisService(object):
     def service_model(self, features): # features = []
         features = np.reshape(features, (1, 4))
         Y_prob = model.predict(features, verbose=0)
+        print(f'type is {type(Y_prob)}')
         predicted = Y_prob.argmax(axis=-1)
         return predicted[0]  # p-value 가 가장 높은 것
 
