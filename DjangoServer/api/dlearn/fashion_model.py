@@ -1,3 +1,5 @@
+import os
+
 import keras.datasets.fashion_mnist
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -8,11 +10,6 @@ from sklearn import datasets
 from sklearn.preprocessing import OneHotEncoder
 
 class FashionModel(object):
-    def __init__(self):
-        global class_names
-        class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
-                            'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-        model = None
 
     def create_model(self):
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
@@ -32,27 +29,25 @@ class FashionModel(object):
         model.fit(train_images, train_labels, epochs=5)
         test_loss, test_acc = model.evaluate(test_images, test_labels)
         print(f'Test Accuracy is {test_acc}')
+        file_name = os.path.join(os.path.abspath("save"), "fashion_model.h5")
+        print(f"저장경로: {file_name}")
+        model.save(file_name)
 
-
-
-
-
-iris_menu = ["Exit",  # 0
-             "hook"]  # 1
-iris_lambda = {
+menu = ["Exit", "create_model"]  # 1
+menu_lambda = {
     "1": lambda x: x.create_model(),
 }
 if __name__ == '__main__':
     model = FashionModel()
     while True:
-        [print(f"{i}. {j}") for i, j in enumerate(iris_menu)]
+        [print(f"{i}. {j}") for i, j in enumerate(menu)]
         menu = input('메뉴선택: ')
         if menu == '0':
             print("종료")
             break
         else:
             try:
-                iris_lambda[menu](model)
+                menu_lambda[menu](model)
             except KeyError as e:
                 if 'some error message' in str(e):
                     print('Caught error message')

@@ -9,35 +9,38 @@ from sklearn import datasets
 from sklearn.preprocessing import OneHotEncoder
 import os
 
+from tensorflow import keras
+
+
 class FashionService(object):
     def __init__(self):
-        pass
+        global class_names
+        class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+                       'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-    def service_model(self, features):
-        model = None
-        test_images = None
-        test_labels = None
+    # self, i, predictions_array, true_label, img
+    def service_model(self) -> []:
+        model = load_model(os.path.join(os.path.abspath("save"), "fashion_model.h5"))
+        (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
         predictions = model.predict(test_images)
-        arr = [predictions, test_labels, test_images]
-        return arr
-
-    def plot_image(self, i, predictions_array, true_label, img) -> []:
-        class_names = None
-        predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
+        i = 20
+        predictions_array, true_label, img = predictions[i], test_labels[i], test_images[i]
         plt.grid(False)
         plt.xticks([])
         plt.yticks([])
         plt.imshow(img, cmap=plt.cm.binary)
         predicted_label = np.argmax(predictions_array)
+        print(f"예측한 답 : {predicted_label}")
         if predicted_label == true_label:
             color = 'blue'
         else:
             color = 'red'
         plt.xlabel('{} {:2.0f}% ({})'.format(
-            class_names[predictions_array],
+            class_names[predicted_label],
             100 * np.max(predictions_array),
             class_names[true_label]
         ), color = color)
+        plt.show()
 
     @staticmethod
     def plot_value_array(i, predictions_array, true_label):
