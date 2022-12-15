@@ -12,6 +12,7 @@ class FashionModel(object):
         global class_names
         class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                             'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+        model = None
 
     def create_model(self):
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
@@ -31,6 +32,9 @@ class FashionModel(object):
         model.fit(train_images, train_labels, epochs=5)
         test_loss, test_acc = model.evaluate(test_images, test_labels)
         print(f'Test Accuracy is {test_acc}')
+
+
+
 
 
 iris_menu = ["Exit",  # 0
