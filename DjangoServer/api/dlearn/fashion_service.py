@@ -19,28 +19,54 @@ class FashionService(object):
                        'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
     # self, i, predictions_array, true_label, img
-    def service_model(self):
-        model = load_model(os.path.join(os.path.abspath("save"), "fashion_model.h5"))
+    def service_model(self, i) -> '':
+        model = load_model(r"C:\Users\AIA\MsaProject\DjangoServer\api\dlearn\save\fashion_model.h5")
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
         predictions = model.predict(test_images)
-        i = 100
         predictions_array, true_label, img = predictions[i], test_labels[i], test_images[i]
+        '''
         plt.grid(False)
         plt.xticks([])
         plt.yticks([])
         plt.imshow(img, cmap=plt.cm.binary)
-        predicted_label = np.argmax(predictions_array)
-        print(f"예측한 답 : {predicted_label}")
+        '''
+        result = np.argmax(predictions_array)
+        print(f"예측한 답 : {result}")
+        '''
         if predicted_label == true_label:
             color = 'blue'
         else:
             color = 'red'
+        
         plt.xlabel('{} {:2.0f}% ({})'.format(
             class_names[predicted_label],
             100 * np.max(predictions_array),
             class_names[true_label]
         ), color = color)
         plt.show()
+        '''
+        if result == 0:
+            resp = 'T-shirt/top'
+        elif result == 1:
+            resp = 'Trouser'
+        elif result == 2:
+            resp = 'Pullover'
+        elif result == 3:
+            resp = 'Dress'
+        elif result == 4:
+            resp = 'Coat'
+        elif result == 5:
+            resp = 'Sandal'
+        elif result == 6:
+            resp = 'Shirt'
+        elif result == 7:
+            resp = 'Sneaker'
+        elif result == 8:
+            resp = 'Bag'
+        elif result == 9:
+            resp = 'Ankle boot'
+        return resp
+
 
 
 menu = ["Exit", "service_model"] #1
