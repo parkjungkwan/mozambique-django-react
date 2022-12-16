@@ -2,12 +2,8 @@ import os
 
 import keras.datasets.fashion_mnist
 import matplotlib.pyplot as plt
-import pandas as pd
-import tensorflow as tf
 from keras import Sequential
 from keras.layers import Dense
-from sklearn import datasets
-from sklearn.preprocessing import OneHotEncoder
 
 class FashionModel(object):
 
@@ -29,7 +25,7 @@ class FashionModel(object):
         model.fit(train_images, train_labels, epochs=5)
         test_loss, test_acc = model.evaluate(test_images, test_labels)
         print(f'Test Accuracy is {test_acc}')
-        file_name = os.path.join(os.path.abspath("save"), "fashion_model.h5")
+        file_name = os.path.join(os.path.abspath("save"), "fashion_model2.h5")
         print(f"저장경로: {file_name}")
         model.save(file_name)
 

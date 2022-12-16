@@ -19,11 +19,11 @@ class FashionService(object):
                        'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
     # self, i, predictions_array, true_label, img
-    def service_model(self) -> []:
+    def service_model(self):
         model = load_model(os.path.join(os.path.abspath("save"), "fashion_model.h5"))
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
         predictions = model.predict(test_images)
-        i = 20
+        i = 100
         predictions_array, true_label, img = predictions[i], test_labels[i], test_images[i]
         plt.grid(False)
         plt.xticks([])
@@ -42,25 +42,8 @@ class FashionService(object):
         ), color = color)
         plt.show()
 
-    @staticmethod
-    def plot_value_array(i, predictions_array, true_label):
-        predictions_array, true_label = \
-            predictions_array[i], true_label[i]
-        plt.grid(False)
-        plt.xticks([])
-        plt.yticks([])
-        thisplot = plt.bar(range(10),
-                           predictions_array,
-                           color='#777777')
-        plt.ylim([0, 1])
-        predicted_label = np.argmax(predictions_array)
-        thisplot[predicted_label].set_color('red')
-        thisplot[true_label].set_color('blue')
 
-
-
-menu = ["Exit", #0
-                "service_model"] #1
+menu = ["Exit", "service_model"] #1
 menu_lambda = {
     "1" : lambda x: x.service_model(),
 }

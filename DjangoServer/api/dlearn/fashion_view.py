@@ -7,16 +7,9 @@ import tensorflow as tf
 from api.dlearn.fashion_service import FashionService
 
 
-@api_view(['POST'])
-@parser_classes([JSONParser])
-def fashion(request):
-    data = request.data
-
+@api_view(['GET'])
+def fashion(request, id):
+    print(f"######## React ID is {id} ########")
     service = FashionService()
-    test_num = tf.constant(float(data['testNum']))
-    service.plot_image(test_num)
-    plt.subplot(1, 2, 2)
-    service.plot_value_array(test_num)
-    plt.show()
-    resp = ""
+    resp = "TEST SUCCESS !!"
     return JsonResponse({'result':resp})
