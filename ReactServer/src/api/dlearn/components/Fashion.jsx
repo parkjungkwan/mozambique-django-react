@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { getFashion, postFashion } from "../api"
+import dlearnService from "../api"
 const Fashion = () => {
     const [inputs, setInputs] = useState({})
     const {id} = inputs
@@ -10,27 +10,11 @@ const Fashion = () => {
     }
     const onGetClick = e => {
         e.preventDefault()
-        alert(`사용자 이름: ${JSON.stringify(request)}`)
-        getFashion(id)
-        .then((res)=>{
-            alert(`옷의 카테고리 : ${JSON.stringify(res.data.result)}`)
-        })
-        .catch((err)=>{
-            console.log(err)
-            alert('숫자를 다시 입력해주세요.')
-        })
+        alert(`사용자 이름: ${JSON.stringify(dlearnService.getFashion(id))}`)
     }
     const onPostClick = e => {
         e.preventDefault()
-        alert(`사용자 이름: ${JSON.stringify(request)}`)
-        postFashion(id)
-        .then((res)=>{
-            alert(`옷의 카테고리 : ${JSON.stringify(res.data.result)}`)
-        })
-        .catch((err)=>{
-            console.log(err)
-            alert('숫자를 다시 입력해주세요.')
-        })
+        dlearnService.iris(request)
     }
     return(<>
     <form method="get">

@@ -11,7 +11,7 @@ from api.dlearn.fashion_service import FashionService
 
 
 @api_view(["GET"])
-def fashion(request, id):
+def fashionById(request, id):
     print(f"######## GET at Here ! React ID is {request.GET['id']} ########")
     return JsonResponse(
         {'result': FashionService().service_model(int(request.GET['id']))})
