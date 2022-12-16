@@ -83,6 +83,12 @@ https://heeya-stupidbutstudying.tistory.com/entry/%ED%86%B5%EA%B3%84-%EC%A0%95%E
 feature 의 변환은 표준화(Z-score 정규화)와 정규화가 있다.
 아웃라이어가 있으면 표준화 나머지는 정규화가 낫다.
 
+## 집계 함수
+집계 함수란 입력이 여러개의 로우이고, 출력이 하나인 결과인 것을 말합니다.
+테이블의 전체 로우 수를 구하는
+count , 평균( avg ), 총합( sum ), 최대값( max ), 최소값( min ) 등등이
+이런 함수들 입니다.
+
 ## 추론과 예측
 https://gentlej90.tistory.com/19
 https://koreapy.tistory.com/1108
