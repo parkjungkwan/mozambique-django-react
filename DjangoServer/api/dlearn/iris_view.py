@@ -36,4 +36,5 @@ def iris(request):
         resp = 'versicolor / 버시칼라'
     elif result == 2:
         resp = 'virginica / 버지니카'
+    print(f' 붓꽃 is {resp}')
     return JsonResponse({'result':resp})

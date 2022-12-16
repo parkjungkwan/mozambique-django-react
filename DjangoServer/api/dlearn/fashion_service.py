@@ -65,6 +65,7 @@ class FashionService(object):
             resp = 'Bag'
         elif result == 9:
             resp = 'Ankle boot'
+        print(f"패션 서비스에서 예측한 값: {resp}")
         return resp
 
 
