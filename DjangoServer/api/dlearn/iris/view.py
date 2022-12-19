@@ -1,9 +1,9 @@
-from django.http import JsonResponse, QueryDict
+from django.http import JsonResponse
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
 import tensorflow as tf
 
-from api.dlearn.iris_service import IrisService
+from api.dlearn.iris.service import IrisService
 
 '''
 아이리스 품종 3: setosa, versicolor, virginica

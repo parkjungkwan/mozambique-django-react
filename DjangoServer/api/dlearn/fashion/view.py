@@ -1,13 +1,10 @@
 import json
 
-from django.http import JsonResponse, QueryDict
-from matplotlib import pyplot as plt
-from rest_framework import serializers
+from django.http import JsonResponse
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
-import tensorflow as tf
 
-from api.dlearn.fashion_service import FashionService
+from api.dlearn.fashion.service import FashionService
 
 @api_view(['POST', 'GET'])
 @parser_classes([JSONParser])

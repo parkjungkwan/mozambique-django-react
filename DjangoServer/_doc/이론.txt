@@ -50,6 +50,7 @@ target = 계수 * featureValue + 편향
 2) 탐색적 데이터 분석(EDA: Exploratory Data Analysis) = 기술통계 = 데이터 -> .. -> 모델 = 귀납
 
 ## 로지스틱 함수
+https://datascienceschool.net/03%20machine%20learning/10.01%20%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1%20%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D.html
 로지스틱 회귀분석 모형에서는 종속변수가 이항분포를 따르고 그 모수 μ가 독립변수 x에 의존한다고 가정한다.
 베르누이 확률분포를 따르는 로지스틱 회귀분석만 고려하기로 한다.
 종속변수 y가 0또는 1인 분류 예측 문제를 풀 때는 x 값을 이용하여 μ(x)를 예측한 후 다음 기준에 따라 y^값을 출력한다.
