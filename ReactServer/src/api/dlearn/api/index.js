@@ -1,4 +1,3 @@
-import axios from "axios";
 import {server, dlearn, vision} from 'context'
 const dlearnService = {
     iris, getFashion, postFashion 

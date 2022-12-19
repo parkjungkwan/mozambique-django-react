@@ -19,7 +19,6 @@ def fashion(request):
         print(f" 리턴결과 : {a} ")
         return JsonResponse({'result': a})
     elif request.method == 'GET':
-        print(f"######## GET id is {request.GET['id']} ########")
         return JsonResponse(
             {'result': FashionService().service_model(int(request.GET['id']))})
 
