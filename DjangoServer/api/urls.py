@@ -18,11 +18,13 @@ from api.views import hello
 
 urlpatterns = [
     path('', hello),
-    path("api/analysis/", include('api.analysis.urls')),
-    path("api/dlearn/", include('api.dlearn.urls')),
-    path("api/mlearn/", include('api.mlearn.urls')),
-    path("api/nlp/", include('api.nlp.urls')),
-    path("api/vision/", include('api.vision.urls')),
+    path("basic/algorithms/", include('basic.algorithms.urls')),
+    path("basic/dlearn/", include('basic.dlearn.urls')),
+    path("basic/mlearn/", include('basic.mlearn.urls')),
+    path("basic/nlp/", include('basic.nlp.urls')),
+    path("basic/pythonic/", include('basic.pythonic.urls')),
+    path("basic/vision/", include('basic.vision.urls')),
+    path("basic/webcrawler/", include('basic.webcrawler.urls')),
     path("blog/comments/", include('blog.comments.urls')),
     path("blog/posts/", include('blog.posts.urls')),
     path("blog/tags/", include('blog.tags.urls')),

@@ -93,6 +93,20 @@ The difference lies in the existence of evidence.
 ## 선형회귀(Linear Regression)을 코드로 구현한다.
 핵심키워드: 선형회귀(Linear Regression) 가설(Hypothesis) 비용함수(Cost function)
 
+## 알고리즘 성능 측정지표
+https://jxo21.tistory.com/17
+https://datascienceschool.net/03%20machine%20learning/09.04%20%EB%B6%84%EB%A5%98%20%EC%84%B1%EB%8A%A5%ED%8F%89%EA%B0%80.html
+
+TP (True Positive) 정탐: 양성예측이 맞음 / 오류가 생겨서 보고함
+TN (True Negative) 정담: 음성예측이 맞음 / 오류가 없어서 보고없음
+FP (False Positive) 오탐: 양성예측이 틀림 / 오오류가 없는데 보고함
+FN (False Negative) 미탐: 음성예측이 틀림 / 오오류가 있는데 보고없음
+
+Precision 정밀도:
+Recall 재현율(=민감도): TP / (TP + FN)
+Accuracy 정확도: TP+ TN / (TP + TN + FP + FN) 맞게 예측한 샘플수의 비율-> 최적화 목적함수로 사용
+Fallout 위양성율: FP / (FP + TN)
+
 ## 시그모이드 함수
 - 시그모이드 함수는 S자형 곡선 또는 시그모이드 곡선을 갖는 수학 함수이다.
 시그모이드 함수의 예시로는 첫 번째 그림에 표시된 로지스틱 함수가 있다.

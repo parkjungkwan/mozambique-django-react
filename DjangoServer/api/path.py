@@ -1,0 +1,6 @@
+root=r"C:\Users\AIA\MsaProject\DjangoServer"
+basic=f"{root}\\basic"
+blog=f"{root}\\blog"
+multiplex=f"{root}\\multiplex"
+security=f"{root}\\security"
+shop=f"{root}\\shop"
