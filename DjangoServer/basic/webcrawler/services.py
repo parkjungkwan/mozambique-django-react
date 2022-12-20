@@ -1,6 +1,6 @@
 import csv
 
-from selenium.webdriver.chrome import webdriver
+from selenium import webdriver
 
 from api.path import basic
 from basic.webcrawler.models import ScrapVO
