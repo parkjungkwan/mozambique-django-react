@@ -7,13 +7,11 @@ from keras.layers import Dense
 
 class FashionModel(object):
 
-    def create_model(self):
-        (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
-        plt.figure()
-        plt.imshow(train_images[10])
-        plt.colorbar()
-        plt.grid(False)
-        plt.show()
+    def __init__(self):
+        global model
+        model = None
+
+    def create(self):
         model = Sequential([
             keras.layers.Flatten(input_shape=(28,28)),
             keras.layers.Dense(128, activation='relu'),
@@ -22,6 +20,14 @@ class FashionModel(object):
         model.compile(optimizer='adam',
                       loss='sparse_categorical_crossentropy',
                       metrics=['accuracy'])
+
+        (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
+        '''
+        plt.figure()
+        plt.imshow(train_images[10])
+        plt.colorbar()
+        plt.grid(False)
+        plt.show()'''
         model.fit(train_images, train_labels, epochs=5)
         test_loss, test_acc = model.evaluate(test_images, test_labels)
         print(f'Test Accuracy is {test_acc}')
@@ -31,7 +37,7 @@ class FashionModel(object):
 
 menu = ["Exit", "create_model"]  # 1
 menu_lambda = {
-    "1": lambda x: x.create_model(),
+    "1": lambda x: x.create(),
 }
 if __name__ == '__main__':
     model = FashionModel()

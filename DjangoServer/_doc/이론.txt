@@ -112,6 +112,21 @@ Fallout 위양성율: FP / (FP + TN)
 - 시그모이드 함수는 S자형 곡선 또는 시그모이드 곡선을 갖는 수학 함수이다.
 시그모이드 함수의 예시로는 첫 번째 그림에 표시된 로지스틱 함수가 있다.
 
+##
+수학에서 계단 함수(step function) 또는 조각마다 상수 함수(piecewise-constant function)는
+정의역을 적절한 유한 개의 구간으로 분할하였을 때 각 구간에서 상수 함수가 되는 함수이다.
+
+##
+ 인공지능의 결정적 인물들
+(1)앨런 튜링
+(2)딥러닝의 시초, 월터 피츠
+(3)인공지능의 시조, 존 매카시
+(4)딥러닝의 선구자, 로젠블랫
+(5)환상의 콤비, 사이먼과 뉴얼
+(6)인간은 생각하는 기계, 마빈 민스키
+(7)특이점이 온다, 레이 커즈와일
+
+
 ## 정규화(Normalization)
 https://heeya-stupidbutstudying.tistory.com/entry/%ED%86%B5%EA%B3%84-%EC%A0%95%EA%B7%9C%ED%99%94%EC%99%80-%ED%91%9C%EC%A4%80%ED%99%94
 feature 의 변환은 표준화(Z-score 정규화)와 정규화가 있다.
@@ -137,6 +152,13 @@ model 은 var 를 잡아내서, class 를 시도한다.
 https://gentlej90.tistory.com/19
 https://koreapy.tistory.com/1108
 추론과 예측의 차이는 답이 라벨인가, 그라운드트루스 인가이다.
+
+## 최적화함수
+최적화함수(Optimizer Function)는 손실함수의 결과값을 최소화하는 함수이며
+기본적으로 경사하강법(Gradient Descent)을 사용한다.
+최적화함수 또한 컴파일 과정에서 정의하며 다양한 방식들이 있다.
+경사하강법을 개선한 확률적 경사하강법(SGD: Stochastic Gradient Descent)이 있고,
+SGD를 개선한 RMSProp 방식이 있다.
 
 ## 통계와 머신러닝 차이
 기술통계 - 추론통계 = 학습(Learning)
