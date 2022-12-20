@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom"
 import {Navigation2, Footer} from "common"
-import {Schedule} from "api"
 import {LoginForm} from "security"
 import image from '../images/fashion.png'
-import {Counter, Iris, Fashion} from "api"
+import {Counter, Iris, Fashion, NaverMovie, Schedule} from "api"
 const Home = () => {
     const imageSize = {width: 700, height: 500}
     return (<>
@@ -24,6 +23,7 @@ const Home = () => {
                 <Route path="/login" element={<LoginForm/>}></Route>
                 <Route path="/iris" element={<Iris/>}></Route>
                 <Route path="/fashion" element={<Fashion/>}></Route>
+                <Route path="/naver-movie" element={<NaverMovie/>}></Route>
             </Routes>
             </td>
         </tr>
