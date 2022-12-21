@@ -231,6 +231,8 @@
      - float = 연속 = 시퀀셜 = 회귀 regression
 ## 통계와 머신러닝 차이
     기술통계 - 추론통계 = 학습(Learning)
+## 특성맵
+    합성곱에서 리턴되는 함수이다.
 ## 편향과 편차
     https://opentutorials.org/module/3653/22071
     정답 하나를 맞추기 위해 컴퓨터는 여러 번의 예측값 내놓기를 시도하는데,
@@ -240,11 +242,17 @@
     회귀 문제이든, 분류 문제이든
     첫 번째 그림과 같은 상황을 Underfitting = High Bias
     세 번째 그림과 같은 상황을 Overfitting이라고 합니다. = High Variance
+## 패팅(Padding)
+    합성곱에서 입력 행렬의 주의를 가상의 원소(0값)으로 채우는 것이다.
+    종류는 세임패딩(Same Padding)과 밸리드패딩(Valid Padding)이 있다.
 ## 프리윗 엣지 연산자
 ## 필터(Filter)
-    저역통과 필터
-    쌍방 필터
-    중간값 필터
+    OpenCV에서 필터는 다음과 같다
+        저역통과 필터
+        쌍방 필터
+        중간값 필터
+    합성곱에서 필터는 뉴런의 행렬구조로 된 집합이다.
+
 ## 캐니 엣지 검출기
     1. 스무딩(블러): 가우시안 필터를 이용한 노이즈 제거한다
     2. 그레디언트: 소벨필터를 이용한 그래디언트의 크기(intensity)를 찾는다
@@ -252,6 +260,8 @@
     4. 경계선으로써 가능성 있는 픽셀을 골라내기 위해 double threshold 방식을 적용한다.
     5. 앞서 double threshold 방식에서 maxVal을 넘은 부분을 strong edge,
     minVal과 maxVal 사이의 부분을 weak edge로 설정하여 strong edge와 연결되어 있는 weak edge를 edge로 판단하고 그렇지 않는 부분은 제거한다. (Hysteresis thresholding)
+## 커널
+    합성곱에서 커널은 가중치이다.
 ## 학습(Learning)
     통계학에서 학습은 추정문제 해결과정(=추론)이다.
     learning 은 target 을 구하는 modeling 이다.

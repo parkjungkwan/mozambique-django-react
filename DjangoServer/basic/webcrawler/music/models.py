@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass
 import pandas as pd
 
-from api.path import basic
+from api.path import webcrawler
 
 
 @dataclass
@@ -28,5 +28,5 @@ class ScrapVO:
         self.df = pd.DataFrame.from_dict(self.diction, orient='index')
 
     def dataframe_to_csv(self):
-        path = f'{basic}/webcrawler/save/melon_ranking.csv'
+        path = f'{webcrawler}/music/melon_ranking.csv'
         self.df.to_csv(path, sep=',', na_rep="NaN", header=None)

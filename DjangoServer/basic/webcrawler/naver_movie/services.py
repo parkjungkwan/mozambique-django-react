@@ -1,8 +1,10 @@
 import csv
+import os.path
 
+import pandas as pd
 from selenium import webdriver
 
-from api.path import basic
+from api.path import webcrawler
 from basic.webcrawler.music.models import ScrapVO
 import urllib.request
 from urllib.request import urlopen
@@ -10,10 +12,12 @@ from bs4 import BeautifulSoup
 
 
 class ScrapService(ScrapVO):
+
     def __init__(self):
         global driverpath, naver_url, savepath, encoding
-        driverpath = f"{basic}\\webcrawler\\chromedriver"
-        savepath = f"{basic}\\webcrawler\\naver_movie"
+        driverpath = f"{webcrawler}\\chromedriver"
+        savepath = f"{webcrawler}\\naver_movie\\naver_movie.csv"
+        # 파일명 없으면 Permission Error 발생
         naver_url = "https://movie.naver.com/movie/sdb/rank/rmovie.naver"
         encoding = "UTF-8"
 
@@ -54,15 +58,20 @@ class ScrapService(ScrapVO):
         arg.dataframe_to_csv()  # csv파일로 저장
 
     def naver_movie_review(self):
-        driver = webdriver.Chrome(driverpath)
-        driver.get(naver_url)
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        all_divs = soup.find_all('div', attrs={'class', 'tit3'})
-        products = [[div.a.string for div in all_divs]]
-        with open(savepath, 'w', newline='', encoding=encoding) as f:
-            wr = csv.writer(f)
-            wr.writerows(products)
-        driver.close()
+        if os.path.isfile(savepath) == False:
+            driver = webdriver.Chrome(driverpath)
+            driver.get(naver_url)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            all_divs = soup.find_all('div', attrs={'class', 'tit3'})
+            products = [[div.a.string for div in all_divs]]
+            with open(savepath, 'w', newline='', encoding=encoding) as f:
+                wr = csv.writer(f)
+                wr.writerows(products)
+            driver.close()
+        else:
+            rank = pd.read_csv(savepath)
+            result = [f"{i+1}위 {j}" for i, j in enumerate(rank)]
+            return result[0]
 
 music_menus = ["Exit", #0
                 "BugsMusic",#1
