@@ -2,6 +2,7 @@
     p-value (확률값)
     귀무 가설(null hypothesis)이 맞다는 전제 하에,
     표본에서 실제로 관측된 통계치와 '같거나 더 극단적인' 통계치가 관측될 확률이다.
+## 검출기
 ## 결정트리학습(DecisionTree Learning) 에서 불순도를 계산하는 3가지 방법
     https://m.blog.naver.com/samsjang/220978650404
     지니 인덱스
@@ -10,6 +11,11 @@
 ## 계단 함수(step function)
     동의어로 상수 함수(piecewise-constant function)는
     정의역을 적절한 유한 개의 구간으로 분할하였을 때 각 구간에서 상수 함수가 되는 함수이다.
+## 구조화 요소
+    침식
+    팽창
+    열기
+    닫기
 ## 귀무 가설(歸無假說, 영어: null hypothesis, 기호 H0) 또는 영 가설(零假說)
     통계학에서 처음부터 버릴 것을 예상하는 가설이다.
     차이가 없거나 의미있는 차이가 없는 경우의 가설이며
@@ -28,6 +34,7 @@
     확률 변수의 기댓값(expected value)은 각 사건이 벌어졌을 때의 이득과
     그 사건이 벌어질 확률을 곱한 것을 전체 사건에 대해 합한 값이다.
     이것은 어떤 확률적 사건에 대한 평균의 의미로 생각할 수 있다. 이 경우 '모 평균'으로 다룰수있다.
+## 나이키스트-새년의 표본화
 ## 대수의 법칙
 ## 대수학(algebra)
     변수는 feature 와 target 으로 나뉜다.
@@ -76,6 +83,8 @@
         순서 로지스틱 회귀: 다항 회귀와 마찬가지로 3개 이상의 변수가 있을 수 있습니다.
                         그러나 측정에는 순서가 있습니다.
                         예를 들어 1에서 5까지의 척도로 호텔을 평가하는 경우를 들 수 있습니다
+## 마르-힐드레스 엣지 검출기
+## 마하밴드
 ## 머신러닝(Machine Learning)
     Machine-Learning has a statistics, deep learning.
     The difference lies in the existence of evidence.
@@ -110,9 +119,13 @@
 ## 산술급수 와 기하급수
 ## 선형회귀(Linear Regression)을 코드로 구현한다.
     핵심키워드: 선형회귀(Linear Regression) 가설(Hypothesis) 비용함수(Cost function)
+## 소벨 엣지 연산자
 ## 손실함수 혹은 비용함수(cost function)는 같은 용어로 통계학, 경제학 등에서 널리 쓰이는 함수로
     머신러닝에서도 손실함수는 예측값과 실제값에 대한 오차를 줄이는 데 사용된다.
     평균제곱오차 또는 음의 로그 우도함수가 있으며, 머신러닝에서도 동일한 손실함수를 사용한다.
+## 수학적 형태학
+    적중-비적중 변환
+    세션화
 ## 시그모이드 함수
     시그모이드 함수는 S자형 곡선 또는 시그모이드 곡선을 갖는 수학 함수이다.
     시그모이드 함수의 예시로는 첫 번째 그림에 표시된 로지스틱 함수가 있다.
@@ -133,9 +146,18 @@
     엔트로피는 일반적으로 보존되지 않고, 열역학 제2법칙에 따라 시간에 따라 증가한다.
     독일의 물리학자 루돌프 클라우지우스가 1850년대 초에 도입하였다.
     대개 기호로 라틴 대문자 S를 쓴다.
-# 연역과 귀납
+## 연역과 귀납
     연역은 가정된 전제이다.
     귀납은 개인적 경험이다.
+## 영상처리
+    HoG(Histogram of Oriented Gradient) 서술자
+    blob(Binary Large Object)
+    LoG(Laplacian of Gaussian)
+    DoG(Difference of Gaussians)
+    SIFT(Scale-Invariant Feature Transform)
+    동차좌표
+    k-d 트리
+    RANSAC(RANdom SAmple Consensus)
 ## 오차 편차 잔차
     오차(Error) : 실제값(y) - 테스트 단계 예측값(y^)
     편차(Deviation) : 예측값평균 - 예측값
@@ -144,6 +166,25 @@
     가능도 함수로 번역되기도 하고, 영어로는 likelihood function 이라 합니다)
     실현된 데이터(혹은 관찰된 데이터 observed data)로 부터
     특정 통계 모델의 적합성을 확인하는데 주로 이용됩니다.
+## 이미지 읽기의 flag는 3가지가 있습니다.
+    cv2.IMREAD_COLOR : 이미지 파일을 Color로 읽어들입니다.
+                        투명한 부분은 무시되며, Default값입니다.
+    cv2.IMREAD_GRAYSCALE : 이미지를 Grayscale로 읽어 들입니다.
+                            실제 이미지 처리시 중간단계로 많이 사용합니다.
+    cv2.IMREAD_UNCHANGED : 이미지파일을 alpha channel까지 포함하여 읽어 들입니다
+    3개의 flag대신에 1, 0, -1을 사용해도 됩니다
+    Shape is (512, 512, 3)
+    Y축: 512 (앞)
+    X축: 512 (뒤)
+    3은 RGB 로 되어 있다.
+    cv2.waitKey(0) : keyboard입력을 대기하는 함수로
+                    0이면 key입력까지 무한대기이며, 특정 시간동안 대기하려면
+                    milisecond값을 넣어주면 됩니다.
+    cv2.destroyAllWindows() 화면에 나타난 윈도우를 종료합니다.
+                            일반적으로 위 3개는 같이 사용됩니다.
+## 이진화
+    전역 임계치 결정
+    적응적 임계치 결정
 ## 인공지능의 결정적 인물들
     (1)앨런 튜링
     (2)딥러닝의 시초, 월터 피츠
@@ -154,6 +195,10 @@
     (7)특이점이 온다, 레이 커즈와일
 ## 인코딩(encoding)
     문자 -> 숫자
+## 잡음(Noise)
+    가우시안 잡음(Gaussian Noise)
+    점 잡음(Salt-And-Pepper Noise)
+## 점확산함수(Point Spread Function)
 ## 정규화(Normalization)
     feature 의 변환은 표준화(Z-score 정규화)와 정규화가 있다.
     아웃라이어가 있으면 표준화 나머지는 정규화가 낫다.
@@ -180,6 +225,10 @@
     최적화함수 또한 컴파일 과정에서 정의하며 다양한 방식들이 있다.
     경사하강법을 개선한 확률적 경사하강법(SGD: Stochastic Gradient Descent)이 있고,
     SGD를 개선한 RMSProp 방식이 있다.
+## 타깃
+    출력값(=타깃)
+     - int = 불연속 = 카테고리컬 = 분류 classification
+     - float = 연속 = 시퀀셜 = 회귀 regression
 ## 통계와 머신러닝 차이
     기술통계 - 추론통계 = 학습(Learning)
 ## 편향과 편차
@@ -191,15 +240,33 @@
     회귀 문제이든, 분류 문제이든
     첫 번째 그림과 같은 상황을 Underfitting = High Bias
     세 번째 그림과 같은 상황을 Overfitting이라고 합니다. = High Variance
-## 합성곱(convolution)
-    합성곱은 함수(=입력)와 함수(=필터)가 커널(가중치)을 곱하여 새로운 함수(=피처맵)를 리턴하는 연산자이다.
-
+## 프리윗 엣지 연산자
+## 필터(Filter)
+    저역통과 필터
+    쌍방 필터
+    중간값 필터
+## 캐니 엣지 검출기
+    1. 스무딩(블러): 가우시안 필터를 이용한 노이즈 제거한다
+    2. 그레디언트: 소벨필터를 이용한 그래디언트의 크기(intensity)를 찾는다
+    3. Non-maximum suppression을 적용하여 거짓 반응을 제거한다.
+    4. 경계선으로써 가능성 있는 픽셀을 골라내기 위해 double threshold 방식을 적용한다.
+    5. 앞서 double threshold 방식에서 maxVal을 넘은 부분을 strong edge,
+    minVal과 maxVal 사이의 부분을 weak edge로 설정하여 strong edge와 연결되어 있는 weak edge를 edge로 판단하고 그렇지 않는 부분은 제거한다. (Hysteresis thresholding)
 ## 학습(Learning)
     통계학에서 학습은 추정문제 해결과정(=추론)이다.
     learning 은 target 을 구하는 modeling 이다.
     -- 학습은 두가지 종류가 있다.
     지도학습은 샘플을 사용한다.
     비지도학습은 샘플을 사용하지 않는다.
+## 함수형 프로그래밍은 속성을 제거한 프로그래밍 패러다임이다.
+    함수형 프로그래밍 언어로 설계된 클로저,스칼라,하스켈 등의 언어가 있고,
+    자바, 자바스크립트,코틀린,파이썬 등에도
+    최근 버전에 함수형 프로그래밍 문법이 추가 되었다.
+    함수형 프로그래밍은 객체 지향형 프로그래밍과는 다른 새로운 방식이다.
+    새로운 계산방법을 배우는 것 처럼 사고의 전환을 필요로 하며
+    다양한 사고방식으로 프로그래밍을 바라보면 유연한 문제해결이 가능하다.
+## 합성곱(convolution)
+    합성곱은 함수(=입력)와 함수(=필터)가 커널(가중치)을 곱하여 새로운 함수(=피처맵)를 리턴하는 연산자이다.
 ## 확률(Probability)
     선험적 통계 = 사전, 수학적 확률, 식 -> 연역법
     경험적 통계 = 사후,  통계적 확률, 식 * "큰수의 법칙" -> 귀납법
@@ -218,6 +285,11 @@
     스칼라 곱 - Scalar Multiple
     행렬 곱 - Matrix Multiplication
     행렬의 전치 - The transpose of a matrix
+## 효과(Effect)
+    동시대비효과
+    표본화(Sampling)
+    양자화(Quantization)
+    평활화(Smoothing)
 ## 휴리스틱 이론
     불충분한 시간이나 데이터로 인해 합리적인 판단이 불가능하거나
     굳이 필요하지 않은 상태에서 빠르게 사용하는 어림짐작
@@ -258,7 +330,14 @@
     matplot는  RGB 사용 -> Blue layer 가장 위로 -> 푸르게 보임
 	plt.imshow((lambda x: Image.fromarray(x))(img))
 	plt.show()
-    Blue Green Red
+## RGB (Blue Green Red)
+    openCV는  BGR  사용 -> Red layer 가장 위로 -> 붉게 보임
+	cv.imshow('Original', img)
+	cv.waitKey(0)
+	cv.destroyAllWindows()
+    matplot는  RGB 사용 -> Blue layer 가장 위로 -> 푸르게 보임
+	plt.imshow((lambda x: Image.fromarray(x))(img))
+	plt.show()
 ## transform 의 종류
     fit_transform()은 train dataset에서만 사용됩니다
     transform()은 test data에 적용하기 위해 를 사용한다.

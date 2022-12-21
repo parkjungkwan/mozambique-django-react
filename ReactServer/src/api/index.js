@@ -1,8 +1,8 @@
-export {default as Counter} from 'api/basics/components/Counter'
-export {default as Iris} from 'api/dlearn/components/Iris'
-export {default as Fashion} from 'api/dlearn/components/Fashion'
-export {default as AddTodo} from 'api/todos/components/AddTodo'
-export {default as Todo} from 'api/todos/components/Todo'
-export {default as TodoList} from 'api/todos/components/TodoList'
-export {default as Schedule} from 'api/todos/containers/Schedule'
-export {default as NaverMovie} from 'api/webcrawler/components/NaverMovie'
+
+// containers
+export {default as Home} from 'api/main/containers/Home'
+// home
+export {default as Navigation} from 'api/main/components/Navigation'
+export {default as Navigation2} from 'api/main/components/Navigation2'
+export {default as Footer} from 'api/main/components/Footer'
+

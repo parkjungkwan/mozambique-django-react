@@ -1,4 +1,4 @@
-import { Home } from "common"
+import { Home } from "api"
 const App = () => {
   return (<><Home/></>)
 }
