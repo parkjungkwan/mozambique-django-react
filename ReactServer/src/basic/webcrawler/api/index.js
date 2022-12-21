@@ -24,7 +24,6 @@ async function naverMovie(){
     .catch((error) => {
         alert('error :::: '+error);
     });
-    alert('내부 1위영화 ::: '+res)
     return Promise.resolve(res);
 }
 export default webcrawlerService

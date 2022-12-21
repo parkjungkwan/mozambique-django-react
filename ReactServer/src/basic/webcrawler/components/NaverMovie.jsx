@@ -5,7 +5,10 @@ const NaverMovie = () => {
 
     const onClick = e => {
         e.preventDefault()
-        webcrawlerService.naverMovie().then(res => setMovie(res))
+        webcrawlerService.naverMovie().then(res => {
+            const json = JSON.parse(res)
+            setMovie(json['result'])
+        })
         let arr = document.getElementsByClassName('box')
         for(let i=0; i<arr.length; i++) arr[i].value = ""
     }
