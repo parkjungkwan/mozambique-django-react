@@ -24,7 +24,7 @@ const NaverMovie = () => {
             </tr>
         </teahd>
         <tbody>
-        {movie.map(({rank, title})=>{
+        {movie && movie.map(({rank, title})=>{
             <tr key={rank}><td>{rank}</td><td>{title}</td></tr>
         })}
         </tbody>
