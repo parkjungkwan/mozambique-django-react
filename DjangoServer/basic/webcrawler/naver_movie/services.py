@@ -70,8 +70,9 @@ class ScrapService(ScrapVO):
             driver.close()
         else:
             rank = pd.read_csv(savepath)
+            # 순위 rank, 제목 title 로 변경해서 리턴할 것
             result = [f"{i+1}위 {j}" for i, j in enumerate(rank)]
-            return result[0]
+            return result
 
 music_menus = ["Exit", #0
                 "BugsMusic",#1
