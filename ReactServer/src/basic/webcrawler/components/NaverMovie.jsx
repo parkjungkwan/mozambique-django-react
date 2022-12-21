@@ -1,13 +1,13 @@
 import {useState} from 'react'
 import webcrawlerService from "../api"
 const NaverMovie = () => {
-    const [movie, setMovie] = useState()
+    const [movies, setMovies] = useState([])
 
     const onClick = e => {
         e.preventDefault()
         webcrawlerService.naverMovie().then(res => {
             const json = JSON.parse(res)
-            setMovie(json['result'])
+            setMovies(json['result'])
         })
         let arr = document.getElementsByClassName('box')
         for(let i=0; i<arr.length; i++) arr[i].value = ""
@@ -24,9 +24,9 @@ const NaverMovie = () => {
             </tr>
         </thead>
         <tbody>
-        {movie && movie.map(({rank, title})=>{
+        {movies && movies.map(({rank, title})=>(
             <tr key={rank}><td>{rank}</td><td>{title}</td></tr>
-        })}
+        ))}
         </tbody>
     </table>
     </>)
