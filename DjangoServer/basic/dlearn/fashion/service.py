@@ -11,16 +11,19 @@ import os
 
 from tensorflow import keras
 
+from api.path import fashion
+
 
 class FashionService(object):
     def __init__(self):
-        global class_names
+        global class_names, modelpath
         class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                        'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+        modelpath = f"{fashion}\\fashion_model.h5"
 
     # self, i, predictions_array, true_label, img
     def service_model(self, i) -> '':
-        model = load_model(r"/basic/dlearn/fashion/fashion_model.h5")
+        model = load_model(modelpath)
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
         predictions = model.predict(test_images)
         predictions_array, true_label, img = predictions[i], test_labels[i], test_images[i]
