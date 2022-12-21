@@ -18,14 +18,13 @@ function handleResponse(response){
         })
 }
 async function naverMovie(){
-    fetch(`${server}${webcrawler}naver-movie`)
+    const res = await fetch(`${server}${webcrawler}naver-movie`)
     .then(handleResponse)
-    .then(data => {
-        alert('1위영화 >>> '+JSON.stringify(data))
-    })
+    .then(data => JSON.stringify(data))
     .catch((error) => {
         alert('error :::: '+error);
     });
-    
+    alert('내부 1위영화 ::: '+res)
+    return Promise.resolve(res);
 }
 export default webcrawlerService
