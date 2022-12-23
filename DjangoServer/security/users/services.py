@@ -4,7 +4,8 @@ from random import shuffle
 import pandas as pd
 from sqlalchemy import create_engine
 
-from basic.algorithms.lambdas import lambda_string, lambda_k_name, lambda_number
+from basic.algorithms.lambdas import lambda_string, lambda_k_name, lambda_number, random_number, lambda_phone, \
+    lambda_birth, address_list, job_list, interests_list
 
 
 class UserService(object):
@@ -28,9 +29,13 @@ class UserService(object):
     '''
     def create_user(self)->[]:
         user_email = str(lambda_string(4)) + "@test.com"
-        password = 0
-        user_name = lambda_k_name
-        phone = '010-'+str(lambda_number(4))+'-'+str(lambda_number(4))
+        password = '1'
+        user_name = lambda_k_name(2)
+        phone = lambda_phone(4)
+        birth = lambda_birth(1985, 2011)
+        address = random.choice(address_list)
+        job = random.choice(job_list)
+        user_interests = random.choice(interests_list)
         '''
         user_email = models.TextField()
         password = models.CharField(max_length=10)
@@ -41,6 +46,7 @@ class UserService(object):
         job = models.TextField()
         user_interests = models.TextField()
         '''
+
 
     def create_users(self)->[]:
         rows = [self.create_user() for i in range(100)]

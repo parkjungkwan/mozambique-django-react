@@ -5,13 +5,7 @@ lambda_string = lambda k: ''.join(random.sample(string.ascii_lowercase, k))
 random_number = lambda start, end: random.randrange(start, end)
 lambda_number = lambda k: ''.join(str(random_number(0, 10)) for _ in range(k))
 lambda_time = lambda x: datetime.datetime.now().strftime(x) # '%Y-%m-%d %H:%M:%S'
-
-first_names = ["김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신", "권", "황", "안", "송", "류",
-               "전", "홍", "고", "문", "양", "손", "배", "조", "백", "허", "유", "남", "심", "노", "정", "하", "곽", "성", "차",
-               "주", "우", "구", "신", "임", "나", "전", "민", "유", "진", "지", "엄", "채", "원", "천", "방", "공", "강", "현",
-               "함", "변", "염", "양", "변", "여", "추", "노", "도", "소", "신", "석", "선", "설", "마", "길", "주", "연", "방",
-               "위", "표", "명", "기", "반", "왕", "금", "옥", "육", "인", "맹", "제", "모", "장", "남", "탁", "국", "여", "진",
-               "어", "은", "편", "구", "용"]
+first_names = ["김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신", "권"]
 name_words = ["가", "강", "건", "경", "고", "관", "광", "구", "규", "근", "기", "길", "나", "남", "노", "누", "다", "단", "달",
               "담", "대", "덕", "도", "동", "두", "라", "래", "로", "루", "리", "마", "만", "명", "무", "문", "미", "민", "바",
               "박", "백", "범", "별", "병", "보", "빛", "사", "산", "상", "새", "서", "석", "선", "설", "섭", "성", "세", "소",
@@ -25,11 +19,24 @@ name_words = ["가", "강", "건", "경", "고", "관", "광", "구", "규", "�
               "실", "직", "흠", "흔", "악", "람", "권", "복", "심", "헌", "엽", "학", "개", "롱", "평", "늘", "늬", "랑", "얀", "향",
               "울", "련"]
 lambda_k_name = lambda k: ''.join(random.sample(first_names, k-1))+''.join(random.sample(name_words, k))
-
+lambda_phone = lambda k: '010-'+str(lambda_number(k))+'-'+str(lambda_number(k))
+lambda_birth = lambda startyear, endyear: str(random_number(startyear,endyear))+'-'+str(random_number(1,12))+'-'+str(random_number(1,32))
+address_list = ["서울","경기","부산","대구","광주"]
+job_list = ["회사원","사업가","개발자","자영업자"]
+interests_list = ["영화","주식","부동산","독서"]
 if __name__ == '__main__':
-    print(lambda_string(5))
-    print(lambda_number(4))
-    print(lambda_k_name(2))
-    print(lambda_time('%Y-%m-%d %H:%M:%S'))
-    a = '010-' + str(lambda_number(4)) + '-' + str(lambda_number(4))
-    print(a)
+    user_email = str(lambda_string(4)) + "@test.com"
+    password = '1'
+    user_name = lambda_k_name(2)
+    phone = lambda_phone(4)
+    birth = lambda_birth(1985, 2011)
+    address = random.choice(address_list)
+    job = random.choice(job_list)
+    user_interests = random.choice(interests_list)
+    print('user_email:'+user_email)
+    print('password: ' + password)
+    print('user_name: ' + user_name)
+    print('phone: ' + phone)
+    print('address: ' + address)
+    print('job: ' + job)
+    print('user_interests: ' + user_interests)

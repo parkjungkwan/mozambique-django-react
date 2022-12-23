@@ -17,15 +17,15 @@ class User(models.Model):
     )
 
     use_in_migrations = True
-    user_email = models.TextField()
-    password = models.CharField(max_length=10)
-    user_name = models.TextField()
-    phone = models.TextField()
-    birth = models.TextField()
-    address = models.TextField(blank=True)
-    job = models.TextField()
-    user_interests = models.TextField()
-    token = models.TextField()
+    user_email = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
+    user_name = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20)
+    birth = models.CharField(max_length=20)
+    address = models.CharField(max_length=20)
+    job = models.CharField(max_length=20)
+    user_interests = models.CharField(max_length=20)
+    token = models.CharField(max_length=20)
     # role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=3)
 
     def __str__(self):
