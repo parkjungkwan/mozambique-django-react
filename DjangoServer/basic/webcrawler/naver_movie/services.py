@@ -58,7 +58,7 @@ class ScrapService(ScrapVO):
         arg.dataframe_to_csv()  # csv파일로 저장
 
     def naver_movie_review(self):
-        if os.path.isfile(savepath) == False:
+        if not os.path.isfile(savepath):
             driver = webdriver.Chrome(driverpath)
             driver.get(naver_url)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
