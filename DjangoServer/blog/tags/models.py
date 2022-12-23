@@ -6,7 +6,7 @@ from blog.posts.models import Post
 class Tag(models.Model):
     use_in_migration = True
     tag_id = models.AutoField(primary_key=True)
-    title = models.TextField()
+    title = models.CharField(max_length=100)
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 

@@ -6,10 +6,10 @@ from security.users.models import User
 class Delivery(models.Model):
     use_in_migration = True
     delivery_id = models.AutoField(primary_key=True)
-    username = models.TextField()
-    address = models.TextField()
-    detail_address = models.TextField()
-    phone = models.TextField()
+    username = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    detail_address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

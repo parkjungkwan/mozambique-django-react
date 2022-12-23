@@ -17,7 +17,7 @@ class UserService(object):
 
     def insert_users(self):
         df = self.create_users()
-        df.to_sql(name='blog_users',
+        df.to_sql(name='users',
                   if_exists='append',
                   con=engine,
                   index=False)
@@ -36,6 +36,7 @@ class UserService(object):
         address = random.choice(address_list)
         job = random.choice(job_list)
         user_interests = random.choice(interests_list)
+        token = 'JWT fefege..'
         '''
         user_email = models.TextField()
         password = models.CharField(max_length=10)
@@ -46,11 +47,13 @@ class UserService(object):
         job = models.TextField()
         user_interests = models.TextField()
         '''
+        return [user_email, password, user_name, phone, birth,
+                address, job, user_interests, token]
 
 
     def create_users(self)->[]:
         rows = [self.create_user() for i in range(100)]
-        columns = ['user_email', 'password', 'user_name', 'phone', 'birth', 'address', 'job', 'user_interests']
+        columns = ['user_email', 'password', 'user_name', 'phone', 'birth', 'address', 'job', 'user_interests', 'token']
         df = pd.DataFrame(rows, columns=columns)
         df['user_email'] = df['user_email'].astype(str)
         return df
@@ -68,4 +71,4 @@ class UserService(object):
             return df'''
 
 if __name__ == '__main__':
-    pass
+    UserService().insert_users()

@@ -31,28 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "blog.comments.apps.CommentsConfig",
-    "blog.posts.apps.PostsConfig",
-    "blog.tags.apps.TagsConfig",
-    "blog.views.apps.ViewsConfig",
-    "multiplex.cinemas.apps.CinemasConfig",
-    "multiplex.movies.apps.MoviesConfig",
-    "multiplex.showtimes.apps.ShowtimesConfig",
-    "multiplex.theater_tickets.apps.TheaterTicketsConfig",
-    "multiplex.theaters.apps.TheatersConfig",
-    "security.users.apps.UsersConfig",
-    "shop.carts.apps.CartsConfig",
-    "shop.categories.apps.CategoriesConfig",
-    "shop.deliveries.apps.DeliveriesConfig",
-    "shop.orders.apps.OrdersConfig",
-    "shop.products.apps.ProductsConfig",
+    "blog.comments","blog.posts","blog.tags","blog.views",
+    "multiplex.cinemas","multiplex.movies","multiplex.showtimes","multiplex.theater_tickets","multiplex.theaters",
+    "security.users",
+    "shop.carts","shop.categories","shop.deliveries","shop.orders","shop.products",
     "rest_framework"
 ]
 
@@ -99,7 +87,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "msadb",
+        "NAME": "mydb",
         "USER": "root",
         "PASSWORD": "root",
         "HOST": "localhost",

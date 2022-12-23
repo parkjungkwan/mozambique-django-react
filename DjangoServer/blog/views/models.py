@@ -7,7 +7,7 @@ from blog.posts.models import Post
 class View(models.Model):
     use_in_migration = True
     view_id = models.AutoField(primary_key=True)
-    ip_address = models.TextField()
+    ip_address = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
