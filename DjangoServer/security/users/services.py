@@ -1,8 +1,11 @@
 import string
-from random import random
-
+import random
+from random import shuffle
 import pandas as pd
 from sqlalchemy import create_engine
+
+from basic.algorithms.lambdas import lambda_string, lambda_k_name, lambda_number
+
 
 class UserService(object):
     def __init__(self):
@@ -23,16 +26,11 @@ class UserService(object):
      "blog_userid= ''.join(random.sample(string_pool, 5))"로 변경
      (email도 email = blog_userid + "@naver.com"로 변경)
     '''
-    def create_user(self)->{}:
-        userid = ''.join(random.sample(string.ascii_lowercase, 5))
-        user_email = str(userid) + "@test.com"
+    def create_user(self)->[]:
+        user_email = str(lambda_string(4)) + "@test.com"
         password = 0
-        user_name = ""
-        numlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        numbers = random.sample(range(0,), 3)
-        phone = ''.join(s for s in numbers)
-
-
+        user_name = lambda_k_name
+        phone = '010-'+str(lambda_number(4))+'-'+str(lambda_number(4))
         '''
         user_email = models.TextField()
         password = models.CharField(max_length=10)
@@ -63,4 +61,5 @@ class UserService(object):
         else:
             return df'''
 
-
+if __name__ == '__main__':
+    pass
