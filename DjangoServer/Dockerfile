@@ -1,8 +1,8 @@
 FROM python:3.9
 
-WORKDIR /django_web
+WORKDIR /usr/src/app
 
 COPY . .
-COPY requirements.txt requirements.txt
-
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
