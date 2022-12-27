@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "basic",
     "blog.comments","blog.posts","blog.tags","blog.views",
     "multiplex.cinemas","multiplex.movies","multiplex.showtimes","multiplex.theater_tickets","multiplex.theaters",
     "security.users",

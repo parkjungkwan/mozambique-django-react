@@ -9,8 +9,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import GridSearchCV
 import seaborn as sns
 import matplotlib.pyplot as plt
-font_path = "C:/Windows/Fonts/malgunbd.ttf"
-font = font_manager.FontProperties(fname=font_path).get_name()
+#font_path = "C:/Windows/Fonts/malgunbd.ttf"
+font = font_manager.FontProperties(fname="").get_name()
 rc('font', family=font)
 
 stroke_meta = {
