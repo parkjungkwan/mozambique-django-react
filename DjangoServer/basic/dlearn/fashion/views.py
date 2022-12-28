@@ -12,7 +12,7 @@ def fashion(request):
     if request.method == 'POST':
         id = json.loads(request.body)  # json to dict
         print(f"######## POST id is {id} type is {type(id)} ########")
-        a = FashionService().service_model(int(id))
+        a = FashionService().find_fashion_by_index(int(id))
         print(f" 리턴결과 : {a} ")
         return JsonResponse({'result': a})
     elif request.method == 'GET':
@@ -28,3 +28,4 @@ def fashion(request):
 
     else:
         print(f"######## ID is None ########")
+

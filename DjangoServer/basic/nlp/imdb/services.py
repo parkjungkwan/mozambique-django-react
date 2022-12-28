@@ -1,4 +1,5 @@
 import csv
+import os
 import time
 from collections import defaultdict
 from math import log, exp
@@ -12,7 +13,6 @@ from selenium import webdriver
 from sklearn.model_selection import train_test_split
 import numpy as np
 import matplotlib.pyplot as plt
-
 from basic.nlp.imdb.models import ImdbModel
 
 
@@ -61,9 +61,9 @@ class NaverMovieService(object):
     def __init__(self):
         global url, driver, file_name, encoding, review_train, k, driver_path
         url = 'https://movie.naver.com/movie/point/af/list.naver?&page='
-        driver_path = r'C:\Users\AIA\MsaProject\DjangoServer\basic\webcrawler\chromedriver.exe'
-        file_name = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\naver_movie_review_corpus.csv'
-        review_train = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\review_train.csv'
+        driver = os.path.join(os.getcwd(), 'chromedriver.exe')
+        file_name = os.path.join(os.getcwd(), 'data/naver_movie_review_corpus.csv')
+        review_train = os.path.join(os.getcwd(), 'data/review_train.csv')
         encoding = "UTF-8"
         k = 0.5
         self.word_probs = []
@@ -71,8 +71,7 @@ class NaverMovieService(object):
     def process(self, new_review):
         service = NaverMovieService()
         service.model_fit()
-        result = service.classify(new_review)
-        return result
+        return service.classify(new_review)
 
     def crawling(self):
         if not path.exists(review_train): # file_name -> review_train
@@ -156,9 +155,5 @@ class NaverMovieService(object):
         self.word_probs = self.word_probablities(word_counts, num_class0, num_class1, k)
 
 
-if __name__ == '__main__':
-    # ImdbService().hook()
-    result = NaverMovieService().process("시간 아깝다. 정말 쓰레기 영화다")
-    print(f"긍정률: {result}")
 
 

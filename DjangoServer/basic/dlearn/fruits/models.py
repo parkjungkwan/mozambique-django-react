@@ -210,5 +210,3 @@ class FruitsModel:
         return model
 
 
-if __name__ == '__main__':
-    FruitsModel().hook()

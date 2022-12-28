@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import pandas as pd
 from matplotlib import font_manager, rc
@@ -13,18 +15,7 @@ import matplotlib.pyplot as plt
 font = font_manager.FontProperties(fname="").get_name()
 rc('font', family=font)
 
-stroke_meta = {
-    'id':'아이디', 'gender':'성별', 'age':'나이', 
-    'hypertension':'고혈압',
-    'heart_disease':'심장병',
-    'ever_married':'기혼여부',
-    'work_type':'직종',
-    'Residence_type':'거주형태',
-    'avg_glucose_level':'평균혈당',
-    'bmi':'체질량지수',
-    'smoking_status':'흡연여부',
-    'stroke':'뇌졸중'
-}
+
 
 '''
 <class 'pandas.core.frame.DataFrame'>
@@ -52,19 +43,11 @@ None
 class Stroke:
 
     def __init__(self):
-        global data, save, stroke, my_stroke, adult_stoke, target, \
-            X_train, X_test, y_train, y_test
-        data = f"./data/stroke"
-        save = f"./save/stroke"
-        stroke = pd.read_csv(f'{data}/healthcare-dataset-stroke-data.csv')
-        my_stroke = None
-        adult_stoke = None
-        target = None
-        data = None
-        X_train = None
-        X_test = None
-        y_train = None
-        y_test = None
+        global data, save, stroke_origin
+        data = os.join.path(os.getcwd(),"data")
+        save = os.join.path(os.getcwd(),"save")
+        stroke_origin = pd.read_csv(os.path.join(data, "healthcare-dataset-stroke-data.csv"))
+
 
     def hook(self):
         print(" 리액트에서 들어옴 !!")
@@ -80,26 +63,39 @@ class Stroke:
     '''
     def spec(self):
         print(" --- 1.Shape ---")
-        print(self.stroke.shape)
+        print(stroke_origin.shape)
         print(" --- 2.Features ---")
-        print(self.stroke.columns)
+        print(stroke_origin.columns)
         print(" --- 3.Info ---")
-        print(self.stroke.info())
+        print(stroke_origin.info())
         print(" --- 4.Case Top1 ---")
-        print(self.stroke.head(1))
+        print(stroke_origin.head(1))
         print(" --- 5.Case Bottom1 ---")
-        print(self.stroke.tail(3))
+        print(stroke_origin.tail(3))
         print(" --- 6.Describe ---")
-        print(self.stroke.describe())
+        print(stroke_origin.describe())
         print(" --- 7.Describe All ---")
-        print(self.stroke.describe(include='all'))
+        print(stroke_origin.describe(include='all'))
     '''
     2.한글 메타데이터
     '''
     def rename_meta(self):
-        self.my_stroke = self.stroke.rename(columns=stroke_meta)
+        global stroke
+        stroke_meta = {
+            'id': '아이디', 'gender': '성별', 'age': '나이',
+            'hypertension': '고혈압',
+            'heart_disease': '심장병',
+            'ever_married': '기혼여부',
+            'work_type': '직종',
+            'Residence_type': '거주형태',
+            'avg_glucose_level': '평균혈당',
+            'bmi': '체질량지수',
+            'smoking_status': '흡연여부',
+            'stroke': '뇌졸중'
+        }
+        stroke = stroke_origin.rename(columns=stroke_meta)
         print(" --- 2.Features ---")
-        print(self.my_stroke.columns)
+        print(stroke.columns)
 
     '''
     3.타깃변수(=종속변수 dependent, Y값) 설정
@@ -109,23 +105,22 @@ class Stroke:
     인터벌 = ['나이','평균혈당','체질량지수']
     '''
     def interval(self):
-        t = self.my_stroke
+        global adult_stoke
         interval = ['나이','평균혈당','체질량지수']
-        print(f'--- 구간변수 타입 --- \n {t[interval].dtypes}')
-        print(f'--- 결측값 있는 변수 --- \n {t[interval].isna().any()[lambda x: x]}')
-        print(f'체질량 결측비율: {t["체질량지수"].isnull().mean():.2f}')
+        print(f'--- 구간변수 타입 --- \n {stroke[interval].dtypes}')
+        print(f'--- 결측값 있는 변수 --- \n {stroke[interval].isna().any()[lambda x: x]}')
+        print(f'체질량 결측비율: {stroke["체질량지수"].isnull().mean():.2f}')
         # 체질량 결측비율: 0.03 는 무시한다
         pd.options.display.float_format = '{:.2f}'.format
-        print(f'--- 구간변수 기초 통계량 --- \n{t[interval].describe()}')
-        criterion = t['나이'] > 18
-        self.adult_stoke = t[criterion]
-        print(f'--- 성인객체스펙 --- \n{self.adult_stoke.shape}')
+        print(f'--- 구간변수 기초 통계량 --- \n{stroke[interval].describe()}')
+        criterion = stroke['나이'] > 18
+        adult_stoke = stroke[criterion]
+        print(f'--- 성인객체스펙 --- \n{adult_stoke.shape}')
         # 평균혈당 232.64이하와 체질량지수 60.3이하를 이상치로 규정하고 제거함
-        t = self.adult_stoke
-        c1 = t['평균혈당'] <= 232.64
-        c2 = t['체질량지수'] <= 60.3
-        self.adult_stoke = self.adult_stoke[c1 & c2]
-        print(f'--- 이상치 제거한 성인객체스펙 ---\n{self.adult_stoke.shape}')
+        c1 = adult_stoke['평균혈당'] <= 232.64
+        c2 = adult_stoke['체질량지수'] <= 60.3
+        adult_stoke = adult_stoke[c1 & c2]
+        print(f'--- 이상치 제거한 성인객체스펙 ---\n{adult_stoke.shape}')
 
     '''
     4.범주형 = ['성별', '심장병', '기혼여부', '직종', '거주형태','흡연여부', '고혈압']
@@ -135,21 +130,16 @@ class Stroke:
         pass
 
     def norminal(self):
-        t = self.adult_stoke
         category = ['성별', '심장병', '기혼여부', '직종', '거주형태', '흡연여부', '고혈압']
-        print(f'범주형변수 데이터타입\n {t[category].dtypes}')
-        print(f'범주형변수 결측값\n {t[category].isnull().sum()}')
-        print(f'결측값 있는 변수\n {t[category].isna().any()[lambda x: x]}')# 결측값이 없음
-        t['성별'] = OrdinalEncoder().fit_transform(t['성별'].values.reshape(-1,1))
-        t['기혼여부'] = OrdinalEncoder().fit_transform(t['기혼여부'].values.reshape(-1, 1))
-        t['직종'] = OrdinalEncoder().fit_transform(t['직종'].values.reshape(-1, 1))
-        t['거주형태'] = OrdinalEncoder().fit_transform(t['거주형태'].values.reshape(-1, 1))
-        t['흡연여부'] = OrdinalEncoder().fit_transform(t['흡연여부'].values.reshape(-1, 1))
-
-        self.stroke = t
-        self.spec()
-        print(" ### 프리프로세스 종료 ### ")
-        self.stroke.to_csv(f"{self.save}/stroke.csv", index=False)
+        print(f'범주형변수 데이터타입\n {adult_stoke[category].dtypes}')
+        print(f'범주형변수 결측값\n {adult_stoke[category].isnull().sum()}')
+        print(f'결측값 있는 변수\n {adult_stoke[category].isna().any()[lambda x: x]}')# 결측값이 없음
+        adult_stoke['성별'] = OrdinalEncoder().fit_transform(adult_stoke['성별'].values.reshape(-1,1))
+        adult_stoke['기혼여부'] = OrdinalEncoder().fit_transform(adult_stoke['기혼여부'].values.reshape(-1, 1))
+        adult_stoke['직종'] = OrdinalEncoder().fit_transform(adult_stoke['직종'].values.reshape(-1, 1))
+        adult_stoke['거주형태'] = OrdinalEncoder().fit_transform(adult_stoke['거주형태'].values.reshape(-1, 1))
+        adult_stoke['흡연여부'] = OrdinalEncoder().fit_transform(adult_stoke['흡연여부'].values.reshape(-1, 1))
+        adult_stoke.to_csv(f"{save}/stroke.csv", index=False)
 
     def ordinal(self): # 해당 컬럼이 없음
         pass

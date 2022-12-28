@@ -1,29 +1,20 @@
 import numpy as np
-import pandas as pd
-import tensorflow as tf
-from keras import Sequential
-from keras.layers import Dense
 from keras.saving.save import load_model
-from matplotlib import pyplot as plt
-from sklearn import datasets
-from sklearn.preprocessing import OneHotEncoder
 import os
-
 from tensorflow import keras
-
-from api.path import fashion
 
 
 class FashionService(object):
     def __init__(self):
-        global class_names, modelpath
+        global class_names, fashion_model, save
+        save = os.path.join(os.getcwd(),"save")
         class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                        'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-        modelpath = f"{fashion}\\fashion_model.h5"
+        fashion_model = os.path.join(save, "fashion_model.h5")
 
     # self, i, predictions_array, true_label, img
-    def service_model(self, i) -> '':
-        model = load_model(modelpath)
+    def find_fashion_by_index(self, i) -> '':
+        model = load_model(fashion_model)
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()
         predictions = model.predict(test_images)
         predictions_array, true_label, img = predictions[i], test_labels[i], test_images[i]
@@ -71,25 +62,3 @@ class FashionService(object):
         print(f"패션 서비스에서 예측한 값: {resp}")
         return resp
 
-
-
-menu = ["Exit", "service_model"] #1
-menu_lambda = {
-    "1" : lambda x: x.service_model(),
-}
-if __name__ == '__main__':
-    service = FashionService()
-    while True:
-        [print(f"{i}. {j}") for i, j in enumerate(menu)]
-        menu = input('메뉴선택: ')
-        if menu == '0':
-            print("종료")
-            break
-        else:
-            try:
-                menu_lambda[menu](service)
-            except KeyError as e:
-                if 'some error message' in str(e):
-                    print('Caught error message')
-                else:
-                    print("Didn't catch error message")

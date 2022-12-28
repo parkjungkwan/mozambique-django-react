@@ -9,7 +9,8 @@ from basic.dlearn.fruits.models import FruitsModel
 class FruitsService():
     def __init__(self):
         global CNNClassifier
-        CNNClassifier = f"{fruits}\\CNNClassifier.h5"
+        data = os.path.join(os.getcwd(),"data")
+        CNNClassifier = os.path.join(data, "CNNClassifier.h5")
 
     def find_fruits(self, id):
         # id = -1 리액트에서 입력한 값
@@ -36,5 +37,4 @@ class FruitsService():
             .format(class_names[np.argmax(score)], 100 * np.max(score))
         )
 
-if __name__ == '__main__':
-    FruitsService().find_fruits()
+
