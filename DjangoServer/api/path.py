@@ -2,9 +2,15 @@ import os
 import platform
 myos = platform.system()
 root = "\\"
-basic = "basic"
+def OSPathJoin(param):
+    root = "\\"
+    dir = ""
+    if param == "algorithms" "aitrater":
+        dir = "basic"
+    elif param == "comments":
+        dir = "blog"
+    return os.path.join(root, dir, param)
 
-algorithms= os.path.join(root, basic, "algorithms") # "{root}/basic/algorithms"
 aitrater=f"{root}/basic/dlearn/aitrater"
 fashion=f"{root}/basic/dlearn/fashion"
 fruits=f"{root}/basic/dlearn/fruits"
@@ -62,5 +68,5 @@ deliveries=f"{root}\\shop\\deliveries"
 products=f"{root}\\shop\\products"
 '''
 if __name__ == '__main__':
-    print(">> "+algorithms)
+    print(">> "+OSPathJoin("aitrater"))
 

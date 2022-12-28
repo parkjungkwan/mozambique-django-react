@@ -1,5 +1,7 @@
 import csv
 import time
+from collections import defaultdict
+from math import log, exp
 from os import path
 
 import pandas as pd
@@ -20,6 +22,7 @@ class ImdbService(object):
         global train_input, train_target, test_input, test_target, train_input2, val_input, train_target2, val_target
         (train_input, train_target), (test_input, test_target) = imdb.load_data(num_words=500)
         train_input2, val_input, train_target2, val_target = train_test_split(train_input, train_target, test_size=0.2, random_state=42)
+        self.word_probs = []
 
     def hook(self):
         model = ImdbModel()
@@ -56,10 +59,11 @@ class ImdbService(object):
 
 class NaverMovieService(object):
     def __init__(self):
-        global url, driver, file_name, encoding
+        global url, driver, file_name, encoding, review_train
         url = 'https://movie.naver.com/movie/point/af/list.naver?&page='
         driver = webdriver.Chrome(r'C:\Users\AIA\MsaProject\DjangoServer\basic\webcrawler\chromedriver.exe')
         file_name = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\naver_movie_review_corpus.csv'
+        review_train = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\review_train.csv'
         encoding = "UTF-8"
 
     def crawling(self):
@@ -85,6 +89,63 @@ class NaverMovieService(object):
         data.columns = ['review', 'score']
         result = [print(f"{i + 1}. {data['score'][i]}\n{data['review'][i]}\n") for i in range(len(data))]
         return result
+
+    def load_corpus(self):
+        corpus = pd.read_table(review_train,sep=",", encoding=encoding)
+        corpus = np.array(corpus)
+        return corpus
+
+    def count_words(self, train_X):
+        counts = defaultdict(lambda : [0,0])
+        for doc, point in train_X:
+            if self.isNumber(doc) is False:
+                words = doc.split()
+                for word in words:
+                    counts[word][0 if point > 3.5 else 1] += 1
+
+    def isNumber(self, param):
+        try:
+            float(param)
+            return True
+        except ValueError:
+            return False
+
+    def probability(self, word_probs, doc):
+        docwords = doc.split()
+        log_prob_if_class0 = log_prob_if_class1 = 0.0
+        for word, prob_if_class0, prob_if_class1 in word_probs:
+            if word in docwords:
+                log_prob_if_class0 += log(prob_if_class0)
+                log_prob_if_class1 += log(prob_if_class1)
+            else:
+                log_prob_if_class0 += log(1.0 - prob_if_class0)
+                log_prob_if_class1 += log(1.0 - prob_if_class1)
+        prob_if_class0 = exp(log_prob_if_class0)
+        prob_if_class1 = exp(log_prob_if_class1)
+        return prob_if_class0 / (prob_if_class0 + prob_if_class1)
+
+    def word_probablities(self, counts, n_class0, n_class1, k):
+        return [(w,
+                 (class0 + k) / (n_class0 + 2 * k),
+                 (class1 + k) / (n_class1 + 2 * k))
+                for w, (class0, class1) in counts.items()]
+
+    def classify(self, doc):
+        return self.probability(word_probs=self.word_probs, doc=doc)
+
+    def model_fit(self):
+        train_X = self.load_corpus()
+        '''
+        '재밌네요': [1,0]
+        '별로 재미없어요': [0,1]
+        '''
+        num_class0 = len([1 for _, point in train_X if point > 3.5])
+        num_class1 = len(train_X) - num_class0
+        pass
+
+
+
+
 
 
 
