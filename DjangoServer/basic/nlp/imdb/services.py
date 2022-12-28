@@ -68,10 +68,10 @@ class NaverMovieService(object):
         k = 0.5
         self.word_probs = []
 
-    def process(self):
+    def process(self, new_review):
         service = NaverMovieService()
         service.model_fit()
-        result = service.classify('내 인생 최고의 영화')
+        result = service.classify(new_review)
         return result
 
     def crawling(self):
@@ -111,8 +111,7 @@ class NaverMovieService(object):
                 words = doc.split()
                 for word in words:
                     counts[word][0 if point > 3.5 else 1] += 1
-            else:
-                print('****** self.isNumber(doc) is True')
+        return counts
 
     def isNumber(self, param):
         try:
@@ -153,13 +152,13 @@ class NaverMovieService(object):
         num_class0 = len([1 for _, point in train_X if point > 3.5])
         num_class1 = len(train_X) - num_class0
         word_counts = self.count_words(train_X)
-        print(f" ************  word_counts is {word_counts}")
+        # print(f" ************  word_counts is {word_counts}")
         self.word_probs = self.word_probablities(word_counts, num_class0, num_class1, k)
 
 
 if __name__ == '__main__':
     # ImdbService().hook()
-    result = NaverMovieService().process()
+    result = NaverMovieService().process("시간 아깝다. 정말 쓰레기 영화다")
     print(f"긍정률: {result}")
 
 
