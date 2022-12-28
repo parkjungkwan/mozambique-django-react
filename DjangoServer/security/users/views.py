@@ -5,5 +5,9 @@ from security.users.services import UserService
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
-def users(request):
+def user_list(request):
+    service = UserService()
     return JsonResponse({'users': UserService().get_users()})
+
+def login(request):
+    pass
