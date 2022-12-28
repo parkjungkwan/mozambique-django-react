@@ -19,10 +19,10 @@ from basic.nlp.imdb.models import ImdbModel
 class ImdbService(object):
 
     def __init__(self):
-        global train_input, train_target, test_input, test_target, train_input2, val_input, train_target2, val_target
+        global train_input, train_target, test_input, test_target, train_input2, \
+            val_input, train_target2, val_target
         (train_input, train_target), (test_input, test_target) = imdb.load_data(num_words=500)
         train_input2, val_input, train_target2, val_target = train_test_split(train_input, train_target, test_size=0.2, random_state=42)
-        self.word_probs = []
 
     def hook(self):
         model = ImdbModel()
@@ -59,16 +59,25 @@ class ImdbService(object):
 
 class NaverMovieService(object):
     def __init__(self):
-        global url, driver, file_name, encoding, review_train
+        global url, driver, file_name, encoding, review_train, k, driver_path
         url = 'https://movie.naver.com/movie/point/af/list.naver?&page='
-        driver = webdriver.Chrome(r'C:\Users\AIA\MsaProject\DjangoServer\basic\webcrawler\chromedriver.exe')
+        driver_path = r'C:\Users\AIA\MsaProject\DjangoServer\basic\webcrawler\chromedriver.exe'
         file_name = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\naver_movie_review_corpus.csv'
         review_train = r'C:\Users\AIA\MsaProject\DjangoServer\basic\nlp\imdb\review_train.csv'
         encoding = "UTF-8"
+        k = 0.5
+        self.word_probs = []
+
+    def process(self):
+        service = NaverMovieService()
+        service.model_fit()
+        result = service.classify('내 인생 최고의 영화')
+        return result
 
     def crawling(self):
-        if not path.exists(file_name):
+        if not path.exists(review_train): # file_name -> review_train
             review_data = []
+            driver = webdriver.Chrome(driver_path)
             for page in range(1, 2):
                 driver.get(url + str(page))
                 soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -141,16 +150,13 @@ class NaverMovieService(object):
         '''
         num_class0 = len([1 for _, point in train_X if point > 3.5])
         num_class1 = len(train_X) - num_class0
-        pass
-
-
-
-
-
-
+        word_counts = self.count_words(train_X)
+        self.word_probs = self.word_probablities(word_counts, num_class0, num_class1, k)
 
 
 if __name__ == '__main__':
     # ImdbService().hook()
-    NaverMovieService().crawling()
+    result = NaverMovieService().process()
+    print(f"긍정률: {result}")
+
 
