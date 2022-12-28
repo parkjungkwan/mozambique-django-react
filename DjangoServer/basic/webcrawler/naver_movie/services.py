@@ -4,7 +4,6 @@ import os.path
 import pandas as pd
 from selenium import webdriver
 
-from api.path import webcrawler
 from basic.webcrawler.music.models import ScrapVO
 import urllib.request
 from urllib.request import urlopen

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import {Navigation2, Footer} from "api"
 import {LoginForm, SignUp} from "security"
 import image from '../images/fashion.png'
-import {Counter, Iris, Fashion, NaverMovie, Schedule} from "basic"
+import {Counter, Iris, Fashion, NaverMovie, Schedule, NaverMovieReview} from "basic"
 
 const Home = () => {
     const imageSize = {width: 700, height: 500}
@@ -26,6 +26,7 @@ const Home = () => {
                 <Route path="/iris" element={<Iris/>}></Route>
                 <Route path="/fashion" element={<Fashion/>}></Route>
                 <Route path="/naver-movie" element={<NaverMovie/>}></Route>
+                <Route path="/naver-movie-review" element={<NaverMovieReview/>}></Route>
             </Routes>
             </td>
         </tr>

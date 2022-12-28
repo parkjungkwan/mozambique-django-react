@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass
 import pandas as pd
 
-from api.path import webcrawler
 
 
 @dataclass

@@ -61,9 +61,9 @@ class NaverMovieService(object):
     def __init__(self):
         global url, driver, file_name, encoding, review_train, k, driver_path
         url = 'https://movie.naver.com/movie/point/af/list.naver?&page='
-        driver = os.path.join(os.getcwd(), 'chromedriver.exe')
-        file_name = os.path.join(os.getcwd(), 'data/naver_movie_review_corpus.csv')
-        review_train = os.path.join(os.getcwd(), 'data/review_train.csv')
+        driver = os.path.join(os.getcwd(),"basic","webcrawler",'chromedriver.exe')
+        file_name = os.path.join(os.getcwd(),"basic","nlp","imdb","data","naver_movie_review_corpus.csv")
+        review_train = os.path.join(os.getcwd(), "basic","nlp","imdb","data","review_train.csv")
         encoding = "UTF-8"
         k = 0.5
         self.word_probs = []
