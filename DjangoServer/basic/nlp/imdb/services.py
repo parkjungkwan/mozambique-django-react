@@ -111,6 +111,8 @@ class NaverMovieService(object):
                 words = doc.split()
                 for word in words:
                     counts[word][0 if point > 3.5 else 1] += 1
+            else:
+                print('****** self.isNumber(doc) is True')
 
     def isNumber(self, param):
         try:
@@ -151,6 +153,7 @@ class NaverMovieService(object):
         num_class0 = len([1 for _, point in train_X if point > 3.5])
         num_class1 = len(train_X) - num_class0
         word_counts = self.count_words(train_X)
+        print(f" ************  word_counts is {word_counts}")
         self.word_probs = self.word_probablities(word_counts, num_class0, num_class1, k)
 
 
