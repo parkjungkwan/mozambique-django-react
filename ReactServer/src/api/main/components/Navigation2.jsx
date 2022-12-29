@@ -21,7 +21,7 @@ const Navigation2 = () => {
         <Link to="/home" style={{width:50, margin:10}}>홈</Link>
         <Link to="/counter" style={{width:50, margin:10}}>카운터</Link>
         <Link to="/todos" style={{width:50, margin:10}}>할일</Link>
-        <Link to="/signup" style={{width:70, margin:10}}>회원가입</Link>
+        <Link to="/signup" style={{width:50, margin:10}}>회원가입</Link>
         <Link to="/login" style={{width:50, margin:10}}>로그인</Link>
         <Link to="/stroke" style={{width:50, margin:10}}>뇌졸증</Link>
         <Link to="/iris" style={{width:50, margin:10}}>붓꽃</Link>

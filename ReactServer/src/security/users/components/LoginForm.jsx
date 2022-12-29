@@ -1,6 +1,6 @@
 import '../styles/Login.css'
 import { useState } from "react"
-import { blogLogin } from '../api'
+import { userLogin } from '../api'
 
 export default function LoginForm(){
     const [inputs, setInputs] = useState({})
@@ -15,7 +15,7 @@ export default function LoginForm(){
         e.preventDefault()
         const request = {email, password}
         alert(`사용자 이름: ${JSON.stringify(request)}`)
-        blogLogin(request)
+        userLogin(request)
         .then((res)=>{
             alert(`Response is ${res.config.data}`)
             console.log(`Response is ${res.config.data}`)

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import {Navigation2, Footer} from "api"
-import {LoginForm, SignUp, UserList} from "security"
+import {Login, SignUp, UserList} from "security"
 import image from '../images/fashion.png'
 import {Counter, Iris, Fashion, NaverMovie, Schedule, NaverMovieReview} from "basic"
 
@@ -21,7 +21,7 @@ const Home = () => {
             <Routes>
                 <Route path="/counter" element={<Counter/>}></Route>
                 <Route path="/todos" element={<Schedule/>}></Route>
-                <Route path="/login" element={<LoginForm/>}></Route>
+                <Route path="/login" element={<Login/>}></Route>
                 <Route path="/signup" element={<SignUp/>}></Route>
                 <Route path="/iris" element={<Iris/>}></Route>
                 <Route path="/fashion" element={<Fashion/>}></Route>
