@@ -1,10 +1,12 @@
 import '../styles/Login.css'
 import { useState } from "react"
 import { userLogin } from '../api'
+import { useNavigate  } from "react-router-dom"
 
 export default function LoginForm(){
     const [inputs, setInputs] = useState({})
     const {user_email, password} = inputs;
+    const navigate = useNavigate()
 
     const onChange = e => {
         e.preventDefault()
@@ -17,8 +19,10 @@ export default function LoginForm(){
         alert(`사용자 이름: ${JSON.stringify(request)}`)
         userLogin(request)
         .then((res)=>{
-            alert(`Response is ${JSON.stringify(res.data)}`)
             
+            localStorage.setItem("loginUser", JSON.stringify(res.data))
+            alert(`로컬스토리지에 저장된 정보: ${localStorage.getItem("loginUser")}`)
+            navigate("/home")
         })
         .catch((err)=>{
             console.log(err)

@@ -29,8 +29,8 @@ def login(request):
             return JsonResponse(data=serializer.data, safe=False)
         # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.
         else:
-            print(" 비번이 틀립니다 ")
+            return Response("비번이 틀립니다")
     except:
-        return Response("LOGIN FAIL")
+        return Response("이메일이 틀립니다")
 
 
