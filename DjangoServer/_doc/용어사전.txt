@@ -142,6 +142,10 @@
 ## 시그모이드 함수
     시그모이드 함수는 S자형 곡선 또는 시그모이드 곡선을 갖는 수학 함수이다.
     시그모이드 함수의 예시로는 첫 번째 그림에 표시된 로지스틱 함수가 있다.
+## 시리얼라이즈(Serialize)
+## 시리즈(Series)
+## 시퀀스(Sequence)
+## 시퀀셜(Sequential)
 ## 알고리즘 성능 측정지표
     https://jxo21.tistory.com/17
     https://datascienceschool.net/03%20machine%20learning/09.04%20%EB%B6%84%EB%A5%98%20%EC%84%B1%EB%8A%A5%ED%8F%89%EA%B0%80.html
@@ -237,6 +241,9 @@
 ## 지도학습 분류
     classification / 회귀 regression 로 나뉜다.
     model 은 var 를 잡아내서, class 를 시도한다.
+## 직렬화(Serialization)
+
+
 ## 집계 함수
     집계 함수란 입력이 여러개의 로우이고, 출력이 하나인 결과인 것을 말합니다.
     테이블의 전체 로우 수를 구하는

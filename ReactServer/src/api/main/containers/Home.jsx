@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import {Navigation2, Footer} from "api"
-import {LoginForm, SignUp} from "security"
+import {LoginForm, SignUp, UserList} from "security"
 import image from '../images/fashion.png'
 import {Counter, Iris, Fashion, NaverMovie, Schedule, NaverMovieReview} from "basic"
 
@@ -27,6 +27,7 @@ const Home = () => {
                 <Route path="/fashion" element={<Fashion/>}></Route>
                 <Route path="/naver-movie" element={<NaverMovie/>}></Route>
                 <Route path="/naver-movie-review" element={<NaverMovieReview/>}></Route>
+                <Route path="/user-list" element={<UserList/>}></Route>
             </Routes>
             </td>
         </tr>

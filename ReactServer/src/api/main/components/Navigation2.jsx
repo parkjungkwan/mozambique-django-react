@@ -28,6 +28,7 @@ const Navigation2 = () => {
         <Link to="/fashion" style={{width:50, margin:10}}>패션</Link>
         <Link to="/naver-movie" style={{width:50, margin:10}}>영화크롤링</Link>
         <Link to="/naver-movie-review" style={{width:50, margin:10}}>영화리뷰</Link>
+        <Link to="/user-list" style={{width:50, margin:10}}>사용자목록</Link>
       </BottomNavigation>
     </Box>
   );
