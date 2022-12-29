@@ -21,14 +21,15 @@ def login(request):
         print(f"로그인 정보: {request.data}")
         loginInfo = request.data
         loginUser = User.objects.get(user_email=loginInfo['user_email'])
-        print(f"해당 email 을 가진  User: {loginUser}")
-        if loginUser["password"] == loginInfo["password"]:
-            serializer = UserSerializer(loginUser, many=False)
-            print(f"")
-            token = Token.objects.create(user=serializer)
-            print(f" 토큰값 : {token}")
+        print(f"해당 email 을 가진  User ID: *** \n {loginUser.id}")
+        if loginUser.password == loginInfo["password"]:
+            dbUser = User.objects.all().filter(id=loginUser.id).values()[0]
+            print(f" DBUser is {dbUser}")
+            serializer = UserSerializer(dbUser, many=False)
             return JsonResponse(data=serializer.data, safe=False)
         # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.
+        else:
+            print(" 비번이 틀립니다 ")
     except:
         return Response("LOGIN FAIL")
 

@@ -4,7 +4,7 @@ import { userLogin } from '../api'
 
 export default function LoginForm(){
     const [inputs, setInputs] = useState({})
-    const {email, password} = inputs;
+    const {user_email, password} = inputs;
 
     const onChange = e => {
         e.preventDefault()
@@ -13,13 +13,12 @@ export default function LoginForm(){
     }
     const onClick = e => {
         e.preventDefault()
-        const request = {email, password}
+        const request = {user_email, password}
         alert(`사용자 이름: ${JSON.stringify(request)}`)
         userLogin(request)
         .then((res)=>{
-            alert(`Response is ${res.config.data}`)
-            console.log(`Response is ${res.config.data}`)
-            localStorage.setItem('token', JSON.stringify(res.config.data))
+            alert(`Response is ${JSON.stringify(res.data)}`)
+            
         })
         .catch((err)=>{
             console.log(err)
@@ -30,7 +29,7 @@ export default function LoginForm(){
 
     return (
     <>
-        EMAIL: <input type="text" name="email" onChange={onChange} /><br/>
+        EMAIL: <input type="text" name="user_email" onChange={onChange} /><br/>
         PASSWORD: <input type="text" name="password" onChange={onChange} /><br/>
         <button onClick={onClick}> 로그인 </button>
 
