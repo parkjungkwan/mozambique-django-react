@@ -14,7 +14,7 @@ export default function UserList(){
         .catch(err => {
             console.log(err)
         })
-    })
+    }, [])
     return <>
     
     </>
