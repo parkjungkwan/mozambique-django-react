@@ -24,9 +24,11 @@ def login(request):
         print(f"해당 email 을 가진  User: {loginUser}")
         if loginUser["password"] == loginInfo["password"]:
             serializer = UserSerializer(loginUser, many=False)
+            print(f"")
             token = Token.objects.create(user=serializer)
             print(f" 토큰값 : {token}")
             return JsonResponse(data=serializer.data, safe=False)
+        # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.
     except:
         return Response("LOGIN FAIL")
 
