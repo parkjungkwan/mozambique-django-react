@@ -1,7 +1,8 @@
 import '../styles/Login.css'
 import { useState } from "react"
 import { blogLogin } from '../api'
-const Login = () => {
+
+export default function LoginForm(){
     const [inputs, setInputs] = useState({})
     const {email, password} = inputs;
 
@@ -36,4 +37,3 @@ const Login = () => {
     
     </>
 )}
-export default Login
