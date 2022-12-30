@@ -19,7 +19,7 @@ from shop.carts.models import Cart
 from shop.carts.serializers import CartSerializer
 
 
-class TheaterRepository(object):
+class CartRepository(object):
 
     def __init__(self):
         print(" CommentsRepository 객체 생성 ")
