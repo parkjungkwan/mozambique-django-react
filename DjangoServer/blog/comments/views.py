@@ -4,11 +4,13 @@ from blog.comments.repository import CommentRepository
 from blog.comments.serializers import CommentSerializer
 
 
-@api_view(['POST','PUT','PATCH','DELETE'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
 def comment(request):
     if request.method == "POST":
         return CommentSerializer().create(request.data)
+    elif request.method == "GET":
+        return CommentRepository().find_by_id(request.data)
     elif request.method == "PATCH":
         return None
     elif request.method == "PUT":
@@ -19,8 +21,3 @@ def comment(request):
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def comment_list(request): return CommentRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_comment_by_id(request): return CommentRepository().find_by_id(request.data)
-
