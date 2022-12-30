@@ -29,3 +29,9 @@ class UserRepository(object):
         # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.
         else:
             return JsonResponse({"data": "WRONG_PASSWORD"})
+
+    def find_user_by_email(self, param):
+        return User.objects.all().filter(user_email=param).values()[0]
+
+    def find_users_by_name(self, param):
+        return User.objects.all().filter(user_email=param).values()

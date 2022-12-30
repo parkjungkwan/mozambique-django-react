@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
 from security.users.repositories import UserRepository
@@ -8,12 +10,19 @@ from security.users.serializers import UserSerializer
 @parser_classes([JSONParser])
 def user(request):
     if request.method == "POST":
-        return UserSerializer().create(request.data)
+        new_user = request.data
+        print(f" 리액트에서 등록한 신규 사용자 {new_user}")
+        serializer = UserSerializer(data=new_user)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({"result": "SUCCESS"})
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
-        return UserRepository().find_by_id(request.data)
+        return UserRepository().find_user_by_email(request.data["user_email"])
     elif request.method == "PATCH":
         return None
     elif request.method == "PUT":
+        
         return UserSerializer().update(request.data)
     elif request.method == "DELETE":
         return UserSerializer().delete(request.data)
@@ -27,4 +36,7 @@ def user_list(request): return UserRepository().get_all()
 @parser_classes([JSONParser])
 def login(request): return UserRepository().login(request.data)
 
-
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def user_list_by_name(request):
+    return UserRepository().find_users_by_name(request.data["user_name"])

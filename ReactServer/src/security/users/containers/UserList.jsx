@@ -6,7 +6,7 @@ export default function UserList(){
     const [list, setList] = useState([])
     useEffect(()=>{
         axios
-        .get('http://localhost:8000/security/users/user-list')
+        .get('http://localhost:8000/security/users/list')
         .then(res => {setList(res.data)})
         .catch(err => {console.log(err)})
     }, [])
