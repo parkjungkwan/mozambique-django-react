@@ -22,10 +22,19 @@ def user(request):
     elif request.method == "PATCH":
         return None
     elif request.method == "PUT":
-        
-        return UserSerializer().update(request.data)
+        repo = UserRepository()
+        modify_user = repo.find_user_by_email(request.data["user_email"])
+        db_user = repo.find_by_id(modify_user.id)
+        serializer = UserSerializer(data=db_user)
+        if serializer.is_valid():
+            serializer.update(modify_user, db_user)
+            return JsonResponse({"result": "SUCCESS"})
     elif request.method == "DELETE":
-        return UserSerializer().delete(request.data)
+        repo = UserRepository()
+        delete_user = repo.find_user_by_email(request.data["user_email"])
+        db_user = repo.find_by_id(delete_user.id)
+        db_user.delete()
+        return JsonResponse({"result": "SUCCESS"})
 
 
 @api_view(['GET'])
