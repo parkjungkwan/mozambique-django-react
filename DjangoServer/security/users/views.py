@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
@@ -18,7 +19,9 @@ def user(request):
             return JsonResponse({"result": "SUCCESS"})
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
-        return UserRepository().find_user_by_email(request.data["user_email"])
+        return Response(UserRepository()
+                        .find_user_by_email(request
+                                            .data["user_email"]))
     elif request.method == "PATCH":
         return None
     elif request.method == "PUT":
