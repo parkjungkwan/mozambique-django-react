@@ -4,23 +4,20 @@ from shop.categories.repository import CategoryRepository
 from shop.categories.serializers import CategorySerializer
 
 
-@api_view(['POST'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def create_category(request): return CategorySerializer().create(request.data)
-
-@api_view(['PUT'])
-@parser_classes([JSONParser])
-def update_category(request): return CategorySerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def delete_category(request): return CategorySerializer().delete(request.data)
+def category(request):
+    if request.method == "POST":
+        return CategorySerializer().create(request.data)
+    elif request.method == "GET":
+        return CategorySerializer().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return CategorySerializer().update(request.data)
+    elif request.method == "DELETE":
+        return CategorySerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def category_list(request): return CategoryRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_category_by_id(request): return CategoryRepository().find_by_id(request.data)
-

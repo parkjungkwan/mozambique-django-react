@@ -4,23 +4,20 @@ from shop.deliveries.repository import DeliveryRepository
 from shop.deliveries.serializers import DeliverySerializer
 
 
-@api_view(['POST'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def create_delivery(request): return DeliverySerializer().create(request.data)
-
-@api_view(['PUT'])
-@parser_classes([JSONParser])
-def update_delivery(request): return DeliverySerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def delete_delivery(request): return DeliverySerializer().delete(request.data)
+def delivery(request):
+    if request.method == "POST":
+        return DeliverySerializer().create(request.data)
+    elif request.method == "GET":
+        return DeliverySerializer().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return DeliverySerializer().update(request.data)
+    elif request.method == "DELETE":
+        return DeliverySerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def delivery_list(request): return DeliveryRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_delivery_by_id(request): return DeliveryRepository().find_by_id(request.data)
-

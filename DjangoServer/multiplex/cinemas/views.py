@@ -4,24 +4,24 @@ from multiplex.cinemas.repository import CinemaRepository
 from multiplex.cinemas.serializers import CinemaSerializer
 
 
-@api_view(['POST'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def cinema_list(request): return CinemaSerializer().create(request.data)
-
-@api_view(['PUT'])
-@parser_classes([JSONParser])
-def cinema_update(request): return CinemaSerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def cinema_delete(request): return CinemaSerializer().delete(request.data)
+def cinema(request):
+    if request.method == "POST":
+        return CinemaSerializer().create(request.data)
+    elif request.method == "GET":
+        return CinemaRepository().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return CinemaSerializer().update(request.data)
+    elif request.method == "DELETE":
+        return CinemaSerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def cinema_list(request): return CinemaRepository().get_all(request.data)
 
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def user_detail(request): return CinemaRepository().find_by_id(request.data)
+
 
 

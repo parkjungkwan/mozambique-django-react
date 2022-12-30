@@ -4,23 +4,21 @@ from shop.orders.repository import OrderRepository
 from shop.orders.serializers import OrderSerializer
 
 
-@api_view(['POST'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def create_order(request): return OrderSerializer().create(request.data)
+def order(request):
+    if request.method == "POST":
+        return OrderSerializer().create(request.data)
+    elif request.method == "GET":
+        return OrderSerializer().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return OrderSerializer().update(request.data)
+    elif request.method == "DELETE":
+        return OrderSerializer().delete(request.data)
 
-@api_view(['PUT'])
-@parser_classes([JSONParser])
-def update_order(request): return OrderSerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def delete_order(request): return OrderSerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def order_list(request): return OrderRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_order_by_id(request): return OrderRepository().find_by_id(request.data)
-

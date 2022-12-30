@@ -16,15 +16,14 @@ class UserRepository(object):
     def get_all(self):
         return Response(UserSerializer(User.objects.all(), many=True).data)
 
-    def get_by_id(self):
-        return Response(UserSerializer(User.objects.all(), many=True).data)
+    def find_by_id(self, id):
+        return User.objects.all().filter(id=id).values()[0]
 
 
-
-    def login(self, kwargs):
-        loginUser = User.objects.get(user_email=kwargs['user_email'])
-        if loginUser.password == kwargs["password"]:
-            dbUser = User.objects.all().filter(id=loginUser.id).values()[0]
+    def login(self, param):
+        loginUser = User.objects.get(user_email=param['user_email'])
+        if loginUser.password == param["password"]:
+            dbUser = self.find_by_id(loginUser.id)
             serializer = UserSerializer(dbUser, many=False)
             return JsonResponse(data=serializer.data, safe=False)
         # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.

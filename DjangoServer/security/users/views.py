@@ -4,25 +4,24 @@ from security.users.repositories import UserRepository
 from security.users.serializers import UserSerializer
 
 
-@api_view(['POST'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def signup(request): return UserSerializer().create(request.data)
+def user(request):
+    if request.method == "POST":
+        return UserSerializer().create(request.data)
+    elif request.method == "GET":
+        return UserRepository().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return UserSerializer().update(request.data)
+    elif request.method == "DELETE":
+        return UserSerializer().delete(request.data)
 
-@api_view(['PUT'])
-@parser_classes([JSONParser])
-def update_user(request): return UserSerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def delete_user(request): return UserSerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
-def user_list(request): return UserRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_user_by_id(request): return UserRepository().find_by_id(request.data)
+def user_list(request): return UserRepository().get_all()
 
 @api_view(['POST'])
 @parser_classes([JSONParser])

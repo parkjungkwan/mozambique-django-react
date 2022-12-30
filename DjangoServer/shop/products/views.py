@@ -8,19 +8,20 @@ from shop.products.serializers import ProductSerializer
 @parser_classes([JSONParser])
 def create_product(request): return ProductSerializer().create(request.data)
 
-@api_view(['PUT'])
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
 @parser_classes([JSONParser])
-def update_product(request): return ProductSerializer().update(request.data)
-
-@api_view(['DELETE'])
-@parser_classes([JSONParser])
-def delete_product(request): return ProductSerializer().delete(request.data)
+def product(request):
+    if request.method == "POST":
+        return ProductSerializer().create(request.data)
+    elif request.method == "GET":
+        return ProductSerializer().find_by_id(request.data)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        return ProductSerializer().update(request.data)
+    elif request.method == "DELETE":
+        return ProductSerializer().delete(request.data)
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def product_list(request): return ProductRepository().get_all(request.data)
-
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def find_product_by_id(request): return ProductRepository().find_by_id(request.data)
-
