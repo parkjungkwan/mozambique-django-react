@@ -9,19 +9,19 @@ from multiplex.cinemas.serializers import CinemaSerializer
 
 @api_view(['POST'])
 @parser_classes([JSONParser])
-def user_list(request): return CinemaSerializer().create()
+def cinema_list(request): return CinemaSerializer().create()
 
 @api_view(['PUT'])
 @parser_classes([JSONParser])
-def user_update(request): return CinemaSerializer().update()
+def cinema_update(request): return CinemaSerializer().update()
 
 @api_view(['DELETE'])
 @parser_classes([JSONParser])
-def user_delete(request): return CinemaSerializer().delete()
+def cinema_delete(request): return CinemaSerializer().delete()
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
-def user_list(request): return CinemaRepository().get_all()
+def cinema_list(request): return CinemaRepository().get_all()
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
