@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import View as view
+from .models import View as view
 
 
 class ViewSerializer(serializers.ModelSerializer):

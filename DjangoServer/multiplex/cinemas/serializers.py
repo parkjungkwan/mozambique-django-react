@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Cinema as cinema
+from .models import Cinema as cinema
 
 
 class CinemaSerializer(serializers.ModelSerializer):

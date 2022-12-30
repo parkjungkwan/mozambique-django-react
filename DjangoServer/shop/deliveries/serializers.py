@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Delivery as delivery
+from .models import Delivery as delivery
 
 
 class DeliverySerializer(serializers.ModelSerializer):

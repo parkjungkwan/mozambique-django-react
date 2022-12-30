@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import TheaterTicket as theaterTicket
+from .models import TheaterTicket as theaterTicket
 
 
 class TheaterTicketSerializer(serializers.ModelSerializer):

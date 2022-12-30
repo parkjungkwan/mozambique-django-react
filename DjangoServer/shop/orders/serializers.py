@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Order as order
+from .models import Order as order
 
 
 class OrderSerializer(serializers.ModelSerializer):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Showtime as showtime
+from .models import Showtime as showtime
 
 
 class ShowtimeSerializer(serializers.ModelSerializer):
