@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
+
+from security.users.models import User
 from security.users.repositories import UserRepository
 from security.users.serializers import UserSerializer
 
@@ -52,3 +54,10 @@ def login(request): return UserRepository().login(request.data)
 @parser_classes([JSONParser])
 def user_list_by_name(request):
     return UserRepository().find_users_by_name(request.data["user_name"])
+
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def exist_email(request, email):
+    exist = User.objects.all().filter(user_email=email).values()[0]
+    if not email == exist['user_email']:
+        return JsonResponse({"result":"SUCCESS"})
