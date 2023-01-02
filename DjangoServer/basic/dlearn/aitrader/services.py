@@ -1,6 +1,7 @@
 import os
 import warnings
 
+import numpy as np
 import pandas as pd
 from prophet import Prophet
 
@@ -31,12 +32,13 @@ Date Open     High      Low    Close     Adj Close   Volume
 class AiTraderService(object):
 
     def __init__(self):
-        global start_date, end_date, item_code
+        global start_date, end_date, item_code, path
+        path = dir_path('aitrader')
         start_date = "2019-1-4"
         end_date = '2022-12-30'
         item_code = '000270.KS'
 
-    def hook(self):
+    def kospi_predict_by_yahoo(self):
         item = data.get_data_yahoo(item_code, start_date, end_date)
         print(f" KIA head: {item.head(3)}")
         print(f" KIA tail: {item.tail(3)}")
@@ -55,13 +57,43 @@ class AiTraderService(object):
         plt.plot(forecast['ds'], forecast['yhat'], label='forecast')
         plt.grid()
         plt.legend()
-        path = dir_path('aitrader')
+
         print(f"path: {path}")
-        plt.savefig(os.path.join(path, 'kia_close.png'))
+        plt.savefig(os.path.join(path, "save", "kia_close.png"))
 
+    def samsung_predict(self):
+        kospi200_df = pd.read_csv(os.path.join(path, "data", "kospi200.csv"),
+                          index_col=0, header=0, encoding="cp949", sep=",")
+        print(kospi200_df)
+        print(kospi200_df.shape)
 
+        samsung_df = pd.read_csv(os.path.join(path, "data", "samsung.csv"),
+                          index_col=0, header=0, encoding="cp949", sep=",")
+        print(samsung_df)
+        print(samsung_df.shape)
+
+        # kospi200의 거래량
+        for i in range(len(kospi200_df.index)):  # 거래량 str -> int 변경
+            kospi200_df.iloc[i, 4] = int(kospi200_df.iloc[i, 4].replace(',', ''))
+            # 삼성전자의 모든 데이터
+        for i in range(len(samsung_df.index)):  # 모든 str -> int 변경
+            for j in range(len(samsung_df.iloc[i])):
+                samsung_df.iloc[i, j] = int(samsung_df.iloc[i, j].replace(',', ''))
+
+        kospi200_df = kospi200_df.sort_values(['일자'], ascending=[True])
+        samsung_df = samsung_df.sort_values(['일자'], ascending=[True])
+        print(kospi200_df)
+        print(samsung_df)
+
+        kospi200_df = kospi200_df.values
+        samsung_df = samsung_df.values
+        print(type(kospi200_df), type(samsung_df))
+        print(kospi200_df.shape, samsung_df.shape)
+
+        np.save(os.path.join(path, "save", "kospi200.npy"), arr=kospi200_df)
+        np.save(os.path.join(path, "save", "samsung.npy"), arr=samsung_df)
 
 if __name__ == '__main__':
     ai = AiTraderService()
-    ai.hook()
+    ai.samsung_predict()
 
