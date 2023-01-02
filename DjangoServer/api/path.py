@@ -5,7 +5,7 @@ root = r"C:\Users\AIA\MsaProject\DjangoServer"
 def dir_path(param):
     if (param == "algorithms") :
         return os.path.join(root, "basic", param)
-    elif (param == "aitrater") \
+    elif (param == "aitrader") \
             or (param == "fashion") \
             or (param == "fruits") \
             or (param == "iris") \
