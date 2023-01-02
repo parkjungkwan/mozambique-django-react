@@ -9,7 +9,7 @@ class KoreanClassifyService(object):
     def __init__(self):
        pass
 
-    def hook(self, test_str):
+    def korean_classify(self, **kwargs):
         ko_str = '이것은 한국어 문장입니다.'
         ja_str = 'これは日本語の文章です。'
         en_str = 'This is English Sentences.'
@@ -19,8 +19,8 @@ class KoreanClassifyService(object):
         y_train = ['ko', 'ja', 'en']
         clf = GaussianNB()
         clf.fit(x_train, y_train)
-        x_test = self.count_codePoint(test_str)
-        y_test = ['ko', 'ja', 'en']
+        x_test = [self.count_codePoint(kwargs["quiz"])]
+        y_test = [kwargs["answer"]]
         y_pred = clf.predict(x_test)
         print(y_pred)
         print(f'정답률: { accuracy_score(y_test, y_pred)}')
@@ -61,7 +61,13 @@ class KoreanClassifyService(object):
 
 if __name__ == '__main__':
     k = KoreanClassifyService()
-    k.homonym_classification()
+    quiz = "경마장에 있는 말이 뛰고 있다"
+    answer = "ko"
+    print(f"{quiz} 언어 종류를 다음에서 고르시오")
+    print(f"'한국어: ko, 일본어: ja, 영어: en' 중에서 {answer}")
+    k.korean_classify(quiz=quiz, answer=answer)
+
+    # k.homonym_classification()
 
 
 
