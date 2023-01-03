@@ -29,17 +29,21 @@ plt.rcParams['axes.unicode_minus'] = False
 Date Open     High      Low    Close     Adj Close   Volume
 '''
 
+
+
 class AiTraderService(object):
 
     def __init__(self):
-        global start_date, end_date, item_code, path
+        global codes, path, labels, dates, images
         path = dir_path('aitrader')
-        start_date = "2019-1-4"
-        end_date = '2022-12-30'
-        item_code = '000270.KS'
+        dates = {"start":"2019-1-4", "end":"2022-12-30"}
+        codes = {"kia":'000270.KS'}
+        labels = {'real':'real', 'forecast':'forecast'}
+        images = {"kia-close":"kia_close.png"}
+        csv_files = {}
 
     def kospi_predict_by_yahoo(self):
-        item = data.get_data_yahoo(item_code, start_date, end_date)
+        item = data.get_data_yahoo(codes["kia"], dates["start"], dates["end"])
         print(f" KIA head: {item.head(3)}")
         print(f" KIA tail: {item.tail(3)}")
         item['Close'].plot(figsize=(12,6), grid=True)
@@ -53,13 +57,11 @@ class AiTraderService(object):
         forecast = prophet.predict(future)
         prophet.plot(forecast)
         plt.figure(figsize=(12,6))
-        plt.plot(item.index, item['Close'], label='real')
-        plt.plot(forecast['ds'], forecast['yhat'], label='forecast')
+        plt.plot(item.index, item['Close'], label=labels['real'])
+        plt.plot(forecast['ds'], forecast['yhat'], label=labels['forecast'])
         plt.grid()
         plt.legend()
-
-        print(f"path: {path}")
-        plt.savefig(os.path.join(path, "save", "kia_close.png"))
+        plt.savefig(os.path.join(path, "save", images["kia-close"]))
 
     def samsung_predict(self):
         kospi200_df = pd.read_csv(os.path.join(path, "data", "kospi200.csv"),
@@ -94,6 +96,9 @@ class AiTraderService(object):
         np.save(os.path.join(path, "save", "samsung.npy"), arr=samsung_df)
 
 if __name__ == '__main__':
-    ai = AiTraderService()
-    ai.samsung_predict()
+    # ai = AiTraderService()
+    # ai.samsung_predict()
+    label = {'real':'real', 'forecast':'forecast'}
+    print(label['real'])
+
 

@@ -17,8 +17,8 @@ class FashionModel(object):
             keras.layers.Dense(128, activation='relu'),
             keras.layers.Dense(10, activation='softmax')
         ])
-        model.compile(optimizer='adam',
-                      loss='sparse_categorical_crossentropy',
+        model.compile(loss='sparse_categorical_crossentropy',
+                      optimizer='adam',
                       metrics=['accuracy'])
 
         (train_images, train_labels), (test_images, test_labels) = keras.datasets.fashion_mnist.load_data()

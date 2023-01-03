@@ -6,6 +6,7 @@ import pandas as pd
 from api.path import dir_path
 
 if __name__ == '__main__':
+
     path = dir_path('aitrader')
     kospi200 = np.load(os.path.join(path, "save", "kospi200.npy"), allow_pickle=True)
     samsung = np.load(os.path.join(path, "save", "samsung.npy"), allow_pickle=True)
@@ -15,7 +16,7 @@ if __name__ == '__main__':
     print(kospi200.shape)
     print(samsung.shape)
 
-    def split_xy5(dataset, time_steps, y_column):
+    def split_xy5_for_dnn_ensemble(dataset, time_steps, y_column):
         x, y = list(), list()
         for i in range(len(dataset)):
             x_end_number = i + time_steps
@@ -28,8 +29,8 @@ if __name__ == '__main__':
             x.append(tmp_x)
             y.append(tmp_y)
         return np.array(x), np.array(y)
-    x1, y1 = split_xy5(samsung, 5, 1)
-    x2, y2 = split_xy5(kospi200, 5, 1)
+    x1, y1 = split_xy5_for_dnn_ensemble(samsung, 5, 1)
+    x2, y2 = split_xy5_for_dnn_ensemble(kospi200, 5, 1)
     print(x2[0,:], "\n", y2[0])
     print(x2.shape)
     print(y2.shape)

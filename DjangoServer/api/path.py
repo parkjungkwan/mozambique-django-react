@@ -56,4 +56,6 @@ def dir_path(param):
         return os.path.join(root, "shop", param)
 
 if __name__ == '__main__':
-    print(">> "+dir_path("carts"))
+    # print(">> "+dir_path("carts"))
+    a = os.path.dirname(os.path.realpath(__file__))
+    print(a)

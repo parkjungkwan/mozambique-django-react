@@ -44,6 +44,15 @@
     그 사건이 벌어질 확률을 곱한 것을 전체 사건에 대해 합한 값이다.
     이것은 어떤 확률적 사건에 대한 평균의 의미로 생각할 수 있다. 이 경우 '모 평균'으로 다룰수있다.
 ## 나이키스트-새년의 표본화
+## 다항회귀(Polynomial regression)
+    다항 회귀는 선형 모델을 사용하여 비선형 데이터 집합을 모델링한다.
+    이것은 동그란 모양의 구멍에 네모난 모양의 못 또는 말뚝을 끼워 넣는 것과 같다.
+    다항 회귀는 독립 변수가 여러 개인 선형 회귀를 뜻하는 다중 선형 회귀와 비슷한 방식으로
+    작동하지만, 비선형 곡선을 사용한다. 즉, 데이터 포인트가 비선형 방식으로 존재할 때 사용한다.
+    모델은 이 데이터 포인트들을 지정된 수준의 다항식 특성으로 변환하고 선형 모델을 사용하여
+    모델화한다. 선형 회귀에서 볼 수 있는 직선이 아닌 곡선의 다항식 선을 사용하여 최적적합을 수행한다.
+    그러나 이 모델은 과대적합으로 나타나기 쉬우므로 이상한 결과치를 피하기 위해서는
+    끝 부분의 곡선을 분석하는 것이 좋다.
 ## 대수의 법칙
 ## 대수학(algebra)
     변수는 feature 와 target 으로 나뉜다.
@@ -70,6 +79,12 @@
     validation dataset is a sample of data held back from training your model that is used to give an estimate of model skill while tuning model’s hyperparameters.
     The validation dataset is different from the test dataset that is also held back from the training of the model, but is instead used to give an unbiased estimate of the skill of the final tuned model when comparing or selecting between final models.
     There is much confusion in applied machine learning about what a validation dataset is exactly and how it differs from a test dataset.
+## 라쏘 회귀(Lasso regression)
+    라쏘 회귀는 리지 회귀와 같이 모델의 복잡성을 줄여주는 또 다른 정규화 기법이다.
+    회귀 계수의 절대 사이즈를 금지함으로써 복잡성을 줄인다.
+    리지 회귀와는 다르게 아예 계수 값을 0에 가깝게 만든다.
+
+그 장점은 기능 선택을 사용할 수 있다는 것이다. 데이터 집합에서 기능 세트를 선택하여 모델을 구축할 수 있다. 라쏘 회귀는 필요한 요소들만 사용하고 나머지를 0으로 설정함으로써 과대적합을 방지할 수 있다.
 ## 랜덤
 ## 로지스틱 함수
     https://datascienceschool.net/03%20machine%20learning/10.01%20%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1%20%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D.html
@@ -83,6 +98,8 @@
     0부터 1사이의 실수값으로 1 대 1 대응시키는 시그모이드함수다.
     보통 시그모이드함수라고 하면 로지스틱함수를 가리킨다.
 ## 로지스틱회귀
+    종속 변수에 이산 값이 있는 경우, 다시 말해 0 또는 1, 참 또는 거짓, 흑 또는 백, 스팸 또는 스팸 아닌 것 등의
+    두 가지 값 중 하나만 취할 수 있는 경우 로지스틱 회귀를 사용하여 데이터를 분석할 수 있다.
     로지스틱 회귀에는 세 가지 기본 종류가 있습니다.
         이진 로지스틱 회귀: 여기서 범주형 응답에 대해 가능한 결과는 두 가지뿐입니다.
                         위의 예에서와 같이 학생은 합격하거나 불합격합니다.
@@ -92,6 +109,12 @@
         순서 로지스틱 회귀: 다항 회귀와 마찬가지로 3개 이상의 변수가 있을 수 있습니다.
                         그러나 측정에는 순서가 있습니다.
                         예를 들어 1에서 5까지의 척도로 호텔을 평가하는 경우를 들 수 있습니다
+## 리지 회귀(Ridge regression)
+    Ridge: 능선(稜線)은 산이나 언덕의 꼭대기가 일정 간격을 두고 연결되어 연속적으로 솟아오른 지형을 말한다. 등산 코스로 흔히 사용된다
+    다중 회귀라고도 불리는 리지 회귀는 정규화 또는 규제화(regularization) 기법으로 알려져 있으며
+    모델의 복잡성을 줄이는 데 사용된다.
+    또한 ‘리지 회귀 페널티’로 알려진 약간의 편향, 즉 바이어스(bias)를 사용하여
+    모델이 과대적합(overfitting)에 덜 취약하게 만든다.
 ## 마르-힐드레스 엣지 검출기
 ## 마하밴드
 ## 머신러닝(Machine Learning)
@@ -109,6 +132,10 @@
     https://www.intel.co.kr/content/www/kr/ko/analytics/data-modeling.html
 ## 밀집 데이터(Dense Data)
     dense data는 차원/전체 공간에 비해 데이터가 있는 공간이 빽빽하게 차 있는 데이터이다.
+## 베이지안
+## 분류 와 회귀
+    참조: https://nexablue.tistory.com/29
+    회귀는 확률을 예측하는 것이 아니다. 회귀는 출력는 연속성이 있고, 그 연속성 중에 어디에 점을 찍을지 결정하는 문제이다.
 ## 분포
     이산확률변수가 따르는 확률분포인 이산확률분포 중,
     대표적인 분포인 베르누이분포(Bernoulli Distribution)와 이항분포(Binomial Distribution)에
@@ -121,14 +148,19 @@
     이때 사용하는 확률분포를 이항분포라고 합니다.
     ㅇ 베르누이분포 : X ~ B(1,p)      (1번 만의 베르누이 시행의 성공 확률분포)
     ㅇ 이항분포     : X ~ B(n,p)      (n번 베르누이 시행의 성공 확률분포)
-## 베이지안
+
 ## 불순도
     다양한 범주들의 개체들이 얼마나 포함되었는가 정도이다.
     여러가지 클래스가 섞여있는 정도이다. 반대로 순수도(purity)는 같은 클래스끼리
     얼마나 많이 포함되어 있는지를 말한다.
     https://computer-science-student.tistory.com/60
 ## 산술급수 와 기하급수
-## 선형회귀(Linear Regression)을 코드로 구현한다.
+## 선형 회귀(Linear regression)
+    예측 변수와 종속 변수로 구성되며, 이 둘은 선형 방식으로 서로 연관지어져 있다.
+    선형 회귀는 위에서 설명한 대로 가장 적합한 선, 즉 최적적합선을 사용한다.
+    변수들이 서로 선형적으로 연결되어 있는 경우 선형 회귀를 사용한다.
+    광고 지출 증가가 판매에 미치는 영향을 예측할 때 등이 예가 될 수 있다.
+    그러나 선형 회귀분석은 특이치에 영향을 받기 쉬우므로 빅데이터 집합을 분석하는 데 사용해서는 안 된다.
     핵심키워드: 선형회귀(Linear Regression) 가설(Hypothesis) 비용함수(Cost function)
 ## 셀레니움(Selenium)
 
@@ -146,6 +178,13 @@
 ## 시리즈(Series)
 ## 시퀀스(Sequence)
 ## 시퀀셜(Sequential)
+
+
+## 시계열 데이터
+    : 일련의 순차적으로 정해진 데이터 셋의 집합
+    : 시간에 관해 순서가 매겨져 있다는 점과, 연속한 관측치는 서로 상관관계를 갖고 있다
+    회귀분석
+    : 관찰된 연속형 변수들에 대해 두 변수 사이의 모형을 구한뒤 적합도를 측정해 내는 분석 방법
 ## 알고리즘 성능 측정지표
     https://jxo21.tistory.com/17
     https://datascienceschool.net/03%20machine%20learning/09.04%20%EB%B6%84%EB%A5%98%20%EC%84%B1%EB%8A%A5%ED%8F%89%EA%B0%80.html
@@ -226,11 +265,6 @@
     (7)특이점이 온다, 레이 커즈와일
 ## 인코딩(encoding)
     문자 -> 숫자
-## 시계열 데이터
-    : 일련의 순차적으로 정해진 데이터 셋의 집합
-    : 시간에 관해 순서가 매겨져 있다는 점과, 연속한 관측치는 서로 상관관계를 갖고 있다
-    회귀분석
-    : 관찰된 연속형 변수들에 대해 두 변수 사이의 모형을 구한뒤 적합도를 측정해 내는 분석 방법
 ## 잡음(Noise)
     가우시안 잡음(Gaussian Noise)
     점 잡음(Salt-And-Pepper Noise)
@@ -260,11 +294,13 @@
     https://koreapy.tistory.com/1108
     추론과 예측의 차이는 답이 라벨인가, 그라운드트루스 인가이다.
 ## 최적화함수
-    최적화함수(Optimizer Function)는 손실함수의 결과값을 최소화하는 함수이며
+    최적화함수(Optimizer Function)는 손실함수의 결과값을 최소화하는 함수이며,
     기본적으로 경사하강법(Gradient Descent)을 사용한다.
     최적화함수 또한 컴파일 과정에서 정의하며 다양한 방식들이 있다.
     경사하강법을 개선한 확률적 경사하강법(SGD: Stochastic Gradient Descent)이 있고,
     SGD를 개선한 RMSProp 방식이 있다.
+## 케라스
+    케라스(Keras)는 파이썬으로 작성된 오픈 소스 신경망 라이브러리이다
 ## 코퍼스(Corpus)
     말뭉치 또는 코퍼스(Corpus)는 자연언어 연구를 위해 특정한 목적을 가지고 언어의 표본을 추출한 집합이다.
     RNN에서 TrainSet을 말한다. 코퍼스에서 소문자(lower_case)전환, 숫자제거, 문장기호를 제거한
@@ -277,6 +313,8 @@
     출력값(=타깃)
      - int = 불연속 = 카테고리컬 = 분류 classification
      - float = 연속 = 시퀀셜 = 회귀 regression
+## 텐서플로
+    TensorFlow는 머신 러닝을 위한 엔드 투 엔드 오픈 소스 플랫폼입니다.
 ## 토큰
     코퍼스에서 숫자와 기호가 제거된 사전에 실린 단어 그 자체를 토큰이라고 한다.
     토큰(Token)이란 문법적으로 더 이상 나눌 수 없는 언어요소를 뜻합니다.
@@ -292,6 +330,12 @@
     기술통계 - 추론통계 = 학습(Learning)
 ## 특성맵
     합성곱에서 리턴되는 함수이다.
+## 파이토치
+    토치(Torch) 및 카페2(Caffe2)를 기반으로 한 텐서플로와 유사한 딥러닝 라이브러리이다.
+    페이스북 인공지능 연구팀에 의해 주로 개발되어 왔다.
+    텐서플로 2.0 이후의 친 keras 행보로 자유로운 네트워크 수정의 난이도가 점점 높아져,
+    최근 연구원들 사이에서는 PyTorch의 사용 비중이 높아지고 있다.
+    흔히 파이소닉(Pythonic)한 코드를 사용한다고 알려져 있다. - 출처: 나무위키 -
 ## 편향과 편차
     https://opentutorials.org/module/3653/22071
     정답 하나를 맞추기 위해 컴퓨터는 여러 번의 예측값 내놓기를 시도하는데,
@@ -364,6 +408,31 @@
 ## 휴리스틱 이론
     불충분한 시간이나 데이터로 인해 합리적인 판단이 불가능하거나
     굳이 필요하지 않은 상태에서 빠르게 사용하는 어림짐작
+## 활성화 함수
+    https://tykimos.github.io/2017/01/27/MLP_Layer_Talk/
+    Dense(8, input_dim=4, init='uniform', activation='relu'))
+    주요 인자는 다음과 같습니다.
+    첫번째 인자 : 출력 뉴런의 수를 설정합니다.
+    input_dim : 입력 뉴런의 수를 설정합니다.
+    init : 가중치 초기화 방법 설정합니다.
+    ‘uniform’ : 균일 분포
+    ‘normal’ : 가우시안 분포
+    activation : 활성화 함수 설정합니다.
+    ‘linear’ : 디폴트 값, 입력뉴런과 가중치로 계산된 결과값이 그대로 출력으로 나옵니다.
+    ‘relu’ : rectifier 함수, 은익층에 주로 쓰입니다.
+    ‘sigmoid’ : 시그모이드 함수, 이진 분류 문제에서 출력층에 주로 쓰입니다.
+    ‘softmax’ : 소프트맥스 함수, 다중 클래스 분류 문제에서 출력층에 주로 쓰입니다.
+## 회귀모델
+
+    회귀모델을 평가하는 평가지표
+    회귀모델은 그 모델이 잘 학습되어졌는지 확인하기 위한 회귀모델의 평가지표들이 4가지 있다. 이를 하나씩 살펴보자.
+## 회귀분석의 다섯가지 타입
+    1. 선형 회귀(Linear regression)
+    2. 로지스틱 회귀(Logistic regression)
+    3. 리지 회귀(Ridge regression)
+    4. 라쏘 회귀(Lasso regression)
+    5. 다항 회귀(Polynomial regression)
+    https://www.appier.com/ko-kr/blog/5-types-of-regression-analysis-and-when-to-use-them
 ## 희소 데이터(sparse data)
     saprse data는 차원/전체 공간에 비해 데이터가 있는 공간이 매우 협소한 데이터이다.
     행렬 중에 희소 행렬(sparse matrix)은 행렬의 값 대부분이 0을 나타낸다.
@@ -430,7 +499,14 @@
 
 ## loc vs iloc
     DF에서 loc는 키 값으로 검색 하고 iloc는 인덱스 값으로 검색한다.
+## MAE (평균절대오차:Mean Absolute Error)
+    회귀평가를 위한 지표로 주로 쓰인다.
+    기계 학습 모델의 퀄리티를 요약하고 평가하기 위한 여러 메트릭 중 하나라고 할 수 있다.
+    MSE와 마찬가지로 0에 가까울수록 좋은 모델이라고 할 수 있다.
 ## MSE vs. CCEE
+    평균제곱오차 (MSE, Mean Squared Error): 추측값에 대한 정확성을 측정하는 방법이다.
+    머신러닝에서는 Cost Function(손실함수 혹은 비용함수)에서,
+    영상처리에서는 화질 개선을 위해 원본 대비 화질을 측정하는 PSNR에서 주로 쓰인다.
     회귀ML 의 손실함수는 MSE 이다
     분류ML 의 손실함수는 CCEE 이다. 활성화함수로 Softmax 를 사용한다.
 ## NLTK
@@ -451,7 +527,11 @@
     matplot는  RGB 사용 -> Blue layer 가장 위로 -> 푸르게 보임
 	plt.imshow((lambda x: Image.fromarray(x))(img))
 	plt.show()
-
+## PSNR (최대 신호 대 잡음비(Peak Signal-to-noise ratio)
+    신호가 가질 수 있는 최대 전력에 대한 잡음의 전력을 나타낸 것이다.
+    주로 영상 또는 동영상 손실 압축에서 화질 손실 정보를 평가할 때 사용된다.
+    최대 신호 대 잡음비는 신호의 전력에 대한 고려 없이
+    평균 제곱 오차(MSE)를 이용해서 계산 할 수 있다.
 ## REST API 보안
     https://docs.iamport.kr/tech/access-token
     '''
@@ -530,11 +610,6 @@
     비슷한 의미를 가진다 라는 의미이다. 따라서 어떤 글의 비슷한 위치에 존재하는 단어는 단어 간의 유사도를 높게 측정할 것이다.
     Word2Vec은 CBow와 Skip-gram이 있다. CBow는 어떤 단어를 문맥 안의 주변 단어들을 통해 예측하는 방법이고
     Skip-gram은 반대로 어떤 단어를 가지고 특정 문맥 안의 주변 단어들을 예측하는 과정이다.
-
-
-
-
-
 
 ## YOLO **프로젝트 사용 라이브러리
 ## yt-dlp **프로젝트 사용 라이브러리
