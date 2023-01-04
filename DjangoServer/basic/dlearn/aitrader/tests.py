@@ -6,7 +6,6 @@ menu = ["Exit",
         "Lstm Model",
         "Lstm Ensemble"]
 if __name__ == '__main__':
-    model = AiTraderModel()
     while True:
         [print(f"{i}. {j}") for i, j in enumerate(menu)]
         menu = input('메뉴선택: ')
