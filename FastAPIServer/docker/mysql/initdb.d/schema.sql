@@ -8,4 +8,4 @@ create table users(
     job varchar(20),
     user_interests varchar(20),
     token varchar(20)
-)
+)charset = utf8;
