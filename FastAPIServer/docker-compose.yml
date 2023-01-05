@@ -11,6 +11,8 @@ services:
       MYSQ_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: root
+    expose:
+      - '3306'
     ports:
       - "3306:3306"
     volumes:
