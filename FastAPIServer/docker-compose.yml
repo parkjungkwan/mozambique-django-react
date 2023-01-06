@@ -16,7 +16,7 @@ services:
       - "3306:3306"
     volumes:
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
-      - ./docker/conf.d/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
 
     networks:
       - local-net
