@@ -1,5 +1,6 @@
-import os
-DB_USER = "root"
-DB_PASSWORD = "root"
-DB_HOST = "localhost"
-DB_NAME = "mydb"
+USERNAME = "root"
+PASSWORD = "root"
+HOSTNAME = "host.docker.internal" # "localhost"
+DATABASE = "mydb"
+PORT = 3306
+CHARSET = "utf8"

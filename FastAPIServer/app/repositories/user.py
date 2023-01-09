@@ -1,26 +1,25 @@
-from sqlalchemy import create_engine, select, text
-from sqlalchemy.orm import Session
+import pymysql
 
-from app.database import DATABASE
+from app.database import engine
+from app.env import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE
 from app.models.user import User
+import pymysql
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+pymysql.install_as_MySQLdb()
+def find_users_legacy():
+    conn = pymysql.connect(host=HOSTNAME, port=PORT, user=USERNAME, password=PASSWORD, db=DATABASE, charset=CHARSET)
+    cursor = conn.cursor()  # MySQL에 접속
+    sql = "select * from users"  # 적용할 MySQL 명령어를 만들어서 sql 객체에 할당하면 됨
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    for data in result:
+        print(f"data: {data}")
+    print(f"type is {type(result)}")
+    # conn.close()  # 위에 작업한 내용 서버에 저장
+    return result
 
-engine = create_engine(DATABASE, encoding="utf-8", echo=True)
-def find_users(db: Session):
-    print(f" 2 db :: {db}")
-    a = db.query(User).all()
-    print(f" 3 users :: {a}")
-    return a
-
-def select_users():
-    with Session(engine) as session:
-        statement = select(User)
-        users = session.exec(statement)
-        for user in users:
-            print(user)
-
-
-def main():
-    with engine.connect() as conn:
-        result = conn.execute(text("select * from users"))
-        print(result.all())
-
+def find_users():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    return session.query(User).all()

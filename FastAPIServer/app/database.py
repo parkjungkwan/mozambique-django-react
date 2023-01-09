@@ -1,21 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, scoped_session
-
-DATABASE = f"mysql+pymysql://root:root@localhost:3306/mydb"
-engine = create_engine(DATABASE, encoding="utf-8", echo=True)
-SessionLacol = scoped_session(sessionmaker(autocommit=False,autoflush=False,bind=engine))
+from app.env import HOSTNAME, PORT, USERNAME, PASSWORD, CHARSET, DATABASE
+import pymysql
 
 Base = declarative_base()
-Base.query = SessionLacol.query_property()
 
+# engine = create_engine(f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}", echo=True, encoding=f"{CHARSET}")
 
-def get_db():
-    try:
-        db = SessionLacol()
-        yield db
-    finally:
-        db.close()
-import pymysql
-import sys
+engine = create_engine(f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}", echo=True)
+pymysql.install_as_MySQLdb()
+conn = pymysql.connect(host=HOSTNAME, port=PORT, user=USERNAME, password=PASSWORD, db=DATABASE, charset=CHARSET)
 
