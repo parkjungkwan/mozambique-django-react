@@ -25,6 +25,3 @@ async def say_hello(name: str):
 async def login(user: User):
     print(f"리액트에서 넘긴 정보: {user.get_email()}, {user.get_password}")
 
-@app.get("/users")
-async def get_users():
-    return [{"user_email":"test1","passowrd":"1"},{"user_email":"test2","passowrd":"1"}]
