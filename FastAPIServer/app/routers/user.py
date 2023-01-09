@@ -1,8 +1,14 @@
-from fastapi import APIRouter
+from typing import List
+
+from fastapi import APIRouter, Depends
+from app.repositories.user import find_users
+from sqlalchemy.orm import Session
+from app.schemas.user import UserList
+from app.database import get_db
 
 router = APIRouter()
 
-@router.get("/")
-async def get_users():
-    return [{"user_email":"test1","passowrd":"1"},{"user_email":"test2","passowrd":"1"}
-            ,{"user_email":"test3","passowrd":"1"}]
+@router.get("/", response_model=List[UserList])
+async def get_users(db: Session = Depends(get_db)):
+    print(f" 1 db :: {db}")
+    return find_users(db=db)

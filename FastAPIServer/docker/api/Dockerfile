@@ -1,6 +1,7 @@
 FROM python:3.9
 
 WORKDIR /app
+RUN pip install -y python3-pandas
 ADD requirements.txt .
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 EXPOSE 8000
