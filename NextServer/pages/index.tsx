@@ -1,10 +1,10 @@
-import { Counter } from '@/components/counter/Counter'
+import Home from '@/components/Home'
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
+const Main: NextPage = () => {
   return (
-    <Counter/>
+    <Home/>
   )
 }
 
-export default Home
+export default Main
