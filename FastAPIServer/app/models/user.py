@@ -1,8 +1,8 @@
 from ..database import Base
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import Session, relationship
-
-class User(Base):
+from pydantic import BaseModel
+class User(Base): # Base
 
     __tablename__="users"
 
