@@ -1,22 +1,20 @@
 import { Route, Routes } from "react-router-dom"
-import {Navigation2, Footer} from "api"
+import {Navigation, Footer} from "admin"
 import {Login, SignUp, UserList} from "security"
-import image from '../images/fashion.png'
 import {Counter, Iris, Fashion, NaverMovie, Schedule, NaverMovieReview} from "basic"
 
 const Home = () => {
-    const imageSize = {width: 700, height: 500}
     return (<>
-    <table style={{ width: "1200px", height: "550px", margin: "0 auto", border: "1px solid black"}}>
-        <thead>
+    <table style={{ width: "1200px", height: "600px", margin: "0 auto", border: "1px solid black"}}>
+        <thead style={{ height: "20%",  border: "1px solid black"}}>
             <tr columns="3" >
                 <td style={{ width: "100%", border: "1px solid black"}}>
-                    <Navigation2/>
+                    <Navigation/>
                 </td>
             </tr>
         </thead>
         <tbody>
-        <tr style={{ width: "20%",height: "80%",  border: "1px solid black"}}>
+        <tr style={{ width: "20%",height: "70%",  border: "1px solid black"}}>
             <td style={{ width: "100%", border: "1px solid black"}}>
             <Routes>
                 <Route path="/counter" element={<Counter/>}></Route>
@@ -31,12 +29,8 @@ const Home = () => {
             </Routes>
             </td>
         </tr>
-        <tr>
-            <td>
-                <img src={image} style={imageSize}/>
-            </td>
-        </tr>
-        <tr style={{ width: "100%", height: "20%", border: "1px solid black"}}>
+        
+        <tr style={{ width: "100%", height: "10%", border: "1px solid black"}}>
             <td style={{ width: "100%", border: "1px solid black"}}>
                 <Footer/>
             </td>

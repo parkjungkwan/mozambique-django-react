@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import login from '../reducers/userAPI'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
-import { Layout, Header, Footer } from 'api';
+import { Layout, Header, Footer } from 'admin';
 
 export default function LoginForm(){
     const dispatch = useDispatch()

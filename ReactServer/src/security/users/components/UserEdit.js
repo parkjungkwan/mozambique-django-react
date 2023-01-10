@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 //import { modify } from 'features/user/reducer/userSlice'
-import { Layout, Header, Footer } from 'api';
+import { Layout, Header, Footer } from 'admin';
 import styled from 'styled-components'
 
 export default function UserEdit() {

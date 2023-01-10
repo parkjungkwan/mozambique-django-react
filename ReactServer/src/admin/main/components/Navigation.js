@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link } from "react-router-dom"
 
-const Navigation2 = () => {
+export default function Navigation(){
   const [value, setValue] = React.useState(0);
 
   return (
@@ -34,4 +34,3 @@ const Navigation2 = () => {
   );
 }
 
-export default Navigation2

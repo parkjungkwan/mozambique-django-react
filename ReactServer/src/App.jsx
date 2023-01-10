@@ -1,4 +1,4 @@
-import { Home } from "api"
+import { Home } from "admin"
 const App = () => {
   return (<><Home/></>)
 }
