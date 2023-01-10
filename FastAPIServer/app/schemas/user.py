@@ -17,5 +17,3 @@ class User(BaseModel):
     class Config:
         orm_mode = True
 
-class UserList(User):
-    users: List[User] = []
