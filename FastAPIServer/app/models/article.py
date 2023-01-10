@@ -17,6 +17,15 @@ class Article(Base):
 
     user = relationship('User', back_populates='articles')
 
+    def __init__(self, title=None, content=None, user_id=None):
+        self.title = title
+        self.content = content
+        self.user_id = user_id
+
+    def __repr__(self):
+        return "<User(user_id='%s', user_name='%s', user_email='%s', password='%s')>" \
+               % (self.user_id, self.user_name, self.user_email, self.password)
+
 
     class Config:
         BaseConfig.arbitrary_types_allowed = True
