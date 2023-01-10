@@ -1,5 +1,4 @@
 from typing import Generator
-from .models.article import Article
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -20,20 +19,11 @@ SessionLocal = scoped_session(
 )
 Base.query = SessionLocal.query_property()
 
-from models.user import User
 async def init_db():
-    print("-- Initialized the db 1 --")
-    Base.metadata.create_all(bind=engine)
-    SessionLocal.add(
-        User(user_email="hong@test.com", user_name="홍길동", password="1"),
-        User(user_email="you@test.com", user_name="유관순", password="1"),
-        Article(title="테스트", content="글쓴 내용", user_id=None),
-        Article(title="테스트2", content="글쓴 내용2", user_id=None)
-    )
-    SessionLocal.commit()
-
-    print("-- Initialized the db 2 --")
-
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        raise e
 
 def get_db() -> Generator:
     try:
