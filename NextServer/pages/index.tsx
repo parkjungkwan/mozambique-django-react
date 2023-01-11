@@ -1,10 +1,11 @@
 import type { ReactElement } from 'react'
 import Layout from '@/components/admin/Layout'
-import Join from '@/components/user/Join'
+import Home from '@/components/Home'
 import type { NextPageWithLayout } from '@/pages/_app'
 
+
 const Page: NextPageWithLayout = () => {
-  return <Join/>
+  return <Home/>
 }
 
 Page.getLayout = function getLayout(page: ReactElement) {

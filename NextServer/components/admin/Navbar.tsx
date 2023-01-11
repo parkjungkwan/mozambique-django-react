@@ -1,22 +1,8 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
 export default function Navbar(){
-  const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 500 }}>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
+    <div>홈
+      
         {/* <Link to="/home" style={{width:50, margin:10}}>홈</Link>
         <Link to="/counter" style={{width:50, margin:10}}>카운터</Link>
         <Link to="/todos" style={{width:50, margin:10}}>할일</Link>
@@ -28,8 +14,8 @@ export default function Navbar(){
         <Link to="/naver-movie" style={{width:50, margin:10}}>영화크롤링</Link>
         <Link to="/naver-movie-review" style={{width:50, margin:10}}>영화리뷰</Link>
         <Link to="/user-list" style={{width:50, margin:10}}>사용자목록</Link> */}
-      </BottomNavigation>
-    </Box>
+      
+    </div>
   );
 }
 
