@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components'
 
-export default function UserEdit() {
+export default function UpdateUser() {
     const dispatch = useDispatch()
     
   return (

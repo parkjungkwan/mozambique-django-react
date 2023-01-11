@@ -1,6 +1,4 @@
-import LoginForm from './LoginForm'
-
-export default function Login(){
+export default function FindPassword(){
     
-    return (<LoginForm/>)
+    return <></>
 }

@@ -2,7 +2,7 @@ import '../styles/SignUp.css'
 import { useState } from "react"
 
 
-export default function SignUp() {
+export default function Join() {
     const [inputs, setInputs] = useState({})
 
     const validateFormWithJS = () => {

@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components'
-export default function UserRemove() {
+export default function RemoveUser() {
   const [pwd, setPwd] = useState('')
 
 
