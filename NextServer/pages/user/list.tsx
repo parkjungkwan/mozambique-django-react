@@ -1,5 +1,5 @@
-
-export default function UserList(){
+import { NextPage } from "next"
+const UserListPage: NextPage = function(){
     
     return <>
         <table className='user-list'>
@@ -15,5 +15,6 @@ export default function UserList(){
         </table>
     </>
 }
+export default UserListPage
 
 

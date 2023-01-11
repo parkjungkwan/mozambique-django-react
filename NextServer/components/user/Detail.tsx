@@ -1,9 +1,7 @@
-import '../styles/SignUp.css'
 import { useState } from "react"
 
 
 export default function UserDetail() {
-    const [inputs, setInputs] = useState({})
 
     return (<>
         <h2>회원정보</h2>

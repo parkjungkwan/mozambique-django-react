@@ -1,6 +1,3 @@
-//기본적인 document의 형태
-
-
 import Document, {Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps} from "next/document";
 
 class MyDocument extends Document {
