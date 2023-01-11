@@ -11,20 +11,11 @@ export default function RemoveUser() {
   return (
     <Main>
       <h1>회원탈퇴</h1>
-      
-    <ul>
-        <li>
-              <label>
-                    <span>사용자아이디 : </span>
-                </label>
-            </li>
-        <li><label htmlFor="pw">비밀번호 확인</label>
-        <input type="password" id="password" name="password" onChange={e => {setPwd(e.target.value)}}/></li>
-        <li><input type="submit" value="탈퇴요청" /></li>
-        <li><input type="button" value="탈퇴취소"/></li>
-    </ul>
-
-
+            <form action="/send-data-here">
+                <label htmlFor="user_email">비밀번호 확인:</label>
+                <input type="text"  id="password" name="password" required/>
+                <button type="submit">Submit</button>
+            </form> 
 </Main>
   );
 }

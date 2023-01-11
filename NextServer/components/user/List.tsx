@@ -3,16 +3,19 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 export default function UserList(){
-    const [list, setList] = useState([])
-    useEffect(()=>{
-        axios
-        .get('http://localhost:8000/security/users/list')
-        .then(res => {setList(res.data)})
-        .catch(err => {console.log(err)})
-    }, [])
-   
+    
     return <>
-        
+        <table className='user-list'>
+            <thead>
+                <tr>
+                <th>ID</th><th>이메일</th><th>이름</th><th>전화번호</th>
+                <th>생년월일</th><th>주소</th><th>직업</th><th>관심사항</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
     </>
 }
 
