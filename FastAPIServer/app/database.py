@@ -14,8 +14,7 @@ SessionLocal = scoped_session(
     sessionmaker(
         bind=engine,
         autocommit=False,
-        autoflush=False
-    )
+        autoflush=False)
 )
 Base.query = SessionLocal.query_property()
 

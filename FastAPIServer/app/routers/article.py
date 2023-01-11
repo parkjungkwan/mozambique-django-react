@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 import app.repositories.article as dao
 from sqlalchemy.orm import Session
-from app.models.article import Article
+from app.schemas.article import Article
 from app.database import get_db
 
 router = APIRouter()
