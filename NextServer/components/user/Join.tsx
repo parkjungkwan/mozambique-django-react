@@ -1,9 +1,4 @@
-import '../styles/SignUp.css'
-import { useState } from "react"
-
-
 export default function Join() {
-    const [inputs, setInputs] = useState({})
 
     return (<>
         <h2>회원가입</h2>
