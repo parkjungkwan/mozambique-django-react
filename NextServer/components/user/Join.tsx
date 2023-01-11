@@ -1,5 +1,5 @@
-const Join: React.FC = () => 
-    (<>
+export default function Join() { 
+    return (<>
         <h2>회원가입</h2>
         <form action="/send-data-here" method="post" >
 
@@ -32,4 +32,4 @@ const Join: React.FC = () =>
           </form> 
         </>)
 
-export default Join
+    }

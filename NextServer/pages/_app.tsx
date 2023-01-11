@@ -2,13 +2,14 @@ import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { Navbar, Footer } from '@/components/admin'
+import {wrapper} from "@/modules/store"
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
 
-export default function MyApp({ Component, pageProps: {...pageProps} }: AppProps) {
+function MyApp({ Component, pageProps: {...pageProps} }: AppProps) {
 
   return (<>
     <table style={{ width: "1200px", height: "640px", margin: "0 auto", border: "1px solid black"}}>
@@ -37,8 +38,5 @@ export default function MyApp({ Component, pageProps: {...pageProps} }: AppProps
         </tbody>
     </table>
     </>)
-          
-          
-       
 }
-// export default wrapper.withRidux(MyApp)
+export default wrapper.withRedux(MyApp)

@@ -1,7 +1,9 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore, AnyAction, CombinedState, combineReducers } from '@reduxjs/toolkit'
 import reducer from '@/modules/counter/counterSlice'
 import { createWrapper } from 'next-redux-wrapper'
 import logger from 'redux-logger'
+import createSagaMiddleware from "@redux-saga/core"
+const sagaMiddleware = createSagaMiddleware()
 
 const isDev = process.env.NODE_ENV === 'development'
 
