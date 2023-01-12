@@ -1,7 +1,7 @@
 export default function Join() { 
     return (<>
         <h2>회원가입</h2>
-        <form action="/send-data-here" method="post" >
+        <form method="post" >
 
           <label htmlFor="userEmail">이메일(ID):</label>
           <input type="text"  id="userEmail" name="userEmail" required minLength= {10} maxLength={20}/> <br/>

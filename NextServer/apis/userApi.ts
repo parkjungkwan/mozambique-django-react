@@ -27,8 +27,10 @@ export const userJoinApi =async (
     userInterests : string}) => {
     const headers = context.headers    
     try{
-        const response : AxiosResponse<unknown, UserType[]> = await axios.post(`${context.server}`, payload, {headers})
+        const url = `${context.server}/users`
+        alert("서버 :  ${url}")
+        const response : AxiosResponse<unknown, UserType[]> = await axios.post(url, payload, {headers})
     } catch(err){
-        
+
     }
 }
