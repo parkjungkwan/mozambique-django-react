@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
-import {Config} from '@/components/admin/enums'
+import {context} from '@/components/admin/enums'
+import { currentTime } from '@/components/admin/utils'
 export interface UserType{
     userId : string
     userEmail : string
@@ -14,11 +15,11 @@ export interface UserType{
     createAt: string
     updatedAt: string
 }
-export const joinApi = async (payload: {userEmail: string, userName: string, password: string}) => {
+export const joinApi = async (payload: {email: string, username: string, password: string}) => {
     try{
-        const response : AxiosResponse<unknown, UserType[]> = await axios.post(`${Config.server}`)
+        const response : AxiosResponse<unknown, UserType[]> = await axios.post(`${context.server}`)
         return response.data
     }catch(err){
-        return err
+        console.log(` ${currentTime} : userSaga 내부에서 join 실패 `)
     }
 }
