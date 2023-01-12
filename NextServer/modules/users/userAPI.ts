@@ -24,7 +24,7 @@ export const joinApi = async (payload: { email : string,
     job : string,
     userInterests : string}) => {
     try{
-        const response : AxiosResponse<unknown, UserType[]> = await axios.post(`${context.server}`)
+        const response : AxiosResponse<unknown, UserType[]> = await axios.post(`${context.server}/users`)
         return response.data
     }catch(err){
         console.log(` ${currentTime} : userSaga 내부에서 join 실패 `)
