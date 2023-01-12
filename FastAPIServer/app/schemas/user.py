@@ -6,18 +6,18 @@ from app.schemas.article import Article
 
 
 class User(BaseModel):
-    user_id : UUID
+    # user_id : UUID
     user_email : str
     password : str
     user_name : str
-    phone : str
-    birth : str
-    address : str
-    job : str
-    user_interests : str
-    token : str
-    create_at: datetime
-    updated_at: datetime
+    # phone : str
+    # birth : str
+    # address : str
+    # job : str
+    # user_interests : str
+    # token : str
+    # create_at: datetime
+    # updated_at: datetime
 
     class Config:
         orm_mode = True
