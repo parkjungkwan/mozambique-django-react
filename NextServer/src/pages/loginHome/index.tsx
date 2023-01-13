@@ -9,9 +9,9 @@ const LoginHomePage: NextPage<Props> = ({docs}: any) => {
     useEffect(() => {
         // 브라우저 API를 이용하여 문서 타이틀을 업데이트합니다.
         const s = localStorage.getItem('loginUser') ;
-        alert("결과: "+JSON.stringify(s))
+        //alert("로그인 홈 결과: "+s)
         
-      },);
+      },[]);
 
     return (<div>로그인 정보 : </div>)
 }
