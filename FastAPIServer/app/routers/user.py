@@ -17,9 +17,10 @@ async def join(user: UserDTO, db: Session = Depends(get_db)):
         result = "failure"
     return {"data": result}
 
-@router.post("/login/{id}")
-async def login(id:str,user: UserDTO, db: Session = Depends(get_db)):
-    dao.login(id, user, db)
+@router.post("/login")
+async def login(user: UserDTO, db: Session = Depends(get_db)):
+    # dao.login(id, user, db)
+    print(f"로그인 정보 : {user}")
     return {"data": "success"}
 
 @router.put("/modify/{id}")

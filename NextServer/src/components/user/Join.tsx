@@ -15,7 +15,7 @@ export default function Join() {
     passwordRef.current = watch("password")
     return (<>
         <h2>회원가입</h2>
-        <form onSubmit={handleSubmit(onSubmit)} method="post">
+        <form onSubmit={handleSubmit(onSubmit)}>
 
           <label htmlFor="user_email">이메일(ID):</label>
           <input 
