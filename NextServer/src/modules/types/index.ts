@@ -20,7 +20,7 @@ export interface User{
     address? : string,
     job? : string,
     user_interests? : string,
-    token? : string,
+    token? : string
     create_at? : string,
     updated_at? : string
 }

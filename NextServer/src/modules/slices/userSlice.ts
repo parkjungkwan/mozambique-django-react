@@ -19,7 +19,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         joinRequest(state: UserState, action: PayloadAction<User>){
-            alert(`joinRequest ${JSON.stringify(action.payload)}`)
+            alert(`2 joinRequest ${JSON.stringify(action.payload)}`)
             state.status = 'loading'
             state.error = null
         },
