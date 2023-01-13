@@ -5,13 +5,12 @@ import { useRef } from "react"
 import { useDispatch } from "react-redux"
 import { joinRequest } from "@/modules/slices"
 
-
 export default function Join() { 
     const dispatch = useDispatch()
     const { register, handleSubmit, watch, formState: { errors }  } = useForm<User>()
     const onSubmit: SubmitHandler<User> = data => {
     dispatch(joinRequest(data))
-    console.log(`리액트에 입력된 회원정보 : ${data}`)};
+    alert(`리액트에 입력된 회원정보 : ${JSON.stringify(data)}`)};
     const passwordRef = useRef<string | null | undefined>(null)
     passwordRef.current = watch("password")
     return (<>

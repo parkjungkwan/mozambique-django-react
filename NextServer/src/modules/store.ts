@@ -4,7 +4,7 @@ import {createWrapper, HYDRATE, MakeStore} from 'next-redux-wrapper'
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga'
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import userReducer from '@/modules/slices/user.slice'
+import userReducer from '@/modules/slices/userSlice'
 
 
 const isDev = process.env.NODE_ENV ==='development'
