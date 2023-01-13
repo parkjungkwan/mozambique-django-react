@@ -27,6 +27,7 @@ export const user = {
         try{
             const response : AxiosResponse<any, User[]> =
             await author.post('/users/login', payload)
+            localStorage.setItem("loginUser", response.data)
             return response.data
         }catch(err){
             return err;

@@ -1,3 +1,5 @@
+from sqlalchemy import select
+
 from app.database import conn
 from app.models.user import User
 from app.schemas.user import UserDTO
@@ -13,7 +15,12 @@ def join(userDTO: UserDTO, db: Session)->str:
 
 def login(userDTO: UserDTO, db: Session):
     user = User(**userDTO.dict())
-    db_user = user.select().where(user.columns.user_email == 'ivxy@test.com')
+    # db_user = user.select().where(user.columns.user_email == 'ivxy@test.com')
+    print(f" email {user.user_email}")
+    # db_user = db.query(user).filter(user.user_email == 'ivxy@test.com')
+    db_user = db.scalars(select(User).where(User.user_email==user.user_email)).first()
+
+    print(f" dbUser {db_user}")
     if db_user is not None:
         if db_user.password == user.password:
             return db_user
