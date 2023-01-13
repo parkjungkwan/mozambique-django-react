@@ -18,8 +18,10 @@ const userSlice = createSlice({
     name: 'userSlice',
     initialState,
     reducers: {
-        joinRequest(state: UserState, _payload){
+        joinRequest(state: UserState, action: PayloadAction<User>){
+            alert(`joinRequest ${JSON.stringify(action.payload)}`)
             state.status = 'loading'
+            state.error = null
         },
         joinSuccess(state: UserState, {payload}){
             state.status = 'idle'

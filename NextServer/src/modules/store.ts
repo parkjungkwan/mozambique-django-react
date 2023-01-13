@@ -1,6 +1,6 @@
 import rootSaga from '@/modules/sagas';
-import {AnyAction, CombinedState, configureStore, combineReducers} from '@reduxjs/toolkit'
-import {createWrapper, HYDRATE, MakeStore} from 'next-redux-wrapper'
+import {AnyAction, configureStore, combineReducers} from '@reduxjs/toolkit'
+import {createWrapper, HYDRATE} from 'next-redux-wrapper'
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga'
 import { TypedUseSelectorHook, useSelector } from 'react-redux';

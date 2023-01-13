@@ -8,11 +8,10 @@ from app.schemas.user import User
 
 router = APIRouter()
 
-@router.post("/")
+@router.post("/join")
 async def join(item: User, db: Session = Depends(get_db)):
     print(f" 회원가입에 진입한 시간: {current_time()} ")
-    user_dict = item.dict()
-    print(f"SignUp Inform : {user_dict}")
+    print(f"SignUp Inform : {item}")
     dao.join(item, db)
     return {"data": "success"}
 

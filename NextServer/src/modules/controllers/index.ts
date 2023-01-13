@@ -9,7 +9,7 @@ export const client = axios.create({
     }
 })
 // 인증 axios
-export const accessClient = axios.create({
+export const author = axios.create({
     baseURL: SERVER,
     headers: {
         "Content-Type" : "application/json",

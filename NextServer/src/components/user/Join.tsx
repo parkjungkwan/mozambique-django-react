@@ -9,7 +9,7 @@ export default function Join() {
     const dispatch = useDispatch()
     const { register, handleSubmit, watch, formState: { errors }  } = useForm<User>()
     const onSubmit: SubmitHandler<User> = data => {
-      alert(`리액트에 입력된 회원정보 : ${JSON.stringify(data)}`)
+      alert(`1 - 리액트에 입력된 회원정보 : ${JSON.stringify(data)}`)
       dispatch(joinRequest(data))
     };
     const passwordRef = useRef<string | null | undefined>(null)
@@ -18,9 +18,9 @@ export default function Join() {
         <h2>회원가입</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
 
-          <label htmlFor="email">이메일(ID):</label>
+          <label htmlFor="user_email">이메일(ID):</label>
           <input 
-            {...register("email", { 
+            {...register("user_email", { 
               required: true,
               maxLength: 30,
               pattern: {
@@ -28,11 +28,11 @@ export default function Join() {
                   message: "이메일 형식에 맞게 입력해주세요"
               }
           })}
-            type="email"  id="email" name="email" 
+            type="email"  id="user_email" name="user_email" 
             placeholder="name@example.com"
             required minLength= {10} maxLength={20}/> <br/>
             
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.user_email && <p>{errors.user_email.message}</p>}
           <label htmlFor="password">비밀번호:</label>
           <input 
             {...register("password", { 
@@ -61,9 +61,9 @@ export default function Join() {
                         name="cpassword"
                         className="block w-full px-4 py-3 text-sm border rounded-lg outline-none"/>
                     {errors.cpassword && <p>비밀번호가 일치하지 않습니다</p>}
-          <label htmlFor="userName">이름(실명):</label>
+          <label htmlFor="user_name">이름(실명):</label>
           <input
-          {...register("username", { 
+          {...register("user_name", { 
             required: true, 
             maxLength: {
                 value: 20,
@@ -71,10 +71,10 @@ export default function Join() {
             }
         })}
           
-          type="text" id="username" name="username" 
+          type="text" id="user_name" name="user_name" 
           placeholder="사용자 이름"
           required /> 
-        {errors.username && <p>{errors.username.message}</p>}<br/>
+        {errors.user_name && <p>{errors.user_name.message}</p>}<br/>
           <label htmlFor="phone">전화번호:</label>
           <input type="text" id="phone" name="phone" required /> <br/>
 
@@ -108,8 +108,8 @@ export default function Join() {
           <label htmlFor="job">직업:</label>
           <input type="text" id="job" name="job" /> <br/>
 
-          <label htmlFor="lastuserInterests">관심사항 :</label>
-          <input type="text" id="userInterests" name="userInterests" /> <br/>
+          <label htmlFor="user_interests">관심사항 :</label>
+          <input type="text" id="user_interests" name="user_interests" /> <br/>
           <input type="checkbox" className="custom-control-input" id="aggrement" required />
                     <label className="custom-control-label" htmlFor="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 

@@ -20,6 +20,7 @@ router = APIRouter()
 router.include_router(user_router, prefix="/users",tags=["users"])
 router.include_router(article_router, prefix="/articles",tags=["articles"])
 app = FastAPI()
+app.router.redirect_slashes = False
 app.include_router(router)
 app.add_middleware(DBSessionMiddleware, db_url=DB_URL)
 

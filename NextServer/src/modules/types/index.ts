@@ -10,18 +10,19 @@ export interface Layout {
 }
 
 export interface User{
-    userid? : string,
-    email : string,
+    user_id? : string,
+    user_email : string,
     password : string,
     cpassword?: string, 
-    username : string,
+    user_name : string,
     phone? : string,
     birth? : string,
     address? : string,
     job? : string,
-    userInterests? : string,
-    createdAt? : string,
-    updatedAt? : string
+    user_interests? : string,
+    token? : string,
+    create_at? : string,
+    updated_at? : string
 }
 export interface Article{
     art_seq? : number
