@@ -13,20 +13,22 @@ def join(userDTO: UserDTO, db: Session)->str:
     db.commit()
     return "success"
 
+def exist_email(userDTO: UserDTO, db: Session):
+    user = User(**userDTO.dict())
+    db_user = db.query(user).filter(User.user_email == user.user_email).first()
+    if db_user is not None:
+        return True
+    else:
+        return False
+
 def login(userDTO: UserDTO, db: Session):
     user = User(**userDTO.dict())
-    # db_user = user.select().where(user.columns.user_email == 'ivxy@test.com')
     print(f" email {user.user_email}")
-    # db_user = db.query(user).filter(user.user_email == 'ivxy@test.com')
-    db_user = db.scalars(select(User).where(User.user_email==user.user_email)).first()
-
-    print(f" dbUser {db_user}")
-    if db_user is not None:
-        if db_user.password == user.password:
-            return db_user
+    if exist_email(userDTO, db) == True:
+        return db.query(user).filter(User.user_email==user.user_email,
+                                    User.password==user.password).first()
     else:
-        print("해당 이메일이 없습니다.")
-        return "failure"
+        return "None-Email"
 
 def update(id, item, db):
     return None
