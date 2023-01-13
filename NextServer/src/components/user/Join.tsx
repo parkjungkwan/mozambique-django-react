@@ -9,8 +9,9 @@ export default function Join() {
     const dispatch = useDispatch()
     const { register, handleSubmit, watch, formState: { errors }  } = useForm<User>()
     const onSubmit: SubmitHandler<User> = data => {
-    dispatch(joinRequest(data))
-    alert(`리액트에 입력된 회원정보 : ${JSON.stringify(data)}`)};
+      alert(`리액트에 입력된 회원정보 : ${JSON.stringify(data)}`)
+      dispatch(joinRequest(data))
+    };
     const passwordRef = useRef<string | null | undefined>(null)
     passwordRef.current = watch("password")
     return (<>
