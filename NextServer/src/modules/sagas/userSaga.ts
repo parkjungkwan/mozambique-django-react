@@ -24,8 +24,9 @@ export function* watchLogin(){
         
         try{
             const response: any = user.login(action.payload)
+            localStorage.setItem("loginUser", response.payload)
             put(loginSuccess(response.payload))
-            window.location.href = '/'
+            window.location.href = '/loginHome'
         }catch(error){
             put(userAction.joinFailure(error))
         }

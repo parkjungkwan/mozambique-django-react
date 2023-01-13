@@ -11,8 +11,15 @@ def join(userDTO: UserDTO, db: Session)->str:
     db.commit()
     return "success"
 
-def login(id: str, item: User, db: Session):
-    return None
+def login(userDTO: UserDTO, db: Session):
+    user = User(**userDTO.dict())
+    db_user = user.select().where(user.columns.user_email == 'ivxy@test.com')
+    if db_user is not None:
+        if db_user.password == user.password:
+            return db_user
+    else:
+        print("해당 이메일이 없습니다.")
+        return "failure"
 
 def update(id, item, db):
     return None
