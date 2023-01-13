@@ -12,7 +12,12 @@ export const user = {
                     "Content-Type" : "application/json",
                     Authorization: "JWT fefege...",
                 }})
-                alert(' 결과: API 내부 join 성공  '+ JSON.stringify(response.data))
+                if(response.data === "failure"){
+                    alert(' 결과: API 내부 join 실패  ')
+                }else{
+                    alert(' 결과: API 내부 join 성공  '+ JSON.stringify(response.data))
+                }
+                
                 return response
             }catch(err){
                 console.log(` ${currentTime} : userSaga 내부에서 join 실패 `)

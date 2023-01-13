@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from app.schemas.article import Article
 
 
-class User(BaseModel):
+class UserDTO(BaseModel):
     user_id : Optional[UUID]
     user_email : str
     password : str
@@ -22,6 +22,6 @@ class User(BaseModel):
     class Config:
         orm_mode = True
 
-class UserDetail(User):
+class UserDetail(UserDTO):
     articles: List[Article] = []
 
