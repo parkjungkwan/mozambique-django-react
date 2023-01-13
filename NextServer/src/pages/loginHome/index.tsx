@@ -4,15 +4,12 @@ import { LoginHome } from "@/components/user"
 
 interface Props{ article: string }
 
-const LoginHomePage: NextPage<Props> = ({docs}: any) => {
-    const [loginUser, setLoginUser] = useState({user_emai:''})
+const LoginHomePage: NextPage<Props> = () => {
+    const [loginUser, setLoginUser] = useState("")
     useEffect(() => {
-        // 브라우저 API를 이용하여 문서 타이틀을 업데이트합니다.
-        const s = localStorage.getItem('loginUser') ;
-        //alert("로그인 홈 결과: "+s)
-        
+        setLoginUser(JSON.stringify(localStorage.getItem("loginUser")))
       },[]);
 
-    return (<div>로그인 정보 : </div>)
+    return (<div>로그인 정보 : {loginUser}  </div>)
 }
 export default LoginHomePage
