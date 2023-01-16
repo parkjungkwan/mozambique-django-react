@@ -11,6 +11,7 @@ import pymysql
 from sqlalchemy.orm import Session
 pymysql.install_as_MySQLdb()
 
+
 class UserCrud(UserBase, ABC):
 
     def __init__(self, db: Session):

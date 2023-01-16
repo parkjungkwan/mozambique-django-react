@@ -3,7 +3,7 @@ import { User } from "@/modules/types"
 import { useRef } from "react"
 import { useDispatch } from "react-redux"
 import { joinRequest } from "@/modules/slices"
-import styled, { createGlobalStyle, css } from 'styled-components';
+import styled from 'styled-components';
 
 export default function Join() { 
     const dispatch = useDispatch()

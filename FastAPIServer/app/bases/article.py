@@ -1,10 +1,10 @@
 from abc import abstractmethod, ABCMeta
 from typing import List
-from app.models.user import User
-from app.schemas.user import UserDTO
+from app.models.article import Article
+from app.schemas.article import ArticleDTO
 
 
-class UserBase(metaclass=ABCMeta):
+class ArticleBase(metaclass=ABCMeta):
 
     @abstractmethod
     def add_user(self, request_user: UserDTO) -> str: pass
