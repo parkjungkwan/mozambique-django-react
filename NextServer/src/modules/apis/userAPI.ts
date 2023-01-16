@@ -8,7 +8,7 @@ export const user = {
     async join(payload: User){
             try{
                 const response : AxiosResponse<any, User[]> =
-                await axios.post(`http://localhost:8000/users/join`, payload, {headers: {
+                await axios.post(`http://localhost:8000/users/register`, payload, {headers: {
                     "Content-Type" : "application/json",
                     Authorization: "JWT fefege...",
                 }})

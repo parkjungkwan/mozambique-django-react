@@ -1,8 +1,6 @@
-from datetime import datetime
 from typing import Optional
-
 from pydantic import BaseModel
-from uuid import UUID
+
 
 class ArticleDTO(BaseModel):
     artseq : Optional[int]

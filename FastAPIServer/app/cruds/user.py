@@ -25,7 +25,7 @@ class UserCrud(UserBase, ABC):
 
     def login(self, request_user: UserDTO) -> User:
         user = User(**request_user.dict())
-        print(f" email {user.user_email}")
+        print(f" email {user.email}")
 
 
     def update_user(self, request_user: UserDTO) -> str:
@@ -43,7 +43,7 @@ class UserCrud(UserBase, ABC):
 
     def find_userid_by_email(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())
-        db_user = self.db.query(user).filter(User.user_email == user.user_email).first()
+        db_user = self.db.query(User).filter(User.email == user.email).first()
         if db_user is not None:
             return db_user.userid
         else:
