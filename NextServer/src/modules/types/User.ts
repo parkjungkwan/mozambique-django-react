@@ -13,3 +13,33 @@ export interface User{
     created? : string,
     modified? : string
 }
+export interface UserLoginInput{
+    email: string,
+    password: string
+}
+export interface LoginUser{ 
+    username?:string, password:string, email:string, userid?:string,
+    phone?:string, birth?:string, 
+    token?: any
+}
+
+export interface UserInfo{
+    username:string, password:string, email:string,
+    phone:string, birth:string,
+    token: any
+}
+
+export interface UserInfoState{
+    data: UserInfo[]
+    isloggined: boolean
+}
+
+export interface UserState{
+    data: User[]
+    status: 'idle' | 'loading' | 'failed'
+    token?: null,
+    isLoggined: boolean,
+    error : null;
+    loginedUser: null,
+    check: boolean
+}

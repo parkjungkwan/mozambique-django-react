@@ -1,8 +1,15 @@
 import { onProps } from "@/modules/types";
 import styled from 'styled-components';
+import React, { useRef } from 'react'
+type Props = {
+    onChange : (e : React.FormEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+    onSubmit : (e : React.FormEvent<HTMLFormElement>) => void
+}
 
-export default function Login({onChange, onSubmit}: onProps){
+export default function Login({onChange, onSubmit}: Props){
 
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
     return (
         <>
             <form onSubmit={onSubmit}>
@@ -15,11 +22,11 @@ export default function Login({onChange, onSubmit}: onProps){
                     <tbody>
                         <Row>
                             <Cell><label htmlFor="email">이메일(ID)</label></Cell>
-                            <Cell><Input type="text"  id="email" name="email" onChange={onChange}  required minLength= {10} maxLength={20}/></Cell>
+                            <Cell><Input type="text"  id="email" name="email" ref = {emailRef} onChange={onChange}  required minLength= {10} maxLength={20}/></Cell>
                         </Row>
                         <Row>
                             <Cell><label htmlFor="password">비밀번호</label></Cell>
-                            <Cell><Input type="text" id="password" name="password"  onChange={onChange}  required /></Cell>
+                            <Cell><Input type="text" id="password" name="password" ref = {passwordRef} onChange={onChange}  required /></Cell>
                         </Row>
                         <Row>
                             <Cell colSpan={2}><button type="submit">전송</button></Cell>

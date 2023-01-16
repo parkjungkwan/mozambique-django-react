@@ -26,8 +26,9 @@ export const user = {
         try{
             const response : AxiosResponse<any, User[]> =
             await author.post('/users/login', payload)
-            localStorage.clear()
-            localStorage.setItem("sessioin", JSON.stringify(response.data))
+            //localStorage.clear()
+            //localStorage.removeItem("sessioin")
+            //localStorage.setItem("sessioin", JSON.stringify(response.data))
             return response.data
         }catch(err){
             return err;

@@ -1,9 +1,20 @@
 import { NextPage } from "next"
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { User } from "@/modules/types"
+import { AppState } from "@/modules/store"
+import {selectUserToken} from "@/modules/slices";
+import {useAppSelector} from "@/modules/store";
+
 interface Props{ article: string }
 
 const LoginHomePage: NextPage<Props> = () => {
+
+
+  let userData = useSelector((state:AppState)=> state.userReducer )
+  
+  console.log(`userState userState userState :::${typeof(userData)}`);
   const [user, setUser] = useState({
     userid : '',
     email : '',

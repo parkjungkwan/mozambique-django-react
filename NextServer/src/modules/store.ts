@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV ==='development'
 const sagaMiddleware = createSagaMiddleware()
 
 const combinedReducer = combineReducers({
-    user: userReducer,
+    userReducer: userReducer,
 })
 const rootReducer = (
 	state: ReturnType<typeof combinedReducer>,
@@ -46,5 +46,5 @@ const store = rootReducer;
 export type AppState = ReturnType<typeof rootReducer>;
 export type AppDispatch = ReturnType<typeof store>["dispatch"];
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
-export const wrapper = createWrapper(makeStore)
+export const wrapper = createWrapper(makeStore, {debug: isDev})
 export default store;
