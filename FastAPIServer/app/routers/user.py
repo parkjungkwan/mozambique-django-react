@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
 
 from app.cruds.user import UserCrud
 from app.admin.security import get_hashed_password
@@ -19,9 +20,10 @@ async def register_user(dto: UserDTO, db: Session = Depends(get_db)):
         print(f" 해시 전 비번 {dto.password}")
         dto.password = get_hashed_password(dto.password)
         print(f" 해시 후 비번 {dto.password}")
-    # result = dao.join(dto, db)
-
-    return {"data": "test"}
+        result = user_crud.add_user(request_user=dto)
+    else:
+        result = JSONResponse(status_code=400, content=dict(msg="이메일이 이미 존재합니다"))
+    return {"data": result}
 
 @router.post("/login")
 async def login(user: UserDTO, db: Session = Depends(get_db)):

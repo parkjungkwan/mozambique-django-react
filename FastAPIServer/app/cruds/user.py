@@ -1,10 +1,6 @@
 from abc import ABC
 from typing import List
-
-from sqlalchemy import select
-
 from app.bases.user import UserBase
-from app.database import conn
 from app.models.user import User
 from app.schemas.user import UserDTO
 import pymysql
@@ -18,9 +14,12 @@ class UserCrud(UserBase, ABC):
         self.db: Session = db
 
     def add_user(self, request_user: UserDTO) -> str:
+        print(f" ### 1 ### {request_user}")
         user = User(**request_user.dict())
+        print(f" ### 2 ### {user}")
         self.db.add(user)
         self.db.commit()
+        print(f" ### 3 ### ")
         return "success"
 
     def login(self, request_user: UserDTO) -> User:
