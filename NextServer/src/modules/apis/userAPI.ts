@@ -26,8 +26,8 @@ export const user = {
         try{
             const response : AxiosResponse<any, User[]> =
             await author.post('/users/login', payload)
-            alert(` 서버에서 리턴받은 값: ${JSON.stringify(response.data)}`)
-            localStorage.setItem("loginUser", JSON.stringify(response.data))
+            alert(` 서버에서 리턴받은 값: ${JSON.stringify(response.data.email)}`)
+            localStorage.setItem("email", response.data.email)
             //return response.data
         }catch(err){
             return err;

@@ -35,6 +35,7 @@ def generate_token(subject: Union[str, Any], expires_delta: int = None):
         expires_delta = utc_seoul() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode = {"exp": expires_delta, "sub": str(subject)}
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
+    print(f" 발급된 토큰 : {encoded_jwt}")
     return encoded_jwt
 
 def generate_token_by_secrets():
