@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-import app.repositories.user as dao
+import app.cruds.user as dao
 from app.admin.utils import current_time
 from app.database import get_db
 from app.schemas.user import UserDTO

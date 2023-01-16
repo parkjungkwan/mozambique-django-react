@@ -6,3 +6,4 @@ pymysql
 pandas
 sqlalchemy-utils
 fastapi-sqlalchemy
+pyjwt
