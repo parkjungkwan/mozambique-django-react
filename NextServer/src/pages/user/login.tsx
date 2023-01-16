@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { loginRequest } from "@/modules/slices"
 
 const LoginPage: NextPage = function(){
-    const [loginInfo, setLoginInfo] = useState<User>({user_email:'', password:''})
+    const [loginInfo, setLoginInfo] = useState<User>({email:'', password:''})
     const dispatch = useDispatch()
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ const LoginPage: NextPage = function(){
     return (
         <>
            <Login onChange={onChange} onSubmit={onSubmit}/>
-           <GoogleLogin/>
+           <GoogleLogin onChange={onChange} onSubmit={onSubmit}/>
         </>
             
         

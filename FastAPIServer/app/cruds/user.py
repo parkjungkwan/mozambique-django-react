@@ -1,5 +1,7 @@
 from abc import ABC
 from typing import List
+
+from app.admin.security import verify_password
 from app.bases.user import UserBase
 from app.models.user import User
 from app.schemas.user import UserDTO
@@ -23,9 +25,14 @@ class UserCrud(UserBase, ABC):
         return "success"
 
     def login(self, request_user: UserDTO) -> User:
-        user = User(**request_user.dict())
-        print(f" email {user.email}")
-
+        target = self.find_user_by_id(request_user)
+        verified = verify_password(plain_password=request_user.password,
+                                   hashed_password= target.password)
+        print(f"로그인 검증결과: {verified}")
+        if verified:
+            return target
+        else:
+            return None
 
     def update_user(self, request_user: UserDTO) -> str:
         pass
@@ -38,7 +45,8 @@ class UserCrud(UserBase, ABC):
         return self.db.query(User).all()
 
     def find_user_by_id(self, request_user: UserDTO) -> UserDTO:
-        pass
+        user = User(**request_user.dict())
+        return self.db.query(User).filter(User.userid == user.userid).first()
 
     def find_userid_by_email(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())

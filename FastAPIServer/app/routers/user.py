@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
 
 from app.cruds.user import UserCrud
-from app.admin.security import get_hashed_password
+from app.admin.security import get_hashed_password, generate_token
 from app.admin.utils import current_time
 from app.database import get_db
 from app.schemas.user import UserDTO
@@ -25,12 +25,25 @@ async def register_user(dto: UserDTO, db: Session = Depends(get_db)):
         result = JSONResponse(status_code=400, content=dict(msg="이메일이 이미 존재합니다"))
     return {"data": result}
 
-@router.post("/login")
-async def login(user: UserDTO, db: Session = Depends(get_db)):
+@router.post("/login", status_code=200)
+async def login(dto: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    return_user = user_crud.login(user, db)
-    print(f"로그인 정보 : {return_user.user_email}")
-    return {"data": return_user}
+    userid = user_crud.find_userid_by_email(request_user=dto)
+    dto.userid = userid
+    print(f"로그인 보내기 전에 확인 ID {dto.userid}, PW {dto.password}")
+    if userid != "":
+        login_user = user_crud.login(request_user=dto)
+        if login_user is not None:
+            print(f"로그인 성공정보: \n{login_user}")
+            new_token = generate_token(login_user.email)
+            login_user.token = new_token
+            result = {"data": login_user}
+        else:
+            print(f" 로그인 실패 ")
+            result = JSONResponse(status_code=400, content=dict(msg="비밀번호가 일치하지 않습니다"))
+    else:
+        result = JSONResponse(status_code = 400, content = dict(msg="이메일 주소가 존재하지 않습니다"))
+    return result
 
 @router.put("/modify/{id}")
 async def update(id:str, item: UserDTO, db: Session = Depends(get_db)):

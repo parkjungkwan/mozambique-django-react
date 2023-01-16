@@ -4,5 +4,6 @@ export interface Article{
     content? : string
     created? : string
     modified? : string
-    userid : string
+    userid? : string
+    username? : string
 }
