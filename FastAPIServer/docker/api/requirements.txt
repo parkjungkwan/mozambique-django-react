@@ -8,3 +8,4 @@ sqlalchemy-utils
 fastapi-sqlalchemy
 pyjwt
 shortuuid
+passlib
