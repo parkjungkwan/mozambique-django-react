@@ -6,12 +6,17 @@ type UserState = {
     status: 'idle' | 'loading' | 'failed'
     isLoggined: boolean
     error: any
+    token: string
+
 }
+
+
 const initialState: UserState = {
-    data: [],
+    data: [{"userid":"kim"}],
     status: 'idle',
     isLoggined: false,
-    error: null
+    error: null,
+    token: ''
 }
 
 const userSlice = createSlice({
@@ -32,9 +37,11 @@ const userSlice = createSlice({
             state.data = [...state.data, payload]
         },
         loginRequest(state: UserState, _payload){
+            alert(`2 loginRequest ${JSON.stringify(_payload)}`)
             state.status = 'loading'
         },
         loginSuccess(state: UserState, {payload}){
+            alert(`loginSuccess >>>> payload is ${payload}`)
             state.status = 'idle'
             state.data = [...state.data, payload]
         },
