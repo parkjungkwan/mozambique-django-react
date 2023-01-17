@@ -25,10 +25,10 @@ export const user = {
     async login(payload: User){
         try{
             const response : AxiosResponse<any, User[]> =
-            await author.post('/users/login', payload)
-            //localStorage.clear()
-            //localStorage.removeItem("sessioin")
-            //localStorage.setItem("sessioin", JSON.stringify(response.data))
+            await author.post('http://localhost:8000/users/login', payload)
+            alert(`4 API payload is ${JSON.stringify(response.data)}`)
+            localStorage.clear()
+            localStorage.setItem("session", JSON.stringify(response.data))
             return response.data
         }catch(err){
             return err;

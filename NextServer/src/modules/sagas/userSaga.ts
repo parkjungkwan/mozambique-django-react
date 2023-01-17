@@ -39,12 +39,12 @@ function* login(action: {payload: UserLoginInput}){
     const {loginSuccess, loginFailure} = userAction
     const param = action.payload
     try{
-        alert(`사가 내부 : ${JSON.stringify(param)}` )
+        alert(`3 사가 내부 : ${JSON.stringify(param)}` )
         const response: User = yield call(user.login, param)
         yield put(loginSuccess(response))
         window.location.href = ('/loginHome')
     }catch(error){
-        put(userAction.joinFailure(error))
+        put(userAction.loginFailure(error))
     }
 }
 

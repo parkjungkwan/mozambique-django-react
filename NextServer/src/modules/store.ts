@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV ==='development'
 const sagaMiddleware = createSagaMiddleware()
 
 const combinedReducer = combineReducers({
-    userReducer: userReducer,
+    user: userReducer,
 })
 const rootReducer = (
 	state: ReturnType<typeof combinedReducer>,
@@ -29,7 +29,7 @@ const rootReducer = (
 const makeStore = () =>{
     const store = 
     configureStore({
-        reducer:{ rootReducer },
+        reducer:{ user : userReducer },
         middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({serializableCheck: false})
             .prepend(sagaMiddleware)

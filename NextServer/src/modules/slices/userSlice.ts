@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { User } from '@/modules/types'
 import { UserLoginInput } from "@/modules/types"
 import { AppState } from "../store";
+import { createSelector } from '@reduxjs/toolkit'; 
 type UserState = {
     data: User[]
     status: 'idle' | 'loading' | 'failed'
@@ -17,11 +18,11 @@ const initialState: UserState = {
     status: 'idle',
     isLoggined: false,
     error: null,
-    token: ''
+    token: 'original'
 }
 
 const userSlice = createSlice({
-    name: 'userReducer',
+    name: 'user',
     initialState,
     reducers: {
         joinRequest(state: UserState, action: PayloadAction<User>){
@@ -38,13 +39,16 @@ const userSlice = createSlice({
             state.data = [...state.data, payload]
         },
         loginRequest(state: UserState,action: PayloadAction<UserLoginInput>){
+            alert(` 1 ${JSON.stringify(action.payload)}`)
             state.status = 'loading'
         },
         loginSuccess(state: UserState, {payload}){
-            alert(`>>> loginSuccess >>>> payload is ${JSON.stringify(payload)}`)
+            //alert(`&&&&&&&& loginSuccess >>>> payload is ${JSON.stringify(payload)}`)
+            alert(`4 token >>>> payload is ${payload.token}`)
             state.status = 'idle'
             state.data = [...state.data, payload]
-
+            state.token = payload.token
+            alert(`5 token >>>> state.token is ${state.token}`)
         },
         loginFailure(state: UserState, {payload}){
             state.status = 'failed'
@@ -84,12 +88,17 @@ export const {joinRequest, joinSuccess, joinFailure,
 export const userAction = actions
 
 // Selectors
-export const selectUserData = (state: AppState) => state.userReducer.data;
-export const selectUserStatus = (state: AppState) => state.userReducer.status;
-export const selectUserIsLoggined = (state: AppState) => state.userReducer.isLoggined;
-export const selectUserError = (state: AppState) => state.userReducer.error;
-export const selectUserToken = (state: AppState) => state.userReducer.token;
-
+export const selectUserData = (state: AppState) => state.user.data;
+export const selectUserStatus = (state: AppState) => state.user.status;
+export const selectUserIsLoggined = (state: AppState) => state.user.isLoggined;
+export const selectUserError = (state: AppState) => state.user.error;
+export const userTokenSelector = (state: AppState) => state.user.token || initialState.token;
+export const userSelector = createSelector(
+    userTokenSelector,
+    (token) => {
+      return `My Token is ${token}.`;
+    }
+  );
 
 // Reducer
 export const userData = (state: AppState) => state.userSlice

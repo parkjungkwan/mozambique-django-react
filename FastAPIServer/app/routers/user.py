@@ -28,9 +28,10 @@ async def register_user(dto: UserDTO, db: Session = Depends(get_db)):
 @router.post("/login", status_code=200)
 async def login(dto: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
+    print(f"존재 확인 email {dto.email}, PW {dto.password}")
     userid = user_crud.find_userid_by_email(request_user=dto)
     dto.userid = userid
-    print(f"로그인 보내기 전에 확인 ID {dto.userid}, PW {dto.password}")
+    print(f"로그인 보내기 전에 확인 ID {dto.email}, PW {dto.password}")
     if userid != "":
         login_user = user_crud.login(request_user=dto)
         if login_user is not None:
