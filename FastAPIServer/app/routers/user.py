@@ -60,5 +60,5 @@ async def get_users_per_page(page: int, db: Session = Depends(get_db)):
 async def get_users_by_job(search:str, page: int, db: Session = Depends(get_db)):
     return JSONResponse(status_code=200,
                         content=jsonable_encoder(
-                            UserCrud(db).find_users_by_job(search, page,db)
+                            UserCrud(db).find_users_by_job(search, page,db)))
 
