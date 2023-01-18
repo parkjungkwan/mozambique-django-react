@@ -23,11 +23,14 @@ async def login_user(dto: UserDTO, db: Session = Depends(get_db)):
                         content=dict(
                             msg=UserCrud(db).login_user(request_user=dto)))
 
-@router.get("/load")
+@router.post("/load")
 async def load_user(dto: UserDTO, db: Session = Depends(get_db)):
-    return JSONResponse(status_code=200,
-                        content=jsonable_encoder(
-                            UserCrud(db).find_user_by_token(request_user=dto)))
+    if UserCrud(db).match_token(request_user=dto):
+        return JSONResponse(status_code=200,
+                            content=jsonable_encoder(
+                                UserCrud(db).find_user_by_token(request_user=dto)))
+    else:
+        RedirectResponse(url='/no-match-token', status_code=302)
 
 @router.put("/modify")
 async def modify_user(dto: UserDTO, db: Session = Depends(get_db)):
