@@ -91,6 +91,10 @@ class UserCrud(UserBase, ABC):
         user = User(**request_user.dict())
         return self.db.query(User).filter(User.userid == user.userid).one_or_none()
 
+    def find_user_by_id_for_update(self, request_user: UserUpdate) -> User:
+        user = User(**request_user.dict())
+        return self.db.query(User).filter(User.userid == user.userid).one_or_none()
+
     def find_userid_by_email(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())
         db_user = self.db.query(User).filter(User.email == user.email).one_or_none()
