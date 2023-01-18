@@ -20,7 +20,7 @@ async def register_user(dto: UserDTO, db: Session = Depends(get_db)):
         message = "SUCCESS: 회원가입이 완료되었습니다"
     else:
         message = "FAILURE: 이메일이 이미 존재합니다"
-    return JSONResponse(status_code=400, content=dict(msg=message))
+    return JSONResponse(status_code=200, content=dict(msg=message))
 
 @router.post("/login", status_code=200)
 async def login_user(dto: UserDTO, db: Session = Depends(get_db)):
@@ -31,20 +31,20 @@ async def login_user(dto: UserDTO, db: Session = Depends(get_db)):
 @router.put("/modify/{id}")
 async def modify_user(id:str, item: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    user_crud.update_user(id,item,db)
-    return {"data": "success"}
+    message = user_crud.update_user(id,item,db)
+    return JSONResponse(status_code=200, content=dict(msg=message))
 
 @router.delete("/delete/{id}", tags=['age'])
 async def remove_user(id:str, item: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
     message = user_crud.delete_user(id,item,db)
-    return JSONResponse(status_code=400, content=dict(msg=message))
+    return JSONResponse(status_code=200, content=dict(msg=message))
 
 @router.get("/page/{page}")
 async def get_users(page: int, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    ls = user_crud.find_users(page,db)
-    return {"data": ls}
+    result = user_crud.find_users(page,db)
+    return JSONResponse(status_code=200, content=dict(result))
 
 @router.get("/email/{id}")
 async def get_user(id: str, db: Session = Depends(get_db)):

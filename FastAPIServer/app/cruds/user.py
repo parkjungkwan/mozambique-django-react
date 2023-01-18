@@ -17,10 +17,10 @@ class UserCrud(UserBase, ABC):
 
     def add_user(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())
-        lastrowid = self.db.add(user)
+        is_success = self.db.add(user)
         self.db.commit()
         self.db.refresh(user)
-        return lastrowid
+        return "" if is_success != 0 else ""
 
     def login_user(self, request_user: UserDTO) -> User:
         userid = self.find_userid_by_email(request_user=request_user)
@@ -46,15 +46,14 @@ class UserCrud(UserBase, ABC):
         is_success = self.db.add(db_user)
         self.db.commit()
         self.db.refresh(db_user)
-        print(f" 수정완료 후 해당 ID : {is_success}")
-        return is_success
+        return "" if is_success != 0 else ""
 
     def update_token(self, db_user: User, new_token: str):
         is_success = self.db.query(User).filter(User.userid == db_user.userid)\
             .update({User.token: new_token}, synchronize_session=False)
         self.db.commit()
         self.db.refresh(db_user)
-        return is_success
+        return "" if is_success != 0 else ""
 
     def update_password(self, request_user: UserDTO):
         user = User(**request_user.dict())
@@ -62,15 +61,14 @@ class UserCrud(UserBase, ABC):
             .update({User.password: user.password}, synchronize_session=False)
         self.db.commit()
         self.db.refresh(user)
-        return is_success
+        return "" if is_success != 0 else ""
 
     def delete_user(self, request_user: UserDTO) -> str:
-        user = self.find_user_by_id(User.user_id)
-        self.db.query(User).filter(User.userid == user.userid). \
+        user = self.find_user_by_id(request_user)
+        is_success = self.db.query(User).filter(User.userid == user.userid). \
             delete(synchronize_session=False)
         self.db.commit()
-        user = self.find_user_by_id(User.user_id)
-        return  "탈퇴 성공입니다." if user is None else "탈퇴 실패입니다."
+        return  "탈퇴 성공입니다." if is_success != 0 else "탈퇴 실패입니다."
 
     def find_all_users_per_page(self, page: int) -> List[User]:
         print(f" page number is {page}")

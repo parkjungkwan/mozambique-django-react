@@ -33,16 +33,17 @@ class ArticleCrud(ArticleBase, ABC):
         self.db.commit()
         return "success"
 
-    def find_all_articles(self, page: int) -> List[ArticleDTO]:
+    def find_all_articles(self, page: int) -> List[Article]:
         return self.db.query(Article).all()
 
-    def find_articles_by_userid(self, userid: str) -> ArticleDTO:
+    def find_articles_by_userid(self, request_article: ArticleDTO) -> List[Article]:
         article = Article(**request_article.dict())
-        return self.db.query(Article).filter(Article.seq == article.seq).first()
+        return self.db.query(Article).filter(Article.userid == article.userid).all()
 
-    def find_articles_by_title(self, title: str) -> List[ArticleDTO]:
-        pass
-
-    def find_article_by_seq(self, request_article: ArticleDTO) -> ArticleDTO:
+    def find_articles_by_title(self, request_article: ArticleDTO) -> List[Article]:
         article = Article(**request_article.dict())
-        return self.db.query(Article).filter(Article.seq == article.seq).first()
+        return self.db.query(Article).filter(Article.title == article.title).all()
+
+    def find_article_by_seq(self, request_article: ArticleDTO) -> Article:
+        article = Article(**request_article.dict())
+        return self.db.query(Article).filter(Article.seq == article.seq).one_or_none()
