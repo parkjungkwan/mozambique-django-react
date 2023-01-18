@@ -42,19 +42,36 @@ class UserCrud(UserBase, ABC):
     def update_user(self, request_user: UserDTO) -> str:
         db = self.db
         update_data = request_user.dict(exclude_unset=True)
+        db_user = db.query(User).filter(User.id == user.id).one_or_none()
+        if db_user is None:
+            return None
 
+        # Update model class variable from requested fields
+        for var, value in vars(user).items():
+            setattr(db_user, var, value) if value else None
+
+        db_user.modified = modified_now
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
         lastrowid = self.db.update(update_data)
         print(f" 수정완료 후 해당 ID : {lastrowid}")
         self.db.commit()
         return lastrowid
 
     def update_token(self, db_user: User, new_token: str):
-        print(" 토큰 수정 메소드 진입 ")
         is_success = self.db.query(User).filter(User.userid == db_user.userid)\
             .update({User.token: new_token}, synchronize_session=False)
-        print(f" 수정완료 후 성공이면  : {is_success}")
         self.db.commit()
         self.db.refresh(db_user)
+        return is_success
+
+    def update_password(self, request_user: UserDTO):
+        user = User(**request_user.dict())
+        is_success = self.db.query(User).filter(User.userid == user.userid) \
+            .update({User.password: user.password}, synchronize_session=False)
+        self.db.commit()
+        self.db.refresh(user)
         return is_success
 
     def delete_user(self, request_user: UserDTO) -> str:
