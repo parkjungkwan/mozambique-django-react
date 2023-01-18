@@ -59,10 +59,9 @@ class UserCrud(UserBase, ABC):
 
     def delete_user(self, request_user: UserDTO) -> str:
         user = self.find_user_by_id(User.user_id)
-        self.db.delete(user)
-        self.db.commit()
         self.db.query(User).filter(User.userid == user.userid). \
             delete(synchronize_session=False)
+        self.db.commit()
         user = self.find_user_by_id(User.user_id)
         return  "탈퇴 성공입니다." if user is None else "탈퇴 실패입니다."
 
