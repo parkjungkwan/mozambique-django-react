@@ -28,7 +28,7 @@ const LoginHomePage: NextPage<Props> = () => {
     /**const [token, setToken] = useState('')*/
   //const userData: string = useSelector(userSelector)
   //const result: string = useAppSelector((state: AppState) => state.user.token || 'tess')
-  useEffect(()=>{
+  /**useEffect(()=>{
     alert(`6 session is ${localStorage.getItem("session")}`)
     const session:{
       userid : '',
@@ -46,7 +46,7 @@ const LoginHomePage: NextPage<Props> = () => {
     } = JSON.parse(localStorage.getItem("session")||'{}')
     setUser(session)
   },[])
-
+*/
 
   return (<>
         
@@ -61,13 +61,13 @@ const LoginHomePage: NextPage<Props> = () => {
             <Cell>
               <label htmlFor="email">이메일(ID)</label></Cell>
             <Cell> 
-              {user.email}
+             
             </Cell>
           </Row>
         <Row><Cell>
       <label htmlFor="password">비밀번호</label></Cell>
       <Cell>
-      {user.password} </Cell>
+      </Cell>
           </Row>
          
           <Row>
@@ -75,37 +75,37 @@ const LoginHomePage: NextPage<Props> = () => {
               <label htmlFor="username">이름(실명)</label>
             </Cell>
             <Cell>
-            {user.username} 
+           
             </Cell>
           </Row>
           <Row>
             <Cell>
             <label htmlFor="phone">전화번호</label></Cell>
             <Cell>
-            {user.phone} 
+           
             </Cell>
           </Row>
           <Row>
             <Cell>
             <label htmlFor="birth">생년월일</label> </Cell>
             <Cell>
-            {user.birth} 
+           
             </Cell>
           </Row>
           <Row>
             <Cell><label htmlFor="address">주소</label></Cell>
-            <Cell>{user.address} </Cell>
+            <Cell></Cell>
           </Row>
           <Row>
             <Cell>
             <label htmlFor="job">직업</label></Cell>
-            <Cell>{user.job} 
+            <Cell>
             </Cell>
           </Row>
           <Row>
             <Cell>
             <label htmlFor="interests">관심사항</label></Cell>
-            <Cell>{user.interests} 
+            <Cell>
             </Cell>
           </Row>
           <Row>

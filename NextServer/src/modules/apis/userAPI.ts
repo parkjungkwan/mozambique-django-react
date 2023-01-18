@@ -28,8 +28,10 @@ export const user = {
             await author.post('http://localhost:8000/users/login', payload)
             alert(`4 API payload is ${JSON.stringify(response.data)}`)
             localStorage.clear()
-            localStorage.setItem("session", JSON.stringify(response.data))
-            return response.data
+            const data = response.data
+            localStorage.setItem("session", data.msg)
+            alert(`API 스토리지에 저장된 토큰 ${localStorage.getItem("session")}`)
+            return data.msg
         }catch(err){
             return err;
         }

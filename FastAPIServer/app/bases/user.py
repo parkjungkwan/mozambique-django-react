@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABCMeta
 from typing import List
 from app.models.user import User
-from app.schemas.user import UserDTO
+from app.schemas.user import UserDTO, UserUpdate
 
 
 class UserBase(metaclass=ABCMeta):
@@ -13,7 +13,7 @@ class UserBase(metaclass=ABCMeta):
     def login_user(self, request_user: UserDTO) -> User: pass
 
     @abstractmethod
-    def update_user(self, request_user: UserDTO): pass
+    def update_user(self, request_user: UserUpdate): pass
 
     @abstractmethod
     def reset_password(self, request_user: UserDTO): pass

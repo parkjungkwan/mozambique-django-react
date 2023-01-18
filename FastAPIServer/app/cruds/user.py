@@ -47,7 +47,7 @@ class UserCrud(UserBase, ABC):
             return "FAILURE: 이메일 주소가 존재하지 않습니다"
 
     def update_user(self, request_user: UserUpdate) -> str:
-        db_user = self.find_user_by_id(request_user)
+        db_user = self.find_user_by_id_for_update(request_user)
         for var, value in vars(request_user).items():
             setattr(db_user, var, value) if value else None
         is_success = self.db.add(db_user)

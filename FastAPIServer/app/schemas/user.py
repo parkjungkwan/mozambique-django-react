@@ -29,6 +29,7 @@ class UserUpdate(BaseModel):
     job: Optional[str]
     interests: Optional[str]
     modified: Optional[str]
+    token: Optional[str]
 
     class Config:
         orm_mode = True
