@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import List
 
-from app.admin.security import verify_password, generate_token
+from app.admin.security import verify_password, generate_token, get_hashed_password
 from app.bases.user import UserBase
 from app.models.user import User
 from app.schemas.user import UserDTO, UserUpdate
@@ -17,10 +17,16 @@ class UserCrud(UserBase, ABC):
 
     def add_user(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())
-        is_success = self.db.add(user)
-        self.db.commit()
-        self.db.refresh(user)
-        return "" if is_success != 0 else ""
+        userid = self.find_userid_by_email(request_user=request_user)
+        if userid == "":
+            user.password = get_hashed_password(user.password)
+            is_success = self.db.add(user)
+            self.db.commit()
+            self.db.refresh(user)
+            message = "SUCCESS: 회원가입이 완료되었습니다" if is_success != 0 else "FAILURE: 회원가입이 실패하였습니다"
+        else:
+            message = "FAILURE: 이메일이 이미 존재합니다"
+        return message
 
     def login_user(self, request_user: UserDTO) -> User:
         userid = self.find_userid_by_email(request_user=request_user)
@@ -57,6 +63,9 @@ class UserCrud(UserBase, ABC):
 
     def reset_password(self, request_user: UserDTO):
         user = User(**request_user.dict())
+        db_user = self.find_user_by_token(request_user=request_user)
+
+
         is_success = self.db.query(User).filter(User.userid == user.userid) \
             .update({User.password: user.password}, synchronize_session=False)
         self.db.commit()
