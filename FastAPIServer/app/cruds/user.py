@@ -55,7 +55,7 @@ class UserCrud(UserBase, ABC):
         self.db.refresh(db_user)
         return "" if is_success != 0 else ""
 
-    def update_password(self, request_user: UserDTO):
+    def reset_password(self, request_user: UserDTO):
         user = User(**request_user.dict())
         is_success = self.db.query(User).filter(User.userid == user.userid) \
             .update({User.password: user.password}, synchronize_session=False)
@@ -74,7 +74,11 @@ class UserCrud(UserBase, ABC):
         print(f" page number is {page}")
         return self.db.query(User).all()
 
-    def find_user_by_id(self, request_user: UserDTO) -> UserDTO:
+    def find_user_by_token(self, request_user: UserDTO) -> User:
+        user = User(**request_user.dict())
+        return self.db.query(User).filter(User.token == user.token).one_or_none()
+
+    def find_user_by_id(self, request_user: UserDTO) -> User:
         user = User(**request_user.dict())
         return self.db.query(User).filter(User.userid == user.userid).one_or_none()
 
