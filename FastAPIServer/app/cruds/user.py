@@ -50,12 +50,12 @@ class UserCrud(UserBase, ABC):
 
     def update_token(self, db_user: User, new_token: str):
         print(" 토큰 수정 메소드 진입 ")
-        lastrowid = self.db.query(User).filter(User.userid == db_user.userid)\
+        is_success = self.db.query(User).filter(User.userid == db_user.userid)\
             .update({User.token: new_token}, synchronize_session=False)
-        print(f" 수정완료 후 해당 ID : {lastrowid}")
+        print(f" 수정완료 후 성공이면  : {is_success}")
         self.db.commit()
         self.db.refresh(db_user)
-        return lastrowid
+        return is_success
 
     def delete_user(self, request_user: UserDTO) -> str:
         user = self.find_user_by_id(User.user_id)
