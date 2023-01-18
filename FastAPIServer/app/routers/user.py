@@ -34,7 +34,7 @@ async def modify_user(dto: UserDTO, db: Session = Depends(get_db)):
     if UserCrud(db).match_token(request_user=dto):
         return JSONResponse(status_code=200,
                         content=dict(
-                            msg=UserCrud(db).update_user(id,dto,db)))
+                            msg=UserCrud(db).update_user(dto)))
     else:
         RedirectResponse(url='/no-match-token', status_code=302)
 
@@ -44,7 +44,7 @@ async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
     if UserCrud(db).match_token(request_user=dto):
         return JSONResponse(status_code=200,
                             content=dict(
-                                msg=UserCrud(db).delete_user(id,dto,db)))
+                                msg=UserCrud(db).delete_user(dto)))
     else:
         RedirectResponse(url='/no-match-token', status_code=302)
 
