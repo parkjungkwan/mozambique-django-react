@@ -2,10 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse, RedirectResponse
-
 from app.cruds.user import UserCrud
-from app.admin.security import get_hashed_password, generate_token
-from app.admin.utils import current_time
 from app.database import get_db
 from app.schemas.user import UserDTO
 
