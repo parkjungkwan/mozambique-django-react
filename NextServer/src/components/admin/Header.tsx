@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function Header(){
   const  [token, setToken] = useState("")
   useEffect(() => {
-    alert(` 토큰 유지 여부 ${localStorage.getItem('key')}`)
+    alert(` 토큰 유지 여부 ${localStorage.getItem('session')}`)
     setToken(localStorage.getItem('session')||"")
   }, [])
     return (
