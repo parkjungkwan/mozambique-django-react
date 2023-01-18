@@ -24,7 +24,7 @@ class UserCrud(UserBase, ABC):
         print(f" ### 3 ### ")
         return "success"
 
-    def login(self, request_user: UserDTO) -> User:
+    def login_user(self, request_user: UserDTO) -> User:
         target = self.find_user_by_id(request_user)
         verified = verify_password(plain_password=request_user.password,
                                    hashed_password= target.password)
@@ -38,7 +38,8 @@ class UserCrud(UserBase, ABC):
         pass
 
     def delete_user(self, request_user: UserDTO) -> str:
-        pass
+        self.find_user_by_id(User.user_id)
+        self.db.query(User).delete()
 
     def find_all_users(self, page: int) -> List[User]:
         print(f" page number is {page}")

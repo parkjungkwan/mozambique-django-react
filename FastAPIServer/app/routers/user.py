@@ -26,12 +26,10 @@ async def register_user(dto: UserDTO, db: Session = Depends(get_db)):
     return {"data": result}
 
 @router.post("/login", status_code=200)
-async def login(dto: UserDTO, db: Session = Depends(get_db)):
+async def login_user(dto: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    print(f"존재 확인 email {dto.email}, PW {dto.password}")
     userid = user_crud.find_userid_by_email(request_user=dto)
     dto.userid = userid
-    print(f"로그인 보내기 전에 확인 ID {dto.email}, PW {dto.password}")
     if userid != "":
         login_user = user_crud.login(request_user=dto)
         if login_user is not None:
@@ -47,15 +45,15 @@ async def login(dto: UserDTO, db: Session = Depends(get_db)):
     return result
 
 @router.put("/modify/{id}")
-async def update(id:str, item: UserDTO, db: Session = Depends(get_db)):
+async def modify_user(id:str, item: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    user_crud.update(id,item,db)
+    user_crud.update_user(id,item,db)
     return {"data": "success"}
 
 @router.delete("/delete/{id}", tags=['age'])
-async def delete(id:str, item: UserDTO, db: Session = Depends(get_db)):
+async def remove_user(id:str, item: UserDTO, db: Session = Depends(get_db)):
     user_crud = UserCrud(db)
-    user_crud.delete(id,item,db)
+    user_crud.delete_user(id,item,db)
     return {"data": "success"}
 
 @router.get("/page/{page}")
