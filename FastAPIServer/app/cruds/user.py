@@ -4,7 +4,7 @@ from typing import List
 from app.admin.security import verify_password, generate_token
 from app.bases.user import UserBase
 from app.models.user import User
-from app.schemas.user import UserDTO
+from app.schemas.user import UserDTO, UserUpdate
 import pymysql
 from sqlalchemy.orm import Session
 pymysql.install_as_MySQLdb()
@@ -39,25 +39,15 @@ class UserCrud(UserBase, ABC):
         else:
             return "FAILURE: 이메일 주소가 존재하지 않습니다"
 
-    def update_user(self, request_user: UserDTO) -> str:
-        db = self.db
-        update_data = request_user.dict(exclude_unset=True)
-        db_user = db.query(User).filter(User.id == user.id).one_or_none()
-        if db_user is None:
-            return None
-
-        # Update model class variable from requested fields
-        for var, value in vars(user).items():
+    def update_user(self, request_user: UserUpdate) -> str:
+        db_user = self.find_user_by_id(request_user)
+        for var, value in vars(request_user).items():
             setattr(db_user, var, value) if value else None
-
-        db_user.modified = modified_now
-        db.add(db_user)
-        db.commit()
-        db.refresh(db_user)
-        lastrowid = self.db.update(update_data)
-        print(f" 수정완료 후 해당 ID : {lastrowid}")
+        is_success = self.db.add(db_user)
         self.db.commit()
-        return lastrowid
+        self.db.refresh(db_user)
+        print(f" 수정완료 후 해당 ID : {is_success}")
+        return is_success
 
     def update_token(self, db_user: User, new_token: str):
         is_success = self.db.query(User).filter(User.userid == db_user.userid)\
