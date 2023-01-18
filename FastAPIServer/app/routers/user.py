@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, RedirectResponse
 
 from app.cruds.user import UserCrud
 from app.admin.security import get_hashed_password, generate_token
@@ -31,15 +31,22 @@ async def load_user(dto: UserDTO, db: Session = Depends(get_db)):
 
 @router.put("/modify")
 async def modify_user(dto: UserDTO, db: Session = Depends(get_db)):
-    return JSONResponse(status_code=200,
+    if UserCrud(db).match_token(request_user=dto):
+        return JSONResponse(status_code=200,
                         content=dict(
                             msg=UserCrud(db).update_user(id,dto,db)))
+    else:
+        RedirectResponse(url='/no-match-token', status_code=302)
+
 
 @router.delete("/delete", tags=['age'])
 async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
-    return JSONResponse(status_code=200,
-                        content=dict(
-                            msg=UserCrud(db).delete_user(id,dto,db)))
+    if UserCrud(db).match_token(request_user=dto):
+        return JSONResponse(status_code=200,
+                            content=dict(
+                                msg=UserCrud(db).delete_user(id,dto,db)))
+    else:
+        RedirectResponse(url='/no-match-token', status_code=302)
 
 @router.get("/page/{page}")
 async def get_users_per_page(page: int, db: Session = Depends(get_db)):

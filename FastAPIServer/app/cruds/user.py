@@ -23,7 +23,8 @@ class UserCrud(UserBase, ABC):
             is_success = self.db.add(user)
             self.db.commit()
             self.db.refresh(user)
-            message = "SUCCESS: 회원가입이 완료되었습니다" if is_success != 0 else "FAILURE: 회원가입이 실패하였습니다"
+            message = "SUCCESS: 회원가입이 완료되었습니다" \
+                if is_success != 0 else "FAILURE: 비정상적인 이유로 회원가입이 실패하였습니다"
         else:
             message = "FAILURE: 이메일이 이미 존재합니다"
         return message
@@ -63,8 +64,8 @@ class UserCrud(UserBase, ABC):
 
     def reset_password(self, request_user: UserDTO):
         user = User(**request_user.dict())
-        db_user = self.find_user_by_token(request_user=request_user)
 
+        get_hashed_password(user.password)
 
         is_success = self.db.query(User).filter(User.userid == user.userid) \
             .update({User.password: user.password}, synchronize_session=False)
@@ -86,6 +87,11 @@ class UserCrud(UserBase, ABC):
     def find_user_by_token(self, request_user: UserDTO) -> User:
         user = User(**request_user.dict())
         return self.db.query(User).filter(User.token == user.token).one_or_none()
+
+    def match_token(self, request_user: UserDTO) -> bool:
+        user = User(**request_user.dict())
+        db_user = self.db.query(User).filter(User.token == user.token).one_or_none()
+        return True if db_user != None else False
 
     def find_user_by_id(self, request_user: UserDTO) -> User:
         user = User(**request_user.dict())

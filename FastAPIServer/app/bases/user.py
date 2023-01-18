@@ -32,3 +32,6 @@ class UserBase(metaclass=ABCMeta):
 
     @abstractmethod
     def find_userid_by_email(self, request_user: UserDTO) -> str: pass
+
+    @abstractmethod
+    def match_token(self, request_user: UserDTO) -> bool: pass
