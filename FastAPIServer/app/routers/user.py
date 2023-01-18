@@ -38,6 +38,14 @@ async def modify_user(dto: UserUpdate, db: Session = Depends(get_db)):
     else:
         RedirectResponse(url='/no-match-token', status_code=302)
 
+@router.put("/reset-password")
+async def reset_password(dto: UserDTO, db: Session = Depends(get_db)):
+    if UserCrud(db).match_token(request_user=dto):
+        return JSONResponse(status_code=200,
+                        content=dict(
+                            msg=UserCrud(db).reset_password(dto)))
+    else:
+        RedirectResponse(url='/no-match-token', status_code=302)
 
 @router.delete("/delete", tags=['age'])
 async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
@@ -52,7 +60,7 @@ async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
 async def get_users_per_page(page: int, db: Session = Depends(get_db)):
     return JSONResponse(status_code=200,
                         content=jsonable_encoder(
-                            UserCrud(db).find_users(page,db)))
+                            UserCrud(db).find_all_users_per_page(page,db)))
 
 
 @router.get("/job/{search}/{page}")

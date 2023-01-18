@@ -29,7 +29,7 @@ class UserCrud(UserBase, ABC):
             message = "FAILURE: 이메일이 이미 존재합니다"
         return message
 
-    def login_user(self, request_user: UserDTO) -> User:
+    def login_user(self, request_user: UserDTO) -> str:
         userid = self.find_userid_by_email(request_user=request_user)
         if userid != "":
             request_user.userid = userid
