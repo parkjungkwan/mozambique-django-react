@@ -7,22 +7,25 @@ from app.schemas.user import UserDTO
 class UserBase(metaclass=ABCMeta):
 
     @abstractmethod
-    def add_user(self, request_user: UserDTO) -> str: pass
+    def add_user(self, request_user: UserDTO): pass
 
     @abstractmethod
     def login_user(self, request_user: UserDTO) -> User: pass
 
     @abstractmethod
-    def update_user(self, request_user: UserDTO) -> str: pass
+    def update_user(self, request_user: UserDTO): pass
 
     @abstractmethod
-    def delete_user(self, request_user: UserDTO) -> str: pass
+    def delete_user(self, request_user: UserDTO): pass
 
     @abstractmethod
-    def find_all_users(self, page: int) -> List[User]: pass
+    def find_all_users_per_page(self, request_user: UserDTO) -> List[User]: pass
 
     @abstractmethod
-    def find_user_by_id(self, request_user: UserDTO) -> UserDTO: pass
+    def find_all_users(self, request_user: UserDTO) -> List[User]: pass
+
+    @abstractmethod
+    def find_user_by_id(self, request_user: UserDTO) -> User: pass
 
     @abstractmethod
     def find_userid_by_email(self, request_user: UserDTO) -> str: pass

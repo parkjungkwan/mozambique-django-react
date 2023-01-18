@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import List
 
-from app.admin.security import verify_password
+from app.admin.security import verify_password, generate_token
 from app.bases.user import UserBase
 from app.models.user import User
 from app.schemas.user import UserDTO
@@ -16,46 +16,74 @@ class UserCrud(UserBase, ABC):
         self.db: Session = db
 
     def add_user(self, request_user: UserDTO) -> str:
-        print(f" ### 1 ### {request_user}")
         user = User(**request_user.dict())
-        print(f" ### 2 ### {user}")
-        self.db.add(user)
+        lastrowid = self.db.add(user)
         self.db.commit()
-        print(f" ### 3 ### ")
-        return "success"
+        self.db.refresh(user)
+        return lastrowid
 
     def login_user(self, request_user: UserDTO) -> User:
-        target = self.find_user_by_id(request_user)
-        verified = verify_password(plain_password=request_user.password,
-                                   hashed_password= target.password)
-        print(f"로그인 검증결과: {verified}")
-        if verified:
-            return target
+        userid = self.find_userid_by_email(request_user=request_user)
+        if userid != "":
+            request_user.userid = userid
+            db_user = self.find_user_by_id(request_user)
+            verified = verify_password(plain_password=request_user.password,
+                                       hashed_password=db_user.password)
+            if verified:
+                new_token = generate_token(request_user.email)
+                request_user.token = new_token
+                self.update_token(db_user, new_token)
+                return new_token
+            else:
+                return "FAILURE: 비밀번호가 일치하지 않습니다"
         else:
-            return None
+            return "FAILURE: 이메일 주소가 존재하지 않습니다"
 
     def update_user(self, request_user: UserDTO) -> str:
-        pass
+        db = self.db
+        update_data = request_user.dict(exclude_unset=True)
+
+        lastrowid = self.db.update(update_data)
+        print(f" 수정완료 후 해당 ID : {lastrowid}")
+        self.db.commit()
+        return lastrowid
+
+    def update_token(self, db_user: User, new_token: str):
+        print(" 토큰 수정 메소드 진입 ")
+        lastrowid = self.db.query(User).filter(User.userid == db_user.userid)\
+            .update({User.token: new_token}, synchronize_session=False)
+        print(f" 수정완료 후 해당 ID : {lastrowid}")
+        self.db.commit()
+        self.db.refresh(db_user)
+        return lastrowid
 
     def delete_user(self, request_user: UserDTO) -> str:
-        self.find_user_by_id(User.user_id)
-        self.db.query(User).delete()
+        user = self.find_user_by_id(User.user_id)
+        self.db.delete(user)
+        self.db.commit()
+        self.db.query(User).filter(User.userid == user.userid). \
+            delete(synchronize_session=False)
+        user = self.find_user_by_id(User.user_id)
+        return  "탈퇴 성공입니다." if user is None else "탈퇴 실패입니다."
 
-    def find_all_users(self, page: int) -> List[User]:
+    def find_all_users_per_page(self, page: int) -> List[User]:
         print(f" page number is {page}")
         return self.db.query(User).all()
 
     def find_user_by_id(self, request_user: UserDTO) -> UserDTO:
         user = User(**request_user.dict())
-        return self.db.query(User).filter(User.userid == user.userid).first()
+        return self.db.query(User).filter(User.userid == user.userid).one_or_none()
 
     def find_userid_by_email(self, request_user: UserDTO) -> str:
         user = User(**request_user.dict())
-        db_user = self.db.query(User).filter(User.email == user.email).first()
+        db_user = self.db.query(User).filter(User.email == user.email).one_or_none()
         if db_user is not None:
             return db_user.userid
         else:
             return ""
+
+    def find_all_users(self, db: Session, skip: int = 0, limit: int = 100):
+        return db.query(User).offset(skip).limit(limit).all()
 
 
 

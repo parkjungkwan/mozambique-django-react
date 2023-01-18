@@ -22,17 +22,23 @@ class ArticleCrud(ArticleBase, ABC):
         return "success"
 
     def update_article(self, request_article: ArticleDTO) -> str:
-        pass
+        update_data = self.find_article_by_seq(request_article)
+        self.db.update(update_data)
+        self.db.commit()
+        return "success"
 
     def delete_article(self, request_article: ArticleDTO) -> str:
-        self.find_article_by_seq(Article.seq)
-        self.db.query(Article).delete()
+        article = self.find_article_by_seq(Article.seq)
+        self.db.delete(article)
+        self.db.commit()
+        return "success"
 
     def find_all_articles(self, page: int) -> List[ArticleDTO]:
         return self.db.query(Article).all()
 
     def find_articles_by_userid(self, userid: str) -> ArticleDTO:
-        pass
+        article = Article(**request_article.dict())
+        return self.db.query(Article).filter(Article.seq == article.seq).first()
 
     def find_articles_by_title(self, title: str) -> List[ArticleDTO]:
         pass

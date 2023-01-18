@@ -7,19 +7,19 @@ from app.schemas.article import ArticleDTO
 class ArticleBase(metaclass=ABCMeta):
 
     @abstractmethod
-    def add_article(self, request_article: ArticleDTO) -> str: pass
+    def add_article(self, request_article: ArticleDTO): pass
 
     @abstractmethod
-    def update_article(self, request_article: ArticleDTO) -> str: pass
+    def update_article(self, request_article: ArticleDTO): pass
 
     @abstractmethod
-    def delete_article(self, request_article: ArticleDTO) -> str: pass
+    def delete_article(self, request_article: ArticleDTO): pass
 
     @abstractmethod
-    def find_all_articles(self, page: int) -> List[ArticleDTO]: pass
+    def find_all_articles(self, request_article: ArticleDTO) -> List[ArticleDTO]: pass
 
     @abstractmethod
-    def find_articles_by_userid(self, request_article: ArticleDTO) -> ArticleDTO: pass
+    def find_articles_by_userid(self, request_article: ArticleDTO) -> List[ArticleDTO]: pass
 
     @abstractmethod
     def find_articles_by_title(self, request_article: ArticleDTO) -> List[ArticleDTO]: pass
