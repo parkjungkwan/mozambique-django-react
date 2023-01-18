@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse, RedirectResponse
 from app.cruds.user import UserCrud
 from app.database import get_db
-from app.schemas.user import UserDTO
+from app.schemas.user import UserDTO, UserUpdate
 
 router = APIRouter()
 
@@ -30,7 +30,7 @@ async def load_user(dto: UserDTO, db: Session = Depends(get_db)):
         RedirectResponse(url='/no-match-token', status_code=302)
 
 @router.put("/modify")
-async def modify_user(dto: UserDTO, db: Session = Depends(get_db)):
+async def modify_user(dto: UserUpdate, db: Session = Depends(get_db)):
     if UserCrud(db).match_token(request_user=dto):
         return JSONResponse(status_code=200,
                         content=dict(

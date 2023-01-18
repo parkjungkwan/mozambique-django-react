@@ -64,9 +64,7 @@ class UserCrud(UserBase, ABC):
 
     def reset_password(self, request_user: UserDTO):
         user = User(**request_user.dict())
-
         get_hashed_password(user.password)
-
         is_success = self.db.query(User).filter(User.userid == user.userid) \
             .update({User.password: user.password}, synchronize_session=False)
         self.db.commit()
