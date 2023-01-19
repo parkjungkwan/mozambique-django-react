@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { useDispatch } from "react-redux"
 import { logoutRequest } from "@/modules/slices"
 import {useAppDispatch, useAppSelector} from '@/hooks'
+import {Logout} from "@/components/user"
 export default function Navbar(){
     const dispatch = useAppDispatch()
 
@@ -24,7 +25,7 @@ export default function Navbar(){
         <li className="nav-item"><Link href="/article/write">글쓰기</Link></li><span style={{width:10}}/>
         
       </ul>
-      <input type="button" id="logout" value="로그아웃" onClick={logout}/>
+      <Logout props={logout}/>
       </nav>
     </div>
   );
