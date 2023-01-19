@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
+from fastapi_pagination import Page, paginate, add_pagination
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse, RedirectResponse
 from app.cruds.user import UserCrud
@@ -62,11 +63,13 @@ async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
     else:
         RedirectResponse(url='/no-match-token', status_code=302)
 
-@router.get("/page/{page}")
+@router.get("/page/{page}",response_model=Page[UserDTO])
 async def get_users_per_page(page: int, db: Session = Depends(get_db)):
+    results = UserCrud(db).find_all_users_per_page(page)
+    page_result = paginate(results)
+    print(f"page_result : {page_result}")
     return JSONResponse(status_code=200,
-                        content=jsonable_encoder(
-                            UserCrud(db).find_all_users_per_page(page)))
+                        content=jsonable_encoder(page_result))
 
 
 @router.get("/job/{search}/{page}")

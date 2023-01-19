@@ -6,7 +6,6 @@ import shortuuid
 from app.admin.utils import utc_seoul
 import jwt
 from passlib.context import CryptContext
-
 ACCESS_TOKEN_EXPIRE_MINUTES = 30  # 30 minutes
 REFRESH_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7 # 7 days
 ALGORITHM = "HS256"
