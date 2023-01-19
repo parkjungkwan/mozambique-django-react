@@ -25,7 +25,7 @@ class UserBase(metaclass=ABCMeta):
     def delete_user(self, request_user: UserDTO): pass
 
     @abstractmethod
-    def find_all_users_per_page(self, request_user: UserDTO) -> List[User]: pass
+    def find_all_users_order_by_created(self, request_user: UserDTO) -> List[User]: pass
 
     @abstractmethod
     def find_all_users(self, request_user: UserDTO) -> List[User]: pass

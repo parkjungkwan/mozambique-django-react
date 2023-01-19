@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
-from fastapi_pagination import Page, paginate, add_pagination
+from fastapi_pagination import Page, paginate, add_pagination, Params
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse, RedirectResponse
 from app.cruds.user import UserCrud
@@ -65,12 +65,18 @@ async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
 
 @router.get("/page/{page}",response_model=Page[UserList])
 async def get_users_per_page(page: int, db: Session = Depends(get_db)):
-    results = UserCrud(db).find_all_users_per_page(page)
-    page_result = paginate(results)
-    print(f"page_result : {page_result}")
+    results = UserCrud(db).find_all_users_order_by_created()
+    default_size = 5
+    page_result = paginate(results, Params(page=page, size=default_size))
     return JSONResponse(status_code=200,
                         content=jsonable_encoder(page_result))
 
+@router.get("/page/{page}/size/{size}",response_model=Page[UserList])
+async def get_users_changed_size(page: int,size: int, db: Session = Depends(get_db)):
+    results = UserCrud(db).find_all_users_order_by_created()
+    page_result = paginate(results, Params(page=page, size=size))
+    return JSONResponse(status_code=200,
+                        content=jsonable_encoder(page_result))
 
 @router.get("/job/{search}/{page}")
 async def get_users_by_job(search:str, page: int, db: Session = Depends(get_db)):
