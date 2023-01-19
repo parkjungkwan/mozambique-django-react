@@ -9,12 +9,15 @@ export default function Home(){
    const [currentPage, setCurrentPage] = useState(1);
    const lastPage = 3;
    const [list, setList] = useState([])
+   const [count, setCount] = useState(0)
 
     useEffect(()=>{
         axios
         .get('http://localhost:8000/users/page/1')
         .then(res => {
-            const items = res.data.items
+            const count = res.data.count
+            const items = res.data.pager.items
+            setCount(count)
             setList(items)
         })
         .catch(err => {console.log(err)})
@@ -22,7 +25,7 @@ export default function Home(){
 
   return (
     <>
-    <h2>User List</h2>
+    <h2>회원목록 총{count}명</h2>
         <table className='user-list'>
             <thead>
                 <tr>

@@ -68,8 +68,13 @@ async def get_users_per_page(page: int, db: Session = Depends(get_db)):
     results = UserCrud(db).find_all_users_order_by_created()
     default_size = 5
     page_result = paginate(results, Params(page=page, size=default_size))
+    print(f" ----> page_result type is {type(page_result)}")
+    print(f" ----> page_result is {page_result}")
+    count = UserCrud(db).count_all_users()
+    print(f" count : {count}")
+    dc = {"count":count,"pager":page_result }
     return JSONResponse(status_code=200,
-                        content=jsonable_encoder(page_result))
+                        content=jsonable_encoder(dc))
 
 @router.get("/page/{page}/size/{size}",response_model=Page[UserList])
 async def get_users_changed_size(page: int,size: int, db: Session = Depends(get_db)):

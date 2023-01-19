@@ -38,3 +38,6 @@ class UserBase(metaclass=ABCMeta):
 
     @abstractmethod
     def match_token(self, request_user: UserDTO) -> bool: pass
+
+    @abstractmethod
+    def count_all_users(self) -> int: pass

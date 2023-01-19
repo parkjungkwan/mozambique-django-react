@@ -118,6 +118,9 @@ class UserCrud(UserBase, ABC):
         print(f"토큰 삭제되면 1 리턴 예상함 : {is_success}")
         return "LOGOUT"
 
+    def count_all_users(self) -> int:
+        return self.db.query(User).count()
+
 
 
 
