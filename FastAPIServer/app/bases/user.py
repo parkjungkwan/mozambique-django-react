@@ -13,6 +13,9 @@ class UserBase(metaclass=ABCMeta):
     def login_user(self, request_user: UserDTO) -> User: pass
 
     @abstractmethod
+    def logout_user(self, request_user: UserDTO) -> str: pass
+
+    @abstractmethod
     def update_user(self, request_user: UserUpdate): pass
 
     @abstractmethod

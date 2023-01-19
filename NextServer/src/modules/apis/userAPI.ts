@@ -36,9 +36,10 @@ export const user = {
             return err;
         }
     },
-    async logout(){
+    async logout(payload: User){
         try{
-            await client.post('/users/logout')
+            const response : AxiosResponse = await client.post('/users/logout', payload)
+            return response.data
         } catch(err){
             console.log(err)
             return err;

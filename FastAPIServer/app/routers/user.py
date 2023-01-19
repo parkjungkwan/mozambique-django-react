@@ -20,6 +20,12 @@ async def login_user(dto: UserDTO, db: Session = Depends(get_db)):
                         content=dict(
                             msg=UserCrud(db).login_user(request_user=dto)))
 
+@router.post("/logout", status_code=200)
+async def logout_user(dto: UserDTO, db: Session = Depends(get_db)):
+    return JSONResponse(status_code=200,
+                        content=dict(
+                            msg=UserCrud(db).logout_user(request_user=dto)))
+
 @router.post("/load")
 async def load_user(dto: UserDTO, db: Session = Depends(get_db)):
     if UserCrud(db).match_token(request_user=dto):

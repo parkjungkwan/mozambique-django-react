@@ -9,7 +9,7 @@ export interface User{
     address? : string,
     job? : string,
     interests? : string,
-    token? : string
+    token? : string,
     created? : string,
     modified? : string
 }
