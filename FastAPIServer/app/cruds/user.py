@@ -81,7 +81,7 @@ class UserCrud(UserBase, ABC):
 
     def find_all_users_per_page(self, page: int) -> List[User]:
         print(f" page number is {page}")
-        return self.db.query(User).all()
+        return self.db.query(User).order_by(User.created).all()
 
     def find_user_by_token(self, request_user: UserDTO) -> User:
         user = User(**request_user.dict())

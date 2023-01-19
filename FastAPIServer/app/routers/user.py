@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse, RedirectResponse
 from app.cruds.user import UserCrud
 from app.database import get_db
-from app.schemas.user import UserDTO, UserUpdate
+from app.schemas.user import UserDTO, UserUpdate, UserList
 
 router = APIRouter()
 
@@ -63,7 +63,7 @@ async def remove_user(dto: UserDTO, db: Session = Depends(get_db)):
     else:
         RedirectResponse(url='/no-match-token', status_code=302)
 
-@router.get("/page/{page}",response_model=Page[UserDTO])
+@router.get("/page/{page}",response_model=Page[UserList])
 async def get_users_per_page(page: int, db: Session = Depends(get_db)):
     results = UserCrud(db).find_all_users_per_page(page)
     page_result = paginate(results)
@@ -78,3 +78,4 @@ async def get_users_by_job(search:str, page: int, db: Session = Depends(get_db))
                         content=jsonable_encoder(
                             UserCrud(db).find_users_by_job(search, page)))
 
+add_pagination(router)
