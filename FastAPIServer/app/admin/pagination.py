@@ -1,9 +1,13 @@
 from starlette.responses import JSONResponse
 from faker import Faker
+
+from app.admin.utils import between_random_date
 from app.database import get_db
 from app.cruds.user import UserCrud
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
+
+from app.schemas.user import UserFaker
 
 router = APIRouter()
 
@@ -51,9 +55,26 @@ def pagination(page: int, db: Session = Depends(get_db)):
     return JSONResponse(status_code=200,
                         content=dict(
                             msg=row_cnt))
-
+@router.get("/many")
 def insert_many(db: Session = Depends(get_db)):
-    s = Session()
+
+    faker = Faker('ko_KR')
+
+
+    """
+    UserCrud(db).add_user(UserFaker(
+        email=fake_kr.email(),
+        password="11aa",
+        username=fake_kr.name(),
+        birth=print_random_date(),
+        address=fake_kr.city()))"""
+
+    [print(UserFaker(
+        email=faker.email(),
+        password="11aa",
+        username=faker.name(),
+        birth=between_random_date(),
+        address=faker.city())) for i in range(5)]
 
     """
     
@@ -65,5 +86,4 @@ def insert_many(db: Session = Depends(get_db)):
         User(name="u3")
     ]
     s.bulk_save_objects(objects)"""
-
 
