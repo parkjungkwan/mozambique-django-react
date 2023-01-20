@@ -10,3 +10,4 @@ pyjwt
 shortuuid
 passlib
 fastapi-pagination
+faker
