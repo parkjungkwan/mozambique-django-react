@@ -35,15 +35,6 @@ def pagination(request_page: int, db: Session = Depends(get_db)):
     print(f"start_page_per_block ={start_page_per_block}")
     print(f"end_page_per_block ={end_page_per_block}")
 
-    return {
-        "start_row_per_page" : start_row_per_page,
-        "end_row_per_page" : end_row_per_page,
-        "start_page_per_block" : start_page_per_block,
-        "end_page_per_block" : end_page_per_block,
-        "response_block" : response_block
-    }
-
-
     '''
     row_cnt = 11, page_size = 5
     page  row_start row_end
