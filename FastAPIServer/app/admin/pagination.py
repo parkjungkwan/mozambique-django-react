@@ -61,14 +61,12 @@ def insert_many(db: Session = Depends(get_db)):
     faker = Faker('ko_KR')
 
 
-    """
-    UserCrud(db).add_user(UserFaker(
-        email=fake_kr.email(),
-        password="11aa",
-        username=fake_kr.name(),
-        birth=print_random_date(),
-        address=fake_kr.city()))"""
 
+    [ UserCrud(db).add_user(
+        UserFaker(email=faker.email(),password="11aa",username=faker.name(),
+        birth=between_random_date(),
+        address=faker.city()))]
+   """
     [print(UserFaker(
         email=faker.email(),
         password="11aa",
@@ -77,13 +75,4 @@ def insert_many(db: Session = Depends(get_db)):
         address=faker.city())) for i in range(5)]
 
     """
-    
-    ls = []
-    
-    objects = [
-        User(name="u1"),
-        User(name="u2"),
-        User(name="u3")
-    ]
-    s.bulk_save_objects(objects)"""
 
