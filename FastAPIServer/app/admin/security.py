@@ -16,6 +16,7 @@ JWT_REFRESH_SECRET_KEY = "JWT_REFRESH_SECRET_KEY"
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 def myuuid():
     alphabet = string.ascii_lowercase + string.digits
     su = shortuuid.ShortUUID(alphabet=alphabet)

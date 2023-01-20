@@ -7,7 +7,6 @@ from app.models.user import User
 from app.schemas.user import UserDTO, UserUpdate
 import pymysql
 from sqlalchemy.orm import Session
-from fastapi_pagination import Page, paginate, add_pagination
 pymysql.install_as_MySQLdb()
 
 
