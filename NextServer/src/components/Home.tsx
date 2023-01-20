@@ -6,7 +6,7 @@ import Pagination from "./admin/Pagination";
 
 export default function Home(){
 
-   const [list, setList] = useState<Number[]>([])
+   const [list, setList] = useState([])
    const [rowCnt, setRowCnt] = useState(0)
    const [requestPage, setRequestPage] = useState(0)
    const [startRowPerPage, setStartRowPerPage] = useState(0)
@@ -18,7 +18,7 @@ export default function Home(){
 
     useEffect(()=>{
         axios
-        .get('http://localhost:8000/users/page/1')
+        .get('http://localhost:8000/users/page/22')
         .then(res => {
             setRowCnt(Number(res.data.pager.row_cnt))
             setStartRowPerPage(Number(res.data.pager.start_row_per_page))
@@ -69,7 +69,7 @@ export default function Home(){
             </tbody>
         </table>
         <div>
-          {rows && rows.map(({idx}) => (<span style={{"border": "1px solid black"}} key={idx}>{idx}</span>))}
+          {rows && rows.map((idx) => (<span style={{"border": "1px solid black"}} >{idx+1}</span>))}
         </div>
         <div className="page-container">
     </div>
