@@ -15,10 +15,12 @@ export default function Home(){
    const [endPagePerBlock, setEndPagePerBlock] = useState(0)
    const [rows, setRows] = useState<number[]>([])
    const [pages, setPages] = useState<number[]>([])
+   const [prevArrow, setPrevArrow] = useState(false)
+   const [nextArrow, setNextArrow] = useState(false)
 
     useEffect(()=>{
         axios
-        .get('http://localhost:8000/users/page/15')
+        .get('http://localhost:8000/users/page/1')
         .then(res => {
             setRowCnt(Number(res.data.pager.row_cnt))
             setStartRowPerPage(Number(res.data.pager.start_row_per_page))
@@ -47,6 +49,8 @@ export default function Home(){
               pages.push(i)
            }
            setPages(pages)
+           setPrevArrow(res.data.pager.prev_arrow)
+           setNextArrow(res.data.pager.next_arrow)
           
         })
         .catch(err => {console.log(err)})
@@ -67,17 +71,19 @@ export default function Home(){
                 </tr>
             </thead>
             <tbody>
-            {list && list.map(({userid, email, password, username, phone, birth, address, job, interests})=>(
+              { prevArrow && <span> 이전 </span>}
+            {list && list.map(({userid, email, username, phone, birth, address, job, interests})=>(
                 <tr key={userid}>
-                    <td>{userid}</td><td>{email}</td><td>{password}</td><td>{username}</td>
+                    <td>{userid}</td><td>{email}</td><td>{username}</td>
                     <td>{phone}</td><td>{birth}</td><td>{address}</td>
                     <td>{job}</td><td>{interests}</td>
                 </tr>
             ))}
+            { nextArrow && <span> 이후 </span>}
             </tbody>
         </table>
         <div>
-          {pages && pages.map((v, i) => (<span style={{"border": "1px solid black"}} >{v+1}</span>))}
+          {pages && pages.map((v, i) => (<span style={{"border": "1px solid black"}}  >{v+1}</span>))}
         </div>
         <div className="page-container">
     </div>
