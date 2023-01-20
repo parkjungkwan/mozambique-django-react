@@ -20,14 +20,6 @@ class UserDTO(UserVO):
     created: Optional[str]
     modified: Optional[str]
 
-class UserFaker(object):
-    def __init__(self, email, password, username, birth, address):
-        self.email = email
-        self.password = password
-        self.username = username
-        self.birth = birth
-        self.address = address
-
     def __str__(self):
         return f'이름: {self.username}, \n ' \
                f'이메일: {self.email} \n ' \

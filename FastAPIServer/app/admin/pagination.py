@@ -7,7 +7,7 @@ from app.cruds.user import UserCrud
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
 
-from app.schemas.user import UserFaker
+from app.schemas.user import UserDTO
 
 router = APIRouter()
 
@@ -57,16 +57,14 @@ def pagination(page: int, db: Session = Depends(get_db)):
                             msg=row_cnt))
 @router.get("/many")
 def insert_many(db: Session = Depends(get_db)):
-
     faker = Faker('ko_KR')
-
-
-
+    temp = UserDTO(email=faker.email(),password="11aa",
+                  username=faker.name(), birth=between_random_date(),
+                  address=faker.city())
     [ UserCrud(db).add_user(
-        UserFaker(email=faker.email(),password="11aa",username=faker.name(),
-        birth=between_random_date(),
-        address=faker.city()))]
-   """
+        )
+        for i in range(100)]
+    """
     [print(UserFaker(
         email=faker.email(),
         password="11aa",
