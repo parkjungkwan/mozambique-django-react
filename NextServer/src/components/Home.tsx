@@ -6,19 +6,21 @@ import Pagination from "./admin/Pagination";
 
 export default function Home(){
 
-   const [list, setList] = useState([])
+   const [list, setList] = useState<Number[]>([])
    const [rowCnt, setRowCnt] = useState(0)
    const [requestPage, setRequestPage] = useState(0)
    const [startRowPerPage, setStartRowPerPage] = useState(0)
    const [endRowPerPage, setEndRowPerPage] = useState(0)
    const [startPagePerBlock, setStartPagePerBlock] = useState(0)
    const [endPagePerBlock, setEndPagePerBlock] = useState(0)
+   const [rows, setRows] = useState<Number[]>([])
+   const [pages, setPages] = useState<Number[]>([])
 
     useEffect(()=>{
         axios
         .get('http://localhost:8000/users/page/1')
         .then(res => {
-            setRowCnt(Number(res.data.pager.rowCnt))
+            setRowCnt(Number(res.data.pager.row_cnt))
             setStartRowPerPage(Number(res.data.pager.start_row_per_page))
             setEndRowPerPage(Number(res.data.pager.end_row_per_page))
             setStartPagePerBlock(Number(res.data.pager.start_page_per_block))
@@ -26,13 +28,17 @@ export default function Home(){
             setRequestPage(Number(res.data.pager.request_page))
             setList(res.data.users.items)
             console.log(" ### 페이지 내용 표시 ### ")
-            for(let i =startRowPerPage; i < endRowPerPage; i++){
-                console.log(i)
+            let rows:Number[] = []
+            let pages:Number[] = []
+            for(let i =startRowPerPage; i <= endRowPerPage; i++){
+                rows.push(i)
             }
+            setRows(rows)
             console.log(" ### 블록 내용 표시 ### ")
-            for(let i =startPagePerBlock; i < endPagePerBlock; i++){
-              console.log(i)
-          }
+            for(let i =startPagePerBlock; i <= endPagePerBlock; i++){
+              pages.push(i)
+           }
+           setPages(pages)
           console.log(` 사용자가 요청한 페이지 번호: ${requestPage}`)
         })
         .catch(err => {console.log(err)})
@@ -62,9 +68,10 @@ export default function Home(){
             ))}
             </tbody>
         </table>
+        <div>
+          {rows && rows.map(({idx}) => (<span style={{"border": "1px solid black"}} key={idx}>{idx}</span>))}
+        </div>
         <div className="page-container">
-      <h1>React TypeScript Pagination</h1>
-      
     </div>
     </>
     
