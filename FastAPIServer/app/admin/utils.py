@@ -54,8 +54,8 @@ def paging(request_page: int, row_cnt: int): # row_cnt = UserCrud(db).count_all_
     end_page_per_block = start_page_per_block + last_page_idx_per_block \
         if response_block != last_block_idx_per_total \
         else last_page_idx_per_total
-    prev_arrow = start_page_per_block  < block_size
-    next_arrow = start_page_per_block  > block_size
+    prev_arrow = response_block != 0
+    next_arrow = response_block != last_block_idx_per_total
     print("### 테스트 ### ")
     print(f"row_cnt ={row_cnt}")
     print(f"start_row_per_page ={start_row_per_page}")

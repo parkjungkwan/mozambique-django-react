@@ -1,4 +1,5 @@
 import axios from "axios";
+import next from "next";
 import {useState, useEffect} from "react"
 import Pagination from "./admin/Pagination";
 
@@ -27,6 +28,8 @@ export default function Home(){
             setEndRowPerPage(Number(res.data.pager.end_row_per_page))
             setStartPagePerBlock(Number(res.data.pager.start_page_per_block))
             setEndPagePerBlock(Number(res.data.pager.end_page_per_block))
+            setPrevArrow(res.data.pager.prev_arrow)
+            setNextArrow(res.data.pager.next_arrow)
             setRequestPage(Number(res.data.pager.request_page))
             alert(` 사용자가 요청한 페이지 번호: ${requestPage}`)
             console.log(` 사용자가 요청한 페이지 번호: ${requestPage}`)
@@ -34,6 +37,8 @@ export default function Home(){
             console.log(` 페이지 마지막 행번호: ${endRowPerPage}`)
             console.log(` 블록 시작 페이지번호: ${startPagePerBlock}`)
             console.log(` 블록 마지막 페이지번호: ${endPagePerBlock}`)
+            console.log(` 이전 보이는지 여부 체크 : ${prevArrow}`)
+            console.log(` 이후 보이는지 여부 체크: ${nextArrow}`)
             setList(res.data.users.items)
             console.log(" ### 페이지 내용 표시 ### ")
             let rows:number[] = []
@@ -49,8 +54,7 @@ export default function Home(){
               pages.push(i)
            }
            setPages(pages)
-           setPrevArrow(res.data.pager.prev_arrow)
-           setNextArrow(res.data.pager.next_arrow)
+           
           
         })
         .catch(err => {console.log(err)})
@@ -71,7 +75,7 @@ export default function Home(){
                 </tr>
             </thead>
             <tbody>
-              { prevArrow && <span> 이전 </span>}
+            <div>  { prevArrow && <span> 이전 </span>}</div>
             {list && list.map(({userid, email, username, phone, birth, address, job, interests})=>(
                 <tr key={userid}>
                     <td>{userid}</td><td>{email}</td><td>{username}</td>
@@ -79,7 +83,8 @@ export default function Home(){
                     <td>{job}</td><td>{interests}</td>
                 </tr>
             ))}
-            { nextArrow && <span> 이후 </span>}
+           <div>  
+            { nextArrow && <span> 이후 </span>}</div>
             </tbody>
         </table>
         <div>
