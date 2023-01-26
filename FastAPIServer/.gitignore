@@ -20,6 +20,7 @@ venv
 docs.zip
 archive.zip
 app/env.py
+
 # vim temporary files
 *~
 .*.sw?
