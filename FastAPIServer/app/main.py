@@ -8,7 +8,7 @@ import logging
 from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.responses import HTMLResponse
 from .admin.utils import current_time
-from .env import DB_URL
+from .env_localhost import DB_URL
 from app.database import init_db
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 baseurl = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +19,8 @@ from .test.user import router as test_router
 from .admin.pagination import router as pagination_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
+from mangum import Mangum
+
 API_TOKEN = "SECRET_API_TOKEN"
 api_key_header = APIKeyHeader(name="Token")
 print(f" ################ app.main Started At {current_time()} ################# ")
@@ -72,3 +74,4 @@ async def say_hello(name: str):
 @app.get("/no-match-token")
 async def no_match_token():
     return {"message": f"토큰 유효시간이 지났습니다."}
+
