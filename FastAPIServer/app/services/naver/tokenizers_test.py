@@ -15,6 +15,11 @@ from tokenizers.implementations import BertWordPieceTokenizer, ByteLevelBPEToken
 우선 네이버 영화 리뷰 데이터를 로드합니다.
 
 """
+
+"""
+딥러닝을 이용한 자연어 처리 입문
+소스코드 출처 : https://wikidocs.net/24996
+"""
 class TokenizersTest:
     def __init__(self):
         pass
