@@ -3,6 +3,7 @@ from PyKakao import KoGPT
 api = KoGPT(service_key = "ccc280dbcb6fa3d2bbbf62aa3e763705")
 """
 소스 출처: https://wooiljeong.github.io/python/pykakao-kogpt/
+
 """
 class KakaoChatbot:
     def __init__(self):

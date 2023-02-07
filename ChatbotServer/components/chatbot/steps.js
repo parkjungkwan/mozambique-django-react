@@ -1,41 +1,29 @@
 export default [
 	{
 		id: '1',
-		message: 'What is your name?',
+		message: '안녕하세요 {name}',
 		trigger: '2',
 	},
 	{
 		id: '2',
-		user: true,
+		message: '손잡이 QR코드를 찍어주세요 ?',
 		trigger: '3',
 	},
 	{
 		id: '3',
-		message: 'Hi {previousValue}, nice to meet you!',
+		user: true,
 		trigger: '4',
 	},
+	
 	{
 		id: '4',
-		message: 'Select any service to proceed',
+		message: ' 사용전 우산내부 사진을 찍어서 올려주세요 ',
 		trigger: '5',
 	},
 	{
 		id: '5',
-		options: [
-			{ value: "Laundry", label: 'Laundry', trigger: '7' },
-			{ value: "Cleaning", label: 'Cleaning', trigger: '7' },
-			{ value: "AC repair", label: 'AC repair', trigger: '6' },
-		],
-	},
-	{
-		id: '6',
-		message: 'Sorry! we are not operating {previousValue} right now ',
-		trigger: '2',
-	},
-	{
-		id: '7',
-		message: 'Awesome! We will be connecting you to our {previousValue} service executive!',
+		message: '대여가 시작됩니다. 시작시간은 10:10입니다. ',
 		end: true,
-	},
+	}
 ];
 

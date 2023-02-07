@@ -145,7 +145,8 @@ sqlalchemy-utils
 sqlparse==0.4.2
 stack-data==0.3.0
 starlette==0.19.1
-tensorflow==2.11.0
+tensorflow==2.10.1
+tensorflow-gpu==2.10.1
 tensorflow_datasets
 terminado==0.15.0
 threadpoolctl==3.1.0
@@ -159,6 +160,7 @@ torchvision
 tornado==6.2
 tqdm==4.61.2
 traitlets==5.3.0
+transformers
 tweepy==3.10.0
 typing_extensions==3.10.0
 tzdata==2022.1
