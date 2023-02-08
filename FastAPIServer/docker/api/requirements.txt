@@ -134,8 +134,10 @@ scikit-image==0.19.3
 scikit-learn
 scipy==1.8.1
 seaborn
+SpeechRecognition
 selenium==3.141.0
 Send2Trash==1.8.0
+seqeval
 shortuuid
 six==1.15.0
 sniffio==1.2.0

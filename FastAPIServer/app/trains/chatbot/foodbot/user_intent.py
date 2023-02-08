@@ -1,6 +1,8 @@
 import tensorflow as tf
 from keras.models import load_model
 from keras import preprocessing
+
+from app.trains.chatbot.demobot.chat_intent import IntentModel
 from app.trains.chatbot.demobot.preprocess import Preprocess
 
 

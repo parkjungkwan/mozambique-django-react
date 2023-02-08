@@ -1,9 +1,11 @@
 from starlette.responses import JSONResponse
-from app.handlers import create_faker_user
+
 from app.configs.database import get_db
 from app.cruds.author.user import UserCrud
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
+
+from app.utils.author.user import create_faker_user
 
 router = APIRouter()
 

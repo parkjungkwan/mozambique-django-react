@@ -1,12 +1,14 @@
 from fastapi_pagination import add_pagination
 
+from app.utils.common.time import current_time
+
 global API_TOKEN, router, app
 import os
 import sys
 import logging
 from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.responses import HTMLResponse
-from app.handlers import current_time
+
 from app.configs.env import DB_URL
 from app.configs.database import init_db
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -14,9 +16,10 @@ baseurl = os.path.dirname(os.path.abspath(__file__))
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from app.routers.author.user import router as user_router
 from app.routers.board.article import router as article_router
-from .routers.chatbot import router as chatbot_router
+from app.routers.chatbot.foodbot import router as foodbot_router
+from app.routers.chatbot.socket_demo import router as socket_router
+from app.routers.common.page import router as page_router
 from app.tests.author.user import router as test_router
-from app.handlers import router as pagination_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 
@@ -28,8 +31,9 @@ router = APIRouter()
 router.include_router(user_router, prefix="/users", tags=["users"])
 router.include_router(article_router, prefix="/articles", tags=["articles"])
 router.include_router(test_router, prefix="/test", tags=["test"])
-router.include_router(chatbot_router, prefix="/chatbot", tags=["chatbot"])
-router.include_router(pagination_router, prefix="/pagination", tags=["pagination"])
+router.include_router(socket_router, prefix="/chatbot", tags=["chatbot"])
+router.include_router(foodbot_router, prefix="/foodbot", tags=["foodbot"])
+router.include_router(page_router, prefix="/page", tags=["page"])
 app = FastAPI()
 add_pagination(app)
 origins = ["http://localhost:3000"]

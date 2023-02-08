@@ -5,6 +5,10 @@ from keras import preprocessing
 from keras.models import Model
 from keras.layers import Input, Embedding, Dense, Dropout, Conv1D, GlobalMaxPool1D, concatenate
 
+from app.configs.global_params import MAX_SEQ_LEN
+from app.trains.chatbot.demobot.preprocess import Preprocess
+
+
 # 의도 분류 모델 모듈
 class IntentModel:
     def __init__(self, model_name, proprocess):
