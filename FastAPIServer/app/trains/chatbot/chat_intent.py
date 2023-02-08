@@ -9,7 +9,7 @@ from keras_preprocessing.sequence import pad_sequences
 from app.configs.global_params import MAX_SEQ_LEN
 from app.configs.path import dir_path
 from app.trains.chatbot.food_preprocess import Preprocess
-
+# https://github.com/keiraydev/chatbot
 
 # 의도 분류 모델 모듈
 class IntentModel:

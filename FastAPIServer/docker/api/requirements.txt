@@ -172,6 +172,7 @@ utils==1.0.1
 uvicorn
 wcwidth==0.2.5
 webencodings==0.5.1
+websockets
 Werkzeug==1.0.1
 wget==3.2
 widgetsnbextension==3.6.1
