@@ -1,4 +1,3 @@
-import uvicorn
 from fastapi_pagination import add_pagination
 
 global API_TOKEN, router, app
@@ -7,17 +6,17 @@ import sys
 import logging
 from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.responses import HTMLResponse
-from .admin.utils import current_time
-from .env import DB_URL
-from app.database import init_db
+from app.handlers import current_time
+from app.configs.env import DB_URL
+from app.configs.database import init_db
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 baseurl = os.path.dirname(os.path.abspath(__file__))
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
-from .routers.user import router as user_router
-from .routers.article import router as article_router
+from app.routers.author.user import router as user_router
+from app.routers.board.article import router as article_router
 from .routers.chatbot import router as chatbot_router
-from .test.user import router as test_router
-from .admin.pagination import router as pagination_router
+from app.tests.author.user import router as test_router
+from app.handlers import router as pagination_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 
