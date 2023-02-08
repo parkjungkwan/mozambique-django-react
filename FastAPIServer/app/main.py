@@ -16,8 +16,8 @@ baseurl = os.path.dirname(os.path.abspath(__file__))
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from app.routers.author.user import router as user_router
 from app.routers.board.article import router as article_router
-from app.routers.chatbot.foodbot import router as foodbot_router
-from app.routers.chatbot.socket_demo import router as socket_router
+from app.routers.chatbot.chat_socket import food_router
+from app.routers.chatbot.chat_socket import router as socket_router
 from app.routers.common.page import router as page_router
 from app.tests.author.user import router as test_router
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,7 +32,7 @@ router.include_router(user_router, prefix="/users", tags=["users"])
 router.include_router(article_router, prefix="/articles", tags=["articles"])
 router.include_router(test_router, prefix="/test", tags=["test"])
 router.include_router(socket_router, prefix="/chatbot", tags=["chatbot"])
-router.include_router(foodbot_router, prefix="/foodbot", tags=["foodbot"])
+router.include_router(food_router, prefix="/food", tags=["food"])
 router.include_router(page_router, prefix="/page", tags=["page"])
 app = FastAPI()
 add_pagination(app)

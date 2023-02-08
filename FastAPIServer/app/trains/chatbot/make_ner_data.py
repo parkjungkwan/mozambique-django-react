@@ -2,9 +2,9 @@ import csv
 from konlpy.tag import Komoran
 from random import  *
 
-date_file = '../demobot/data/date.csv'
-food_file = 'data/food.csv'
-sent_file = 'data/주문조합.csv'
+date_file = 'data/demo/date.csv'
+food_file = 'data/food/food.csv'
+sent_file = 'data/food/주문조합.csv'
 
 komoran = Komoran(userdic='../../utils/user_dic.tsv')
 

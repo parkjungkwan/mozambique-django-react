@@ -1,7 +1,7 @@
 import csv
 
 
-file = '../demobot/data/ner.txt'
+file = 'data/demo/ner.txt'
 
 # 학습 파일 불러오기
 def read_file(file_name):
@@ -20,7 +20,7 @@ def read_file(file_name):
 
 
 corpus = read_file(file)
-file = open("data/food_corpus.txt", 'w')
+file = open("data/food/food_corpus.txt", 'w')
 for c in corpus:
     c = "{}\t{}\t{}\n".format('0000', c, 0)
     file.write(c)

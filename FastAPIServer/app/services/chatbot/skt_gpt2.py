@@ -1,7 +1,7 @@
 import torch
 from transformers import GPT2LMHeadModel
 
-from app.trains.chatbot.foodbot.train_tools.dict.create_dict import tokenizer
+from app.train_tools import tokenizer
 
 """
 https://wikidocs.net/157896

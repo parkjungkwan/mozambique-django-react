@@ -66,6 +66,7 @@ jupyter-console==6.4.4
 jupyter-core==4.11.1
 jupyterlab-pygments==0.2.2
 jupyterlab-widgets==1.1.1
+keras_preprocessing
 kiwisolver==1.4.3
 konlpy==0.5.2
 Korpora

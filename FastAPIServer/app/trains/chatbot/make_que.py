@@ -1,7 +1,7 @@
 import csv
 
-word_file = '../demobot/data/keyword.csv'
-sent_file = 'data/주문조합.csv'
+word_file = 'data/demo/keyword.csv'
+sent_file = 'data/food/주문조합.csv'
 
 with open(word_file, mode='r', encoding='utf-8-sig') as f:
     reader = csv.reader(f)

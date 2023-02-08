@@ -1,13 +1,9 @@
-import tensorflow as tf
-import numpy as np
-from keras.models import Model, load_model
-from keras import preprocessing
+from keras.models import load_model
 # 모델 정의 (Bi-LSTM)
 from keras.models import Sequential
-from keras.layers import LSTM, Embedding, Dense, TimeDistributed, Dropout, Bidirectional
+from keras.layers import LSTM, Embedding, Dense, TimeDistributed, Bidirectional
 from keras.optimizers import Adam
-from app.trains.chatbot.demobot.preprocess import Preprocess
-import matplotlib.pyplot as plt
+from app.trains.chatbot.food_preprocess import Preprocess
 import tensorflow as tf
 from keras import preprocessing
 from sklearn.model_selection import train_test_split
@@ -99,7 +95,7 @@ class NerModel:
                        userdic='../../utils/user_dic.tsv')
 
         # 학습용 말뭉치 데이터를 불러옴
-        corpus = self.read_file('data/ner.txt')
+        corpus = self.read_file('data/demo/ner.txt')
 
         # 말뭉치 데이터에서 단어와 BIO 태그만 불러와 학습용 데이터셋 생성
         sentences, tags = [], []

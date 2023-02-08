@@ -4,7 +4,7 @@ import numpy as np
 from keras.models import load_model
 from keras import preprocessing
 
-from app.trains.chatbot.demobot.preprocess import Preprocess
+from app.trains.chatbot.food_preprocess import Preprocess
 
 
 # 개체명 인식 모델 모듈

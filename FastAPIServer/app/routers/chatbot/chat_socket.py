@@ -1,11 +1,19 @@
 from typing import List
-
+import tensorflow as tf
 from fastapi import WebSocket, APIRouter
 from fastapi.responses import HTMLResponse
+
+from keras_preprocessing.sequence import pad_sequences
 from starlette.websockets import WebSocketDisconnect
+from keras.models import load_model
+
+from app.configs.global_params import MAX_SEQ_LEN
+from app.configs.path import dir_path
+from app.trains.chatbot.chat_intent import IntentModel
+from app.trains.chatbot.food_preprocess import Preprocess
 
 router = APIRouter()
-
+food_router = APIRouter()
 html = """
 <!DOCTYPE html>
 <html>
@@ -49,19 +57,19 @@ body {
     </div>
     <div class="row">
         <div class="col-md-12">
-            
+
                     <h3>메세지</h3>
-               
+
                 <ul id="messages">
                 </ul>
-         
+
         </div>
     </div>
 </div>
     <script>
         var client_id = Date.now()
         document.querySelector("#ws-id").textContent = client_id;
-        var ws = new WebSocket(`ws://localhost:8000/chatbot/ws/${client_id}`);
+        var ws = new WebSocket(`ws://localhost:8000/food/ws/${client_id}`);
         ws.onmessage = function(event) {
             var messages = document.getElementById('messages')
             var message = document.createElement('li')
@@ -78,6 +86,8 @@ body {
     </script>
 </body>
 """
+
+
 class ConnectionManager:
     def __init__(self):
         self.active_connections: List[WebSocket] = []
@@ -116,3 +126,58 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         await manager.broadcast(f"Client #{client_id} left the chat")
+
+@food_router.get("")
+async def get():
+    return HTMLResponse(html)
+@food_router.websocket("/ws/{client_id}")
+async def websocket_endpoint(websocket: WebSocket, client_id: int):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await manager.send_personal_message(f"Client ask: {data}", websocket)
+            res = food_intent(data)
+            await manager.broadcast(f"Server #{client_id} answer: {res}")
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        await manager.broadcast(f"Client #{client_id} left the chat")
+
+def food_intent(query: str):
+    p = Preprocess(word2index_dic=f'{dir_path("train_tools/dict")}/chatbot_dict.bin',
+                   userdic=f'{dir_path("train_tools/dict")}/user_dic.tsv')
+    print(f"query : {query}")
+    intent = IntentModel(model_name=f"{dir_path('models/chatbot')}/foodbot_intent.h5", proprocess=p)
+    predict = intent.predict_class(query)
+    print("의도 예측 클래스 : ", predict)
+    predict_label = intent.labels[predict]
+    print("의도 예측 레이블 : ", predict_label)
+    return predict_label
+
+def food_intent2(query: str):
+
+    print(f"query : {query}") # query = "오늘 탕수육 주문 가능한가요?"
+    intent_labels = {0: "인사", 1: "욕설", 2: "주문", 3: "예약", 4: "기타"}
+
+    model = load_model(f'{dir_path("models/chatbot")}/foodbot_intent.h5')
+    print("intent 다음 ...")
+    p = Preprocess(word2index_dic=f'{dir_path("train_tools/dict")}/chatbot_dict.bin',
+                   userdic=f'{dir_path("train_tools/dict")}/user_dic.tsv')
+    pos = p.pos(query)
+    print(f"pos ...{pos}")
+    keywords = p.get_keywords(pos, without_tag=True)
+    print(f"keywords ...{keywords}")
+    seq = p.get_wordidx_sequence(keywords)
+    print(f"seq ...{seq}")
+    sequences = [seq]
+    print(f"sequences ...{sequences}")
+    # 단어 시퀀스 벡터 크기
+    padded_seqs = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
+    print(f"padded_seqs ...{padded_seqs}")
+    predict = model.predict(padded_seqs)
+    print("의도 예측 점수 : ", predict)
+    predict_class = tf.math.argmax(predict, axis=1)
+    print("의도 예측 클래스 : ", predict_class.numpy())
+    res = intent_labels[predict_class.numpy()[0]]
+    print(f"의도 결과  : {res}")
+    return res

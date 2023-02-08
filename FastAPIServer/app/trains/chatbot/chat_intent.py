@@ -1,12 +1,14 @@
-from keras.models import Model, load_model
+from keras.models import load_model
 import pandas as pd
 import tensorflow as tf
-from keras import preprocessing
+
 from keras.models import Model
 from keras.layers import Input, Embedding, Dense, Dropout, Conv1D, GlobalMaxPool1D, concatenate
+from keras_preprocessing.sequence import pad_sequences
 
 from app.configs.global_params import MAX_SEQ_LEN
-from app.trains.chatbot.demobot.preprocess import Preprocess
+from app.configs.path import dir_path
+from app.trains.chatbot.food_preprocess import Preprocess
 
 
 # 의도 분류 모델 모듈
@@ -36,7 +38,7 @@ class IntentModel:
 
 
         # 패딩처리
-        padded_seqs = preprocessing.sequence.pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
+        padded_seqs = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
 
         predict = self.model.predict(padded_seqs)
         predict_class = tf.math.argmax(predict, axis=1)
@@ -50,8 +52,8 @@ class IntentModel:
         queries = data['query'].tolist()
         intents = data['intent'].tolist()
 
-        p = Preprocess(word2index_dic='../../train_tools/dict/chatbot_dict.bin',
-                       userdic='../../utils/user_dic.tsv')
+        p = Preprocess(word2index_dic=f'{dir_path("train_tools/dict")}/chatbot_dict.bin',
+                       userdic=f'{dir_path("train_tools/dict")}/user_dic.tsv')
 
         # 단어 시퀀스 생성
         sequences = []
@@ -65,7 +67,7 @@ class IntentModel:
         # 단어 인덱스 시퀀스 벡터 ○2
         # 단어 시퀀스 벡터 크기
 
-        padded_seqs = preprocessing.sequence.pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
+        padded_seqs = pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
 
         # (105658, 15)
         print(padded_seqs.shape)
@@ -144,4 +146,4 @@ class IntentModel:
 
 
         # 모델 저장  ○8
-        model.save('intent_model.h5')
+        model.save('foodbot_intent2.h5')
